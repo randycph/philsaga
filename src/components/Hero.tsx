@@ -74,7 +74,7 @@ export function Hero() {
           },
         });
 
-        timeline.fromTo("[data-hero-line]", { opacity: 0.65, y: 18 }, { opacity: 1, y: 0, stagger: 0.15, duration: 0.4 }, 0);
+        timeline.fromTo("[data-hero-line]", { opacity: 0.92, y: 18 }, { opacity: 1, y: 0, stagger: 0.15, duration: 0.4 }, 0);
         timeline.to("[data-scroll-indicator]", { opacity: 0, duration: 0.1 }, 0);
       }, root);
 
