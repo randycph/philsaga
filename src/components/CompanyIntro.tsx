@@ -34,14 +34,29 @@ export function CompanyIntro() {
               </a>
             </Button>
           </Reveal>
-          <Reveal className="relative min-h-[320px] overflow-hidden lg:min-h-full" parallax>
+          <Reveal className="relative min-h-[320px] overflow-hidden bg-[#15291d] lg:min-h-full" parallax>
             <img
               src="/assets/about-mining.png"
               alt={uiCopy.philsagaMiningOperationsInMindanao}
               width={1448}
               height={1088}
               loading="lazy"
-              className="absolute inset-0 size-full object-cover"
+              className="absolute inset-0 size-full object-cover grayscale"
+            />
+            <img
+              src="/assets/about-mining.png"
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 size-full object-cover [clip-path:polygon(57%_0,79%_0,59%_100%,37%_100%)]"
+            />
+            <div aria-hidden="true" className="absolute inset-0 bg-[#f28c18] [clip-path:polygon(67%_0,70%_0,50%_100%,47%_100%)]" />
+            <div aria-hidden="true" className="absolute inset-0 bg-[#073c27]/90 [clip-path:polygon(73%_0,84%_0,64%_100%,53%_100%)]" />
+            <img
+              src="/assets/about-worker.png"
+              alt="Mining worker wearing a hard hat and high visibility jacket"
+              width={1280}
+              height={1280}
+              className="absolute bottom-[-12%] right-[-5%] z-10 w-[68%] max-w-[650px]"
             />
           </Reveal>
         </div>
