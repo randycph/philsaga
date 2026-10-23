@@ -85,6 +85,7 @@ export function Hero() {
       trigger = timeline.scrollTrigger;
       media.addEventListener("seeked", onSeeked);
       ScrollTrigger.refresh();
+      window.scrollTo({ top: window.innerHeight, behavior: "instant" });
     };
 
     if (media.readyState >= HTMLMediaElement.HAVE_METADATA) {
@@ -123,7 +124,6 @@ export function Hero() {
           {!reducedMotion && (
             <>
               <source src="/assets/intro3.mp4" type="video/mp4" />
-              <source src="/assets/intro3.webm" type="video/webm" />
             </>
           )}
         </video>
