@@ -1,70 +1,54 @@
-import { uiCopy } from "../data/ui";
-import { site } from "../data/site";
-import { container, Eyebrow, heading, Reveal } from "./Shared";
+import { ArrowRight } from "lucide-react";
+import "./PurposeSections.css";
 
 export function VisionMission() {
   return (
-    <section
-      aria-labelledby="purpose-heading"
-      className="mx-auto max-w-[1600px] bg-paper px-6 py-24 text-foreground md:px-12"
-    >
-      <h2 id="purpose-heading" className="sr-only">
-        {uiCopy.ourVisionAndMission}
-      </h2>
-      <div className="grid gap-8 border-t border-black/15 pt-12 lg:grid-cols-[1.2fr_1fr]">
-        <Reveal className="overflow-hidden" parallax>
-          <img
-            src="/assets/pic4.png"
-            alt={
-              uiCopy.pmcUndergroundMinersOperatingDrillingEquipmentWithProtective
-            }
-            width={852}
-            height={608}
-            loading="lazy"
-            className="h-full min-h-80 w-full object-cover lg:min-h-[620px]"
-          />
-        </Reveal>
-        <Reveal className="flex flex-col justify-center px-6 py-24 md:px-16 lg:px-20">
-          <Eyebrow light>{uiCopy.ourVision}</Eyebrow>
-          <h3 className={heading}>
-            {uiCopy.lookingBeyond}
-            <br />
-            {uiCopy.theHorizon}
-          </h3>
-          <p className="mt-7 max-w-lg text-lg leading-[1.8] text-foreground/70">
-            {site.vision}
+    <>
+      <section className="editorial-purpose" aria-labelledby="purpose-heading">
+        <img className="editorial-purpose__photo" src="/assets/purpose-mine.png" alt="Haul truck carrying rock through a mine" loading="lazy" />
+        <div className="editorial-purpose__amber" aria-hidden="true" />
+        <div className="editorial-purpose__panel" aria-hidden="true" />
+        <div className="editorial-marker" aria-hidden="true">
+          03
+          <span />
+        </div>
+        <div className="editorial-purpose__copy">
+          <p className="editorial-eyebrow">Our Purpose</p>
+          <h2 id="purpose-heading">Looking beyond<br />the horizon.</h2>
+          <p className="editorial-description">
+            We strive to unlock opportunities, drive inclusive growth, and build
+            a more resilient tomorrow through responsible mining.
           </p>
-        </Reveal>
-      </div>
-      <div className="mt-24 grid gap-8 border-t border-black/15 pt-12 lg:grid-cols-[1fr_0.85fr]">
-        <Reveal className="order-2 flex flex-col justify-center px-6 py-24 md:px-16 lg:order-1 lg:px-20">
-          <Eyebrow light>{uiCopy.ourMission}</Eyebrow>
-          <h3 className={heading}>
-            {uiCopy.purposeIn}
-            <br />
-            {uiCopy.everyOperation}
-          </h3>
-          <p className="mt-7 max-w-lg text-lg leading-[1.8] text-foreground/70">
-            {site.mission}
+          <a className="editorial-purpose__link" href="https://www.philsaga.com/about-us">
+            <span><ArrowRight aria-hidden="true" /></span>
+            Our Purpose
+          </a>
+        </div>
+      </section>
+      <section className="editorial-approach" aria-labelledby="approach-heading">
+        <div className="editorial-marker" aria-hidden="true">
+          04
+          <span />
+        </div>
+        <div className="editorial-approach__copy">
+          <p className="editorial-eyebrow">Our Approach</p>
+          <h2 id="approach-heading">Purpose in<br />every operation.</h2>
+          <p className="editorial-description">
+            Our work goes beyond mining. We aim to create positive and lasting
+            impact by supporting local communities, protecting the environment,
+            and building shared opportunities.
           </p>
-        </Reveal>
-        <Reveal
-          className="order-1 overflow-hidden lg:order-2 lg:mt-24"
-          parallax
-        >
-          <img
-            src="/assets/pic3.png"
-            alt={
-              uiCopy.pmcInternalAuditorsReviewingEnvironmentalManagementStandards
-            }
-            width={1282}
-            height={904}
-            loading="lazy"
-            className="h-full min-h-80 w-full object-cover lg:min-h-[620px]"
-          />
-        </Reveal>
-      </div>
-      <div className={`${container} h-px`} />
-    </section>
+          <a className="editorial-approach__link" href="https://www.philsaga.com/about-us">
+            Learn More
+            <ArrowRight aria-hidden="true" />
+          </a>
+        </div>
+        <div className="editorial-approach__art">
+          <img className="editorial-approach__planting" src="/assets/approach-planting.png" alt="Gloved worker planting a seedling" loading="lazy" />
+          <img className="editorial-approach__seedling" src="/assets/approach-seedling.png" alt="Young plant taking root in rocky soil" loading="lazy" />
+          <img className="editorial-approach__mountains" src="/assets/approach-mountains.png" alt="Forested mountains and mist-filled valleys" loading="lazy" />
+        </div>
+      </section>
+    </>
   );
 }

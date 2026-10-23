@@ -30,3 +30,9 @@
 - Fixed asynchronous ScrollTrigger refresh order, tablet statistic overflow, light-section label contrast, and closing search after local navigation.
 - Validated the build and inspected the four requested responsive widths. Outstanding artwork and verification limits are recorded in README.md.
 - Moved the Home anchor outside the pinned hero and bounded headline sizing by viewport height to keep navigation and hero content clear on wide, short screens.
+
+## Purpose, Approach and Values reference sections
+
+- Added supplied mine, planting, seedling, mountain and tiger artwork with diagonal CSS masks and reference copy.
+- Replaced the pinned values presentation with the four-card reference layout.
+- Production build passed; desktop Purpose, Approach and Values visually inspected and screenshots saved in artifacts/.
