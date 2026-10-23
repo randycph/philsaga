@@ -4,13 +4,10 @@ import * as NavigationMenu from "./ui/navigation-menu";
 import {
   ArrowUpRight,
   ChevronDown,
-  MapPin,
   Menu,
-  Phone,
   Search,
 } from "lucide-react";
 import {
-  legalLinks,
   navLinks,
   site,
   sustainabilityLinks,
@@ -64,46 +61,17 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b border-black/10 transition-colors duration-300",
+        "fixed inset-x-0 top-0 z-50 border-b border-black/10 transition-all duration-300",
         scrolled
-          ? "bg-background/95 backdrop-blur-xl"
-          : "bg-background/90 backdrop-blur-xl",
+          ? "bg-background/95 shadow-sm backdrop-blur-xl"
+          : "bg-background/75 backdrop-blur-md",
       )}
     >
-      <div className="hidden border-b border-black/10 md:block">
-        <div
-          className={cn(
-            container,
-            "flex min-h-10 items-center justify-between gap-4 text-sm text-foreground/75",
-          )}
-        >
-          <div className="flex gap-6">
-            <span className="flex items-center gap-2">
-              <MapPin className="size-3.5 text-primary" />
-              {site.location}
-            </span>
-            <a href={site.phoneHref} className="flex items-center gap-2">
-              <Phone className="size-3.5 text-primary" />
-              {site.phone}
-            </a>
-          </div>
-          <div className="hidden gap-5 lg:flex">
-            {legalLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="hover:text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
       <div
         className={cn(
           container,
-          "flex h-20 items-center justify-between gap-5 lg:h-24",
+          "flex items-center justify-between gap-5 transition-all duration-300",
+          scrolled ? "h-16" : "h-20 lg:h-24",
         )}
       >
         <a
@@ -111,7 +79,7 @@ export function Navbar() {
           aria-label={uiCopy.philsagaMiningCorporationHome}
           className="flex shrink-0 items-center gap-3"
         >
-          <span className="block h-[60px] w-[142px] shrink-0">
+          <span className={cn("block shrink-0 transition-all duration-300", scrolled ? "h-[44px] w-[104px]" : "h-[60px] w-[142px]")}>
             <img
               src="/assets/pmc-mmprc.png"
               alt={uiCopy.pmcAndMmprcEmblems}
