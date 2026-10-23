@@ -26,10 +26,7 @@ export function Sdmp() {
       />
       <div className="relative mx-auto grid w-full max-w-[1440px] gap-12 px-6 md:px-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-12 lg:px-16 xl:px-20">
         <div className="max-w-xl">
-          <p className="mb-5 flex items-center gap-3 text-[11px] font-semibold tracking-[0.22em] text-[#f3a23a]">
-            <span className="h-px w-7 bg-[#f3a23a]" />
-            {copy.sdmpEyebrow}
-          </p>
+          <p className="editorial-eyebrow">{copy.sdmpEyebrow}</p>
           <h2
             id="sdmp-heading"
             className="max-w-[20ch] font-heading text-4xl font-semibold leading-[1.02] tracking-[-0.045em] sm:text-5xl lg:text-[clamp(2.25rem,2.3vw,2.625rem)]"

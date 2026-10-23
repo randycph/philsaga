@@ -1,21 +1,17 @@
-import { ChartNoAxesCombined, Trees, Shield, UsersRound, ArrowRight } from "lucide-react";
+import { ChartNoAxesCombined, Trees, ShieldCheck, UsersRound, TrendingUp, Award } from "lucide-react";
 import "./PurposeSections.css";
 
 const cards = [
   { title: "Teamwork", description: "We achieve more together.", icon: UsersRound },
-  { title: "Integrity", description: "We do what is right, always.", icon: Shield },
-  { title: "Growth", description: "We grow our people, our communities, and our company.", icon: ArrowRight },
-  { title: "Excellence", description: "We pursue continuous improvement.", icon: ChartNoAxesCombined },
+  { title: "Integrity", description: "We do what is right, always.", icon: ShieldCheck },
+  { title: "Growth", description: "We grow our people, our communities, and our company.", icon: TrendingUp },
+  { title: "Excellence", description: "We pursue continuous improvement.", icon: Award },
   { title: "Responsibility", description: "We care for people, communities and the environment.", icon: Trees },
 ];
 
 export function TigerValues() {
   return (
     <section id="values" className="editorial-values" aria-labelledby="values-heading">
-      <div className="editorial-marker" aria-hidden="true">
-        05
-        <span />
-      </div>
       <div className="editorial-values__heading">
         <div>
           <p className="editorial-eyebrow">Our Values</p>

@@ -84,10 +84,6 @@ export function VideoSection() {
       aria-labelledby="video-heading"
       className="community-media community-media--forest"
     >
-      <div className="community-strip__marker" aria-hidden="true">
-        08
-        <span />
-      </div>
       <div className="community-media__copy">
         <p className="editorial-eyebrow community-media__eyebrow">Our Stories</p>
         <h2 id="video-heading">A closer look<br />at Philsaga.</h2>

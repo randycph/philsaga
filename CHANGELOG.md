@@ -79,3 +79,9 @@
 - Added responsive carousel paging with premium previous/next controls, draggable cards, a slide counter and clickable progress indicators to the SDMP stories.
 - Verified arrow navigation in the browser and confirmed the production build passes.
 
+
+## Section markers
+
+- Removed the decorative section numbers and vertical marker lines from the About, Vision, Mission, Values, Community Programs and Our Stories sections.
+- Production build and diff checks passed; confirmed the markers are absent in the rendered accessibility tree.
+

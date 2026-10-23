@@ -1,7 +1,7 @@
 .community-strip,
 .community-media {
   position: relative;
-  padding: 4vw 6% 3.5vw 10.8%;
+  padding: 4vw 6% 3.5vw 7%;
 }
 
 .community-strip {
@@ -13,23 +13,6 @@
   scroll-margin-top: 80px;
 }
 
-.community-strip__marker {
-  position: absolute;
-  top: 4vw;
-  left: 3.5%;
-  font-size: clamp(10px, 1.25vw, 20px);
-  font-weight: 700;
-  opacity: 0.6;
-}
-
-.community-strip__marker span {
-  display: block;
-  width: 1px;
-  height: 4.3vw;
-  margin: 1vw auto 0;
-  background: currentColor;
-}
-
 .community-strip h2 {
   font-size: clamp(24px, 2.5vw, 48px);
   line-height: 1.12;
@@ -37,7 +20,7 @@
   font-weight: 700;
 }
 
-.community-strip__copy > p {
+.community-strip__copy > p:not(.editorial-eyebrow) {
   margin-top: 1.5vw;
   color: #68716d;
   font-size: clamp(13px, 1.3vw, 23px);
@@ -289,7 +272,7 @@
   .community-strip,
   .community-media {
     grid-template-columns: 1fr;
-    padding: 36px 6% 36px 12%;
+    padding: 36px 6%;
     gap: 30px;
   }
 
@@ -468,3 +451,4 @@
     flex-wrap: wrap;
   }
 }
+

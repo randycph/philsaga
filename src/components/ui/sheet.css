@@ -1,0 +1,87 @@
+.dialog-overlay[data-state="open"] {
+  animation: navigation-overlay-in 320ms ease-out both;
+}
+
+.dialog-overlay[data-state="closed"] {
+  animation: navigation-overlay-out 220ms ease-in both;
+}
+
+.mobile-navigation-sheet[data-state="open"] {
+  animation: navigation-sheet-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mobile-navigation-sheet[data-state="closed"] {
+  animation: navigation-sheet-out 260ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+.mobile-navigation-sheet nav a {
+  border-color: rgb(246 244 239 / 12%);
+  padding-block: 1rem;
+  transition: color 180ms ease, padding-left 220ms ease, border-color 180ms ease;
+}
+
+.mobile-navigation-sheet nav a:hover,
+.mobile-navigation-sheet nav a:focus-visible {
+  border-color: rgb(243 162 58 / 60%);
+  padding-left: 1rem;
+  color: #f3a23a;
+}
+
+.mobile-navigation-sheet nav a:focus-visible {
+  outline: 2px solid #f3a23a;
+  outline-offset: 3px;
+}
+
+@keyframes navigation-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes navigation-overlay-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes navigation-sheet-in {
+  from { opacity: 0.7; transform: translate3d(28px, 0, 0) scale(0.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes navigation-sheet-out {
+  from { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  to { opacity: 0.7; transform: translate3d(22px, 0, 0) scale(0.985); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-overlay[data-state],
+  .mobile-navigation-sheet[data-state] {
+    animation-duration: 1ms;
+  }
+
+  .mobile-navigation-sheet nav a {
+    transition-duration: 1ms;
+  }
+}
+.mobile-navigation-sheet nav a {
+  border-color: rgb(16 43 43 / 14%);
+}
+
+.mobile-navigation-sheet nav a:hover,
+.mobile-navigation-sheet nav a:focus-visible {
+  border-color: rgb(243 162 58 / 70%);
+  color: #bb6800;
+}
+
+.mobile-navigation-sheet > button {
+  color: #102b2b;
+}
+
+@keyframes navigation-sheet-in {
+  from { opacity: 1; transform: translate3d(100%, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes navigation-sheet-out {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 1; transform: translate3d(100%, 0, 0); }
+}

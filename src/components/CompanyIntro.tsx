@@ -1,21 +1,17 @@
-import { ArrowRight, HardHat, Mountain, UsersRound } from "lucide-react";
+import { ArrowRight, HardHat, Pickaxe, ContactRound } from "lucide-react";
 import { uiCopy } from "../data/ui";
 import "./CompanyIntro.css";
 
 const statistics = [
-  { value: "2000+", label: "People Empowered", icon: UsersRound },
+  { value: "2000+", label: "People Empowered", icon: ContactRound },
   { value: "25+", label: "Years of Operations", icon: HardHat },
-  { value: "50M+ MT", label: "Total Resources", icon: Mountain },
+  { value: "50M+ MT", label: "Total Resources", icon: Pickaxe },
 ];
 
 export function CompanyIntro() {
   return (
     <section id="about" aria-labelledby="about-heading" className="company-about">
       <div className="company-about__main">
-        <div className="company-about__marker" aria-hidden="true">
-          02
-          <span />
-        </div>
         <div className="company-about__copy">
           <p className="company-about__eyebrow">
             <span />
@@ -31,7 +27,7 @@ export function CompanyIntro() {
             creates lasting value for communities, the environment, and future
             generations.
           </p>
-          <a className="company-about__link" href={uiCopy.httpsWwwPhilsagaComAboutUs}>
+          <a className="section-text-cta company-about__link" href={uiCopy.httpsWwwPhilsagaComAboutUs}>
             Learn More
             <ArrowRight aria-hidden="true" />
           </a>

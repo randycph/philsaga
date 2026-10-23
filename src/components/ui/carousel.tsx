@@ -99,24 +99,24 @@ export function Carousel({
             variant="outline"
             disabled={!canPrev}
             aria-label={uiCopy.previousStory}
-            className="size-12 min-h-0 min-w-0 rounded-full border-white/30 bg-white/5 p-0 text-white shadow-[0_8px_22px_rgba(0,0,0,0.16)] transition duration-300 hover:-translate-y-0.5 hover:border-[#f3a23a] hover:bg-[#f3a23a] hover:text-[#08231f] active:scale-95 disabled:border-white/15 disabled:bg-transparent disabled:text-white/40"
+            className="size-9 min-h-0 min-w-0 rounded-full border-[#a9873c] bg-[#08151d26] p-0 text-white transition-[color,background-color,border-color,transform,box-shadow] duration-200 hover:border-[#f6931c] hover:bg-[#f6931c] hover:text-[#102b2b] hover:shadow-[0_0_0_6px_#f6931c33] active:scale-[0.92] disabled:border-white/15 disabled:bg-transparent disabled:text-white/40"
             onClick={() => {
               api?.scrollPrev();
             }}
           >
-            <ArrowLeft className="size-[18px]" />
+            <ArrowLeft className="size-4" />
           </Button>
           <Button
             type="button"
             variant="outline"
             disabled={!canNext}
             aria-label={uiCopy.nextStory}
-            className="size-12 min-h-0 min-w-0 rounded-full border-white/30 bg-white/5 p-0 text-white shadow-[0_8px_22px_rgba(0,0,0,0.16)] transition duration-300 hover:-translate-y-0.5 hover:border-[#f3a23a] hover:bg-[#f3a23a] hover:text-[#08231f] active:scale-95 disabled:border-white/15 disabled:bg-transparent disabled:text-white/40"
+            className="size-9 min-h-0 min-w-0 rounded-full border-[#a9873c] bg-[#08151d26] p-0 text-white transition-[color,background-color,border-color,transform,box-shadow] duration-200 hover:border-[#f6931c] hover:bg-[#f6931c] hover:text-[#102b2b] hover:shadow-[0_0_0_6px_#f6931c33] active:scale-[0.92] disabled:border-white/15 disabled:bg-transparent disabled:text-white/40"
             onClick={() => {
               api?.scrollNext();
             }}
           >
-            <ArrowRight className="size-[18px]" />
+            <ArrowRight className="size-4" />
           </Button>
         </div>
       </div>
@@ -135,3 +135,5 @@ export function CarouselItem({ children }: { children: ReactNode }) {
     </div>
   );
 }
+
+

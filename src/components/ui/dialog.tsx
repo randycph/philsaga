@@ -17,7 +17,7 @@ export function DialogContent({
 }: ComponentProps<typeof Primitive.Content>) {
   return (
     <Primitive.Portal>
-      <Primitive.Overlay className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm" />
+      <Primitive.Overlay className="dialog-overlay fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm" />
       <Primitive.Content
         data-lenis-prevent
         className={cn(

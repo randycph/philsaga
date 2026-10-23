@@ -10,23 +10,6 @@
   overflow: hidden;
 }
 
-.company-about__marker {
-  position: absolute;
-  top: 4.9vw;
-  left: 3.5%;
-  color: #7c8584;
-  font-size: clamp(10px, 1.3vw, 20px);
-  font-weight: 700;
-}
-
-.company-about__marker span {
-  display: block;
-  height: 4.4vw;
-  width: 1px;
-  margin: 1.1vw auto 0;
-  background: #afb6b3;
-}
-
 .company-about__watermark {
   position: absolute;
   top: 6vw;
@@ -40,7 +23,7 @@
   position: relative;
   z-index: 1;
   width: 28%;
-  margin-left: 10.9%;
+  margin-left: 7%;
   padding-top: 6.2vw;
   padding-bottom: 4.3vw;
 }
@@ -151,14 +134,10 @@
   }
 
   .company-about__copy {
-    width: 77%;
+    width: 84%;
     padding-top: 42px;
     padding-bottom: 32px;
-    margin-left: 15%;
-  }
-
-  .company-about__marker {
-    top: 42px;
+    margin-left: 7%;
   }
 
   .company-about__description {
@@ -193,3 +172,4 @@
     height: 30px;
   }
 }
+

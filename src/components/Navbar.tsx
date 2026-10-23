@@ -63,15 +63,15 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 border-b border-black/10 transition-all duration-300",
         scrolled
-          ? "bg-background/95 shadow-sm backdrop-blur-xl"
+          ? "bg-background/65 shadow-sm backdrop-blur-xl"
           : "bg-background/75 backdrop-blur-md",
       )}
     >
       <div
         className={cn(
           container,
-          "flex items-center justify-between gap-5 transition-all duration-300",
-          scrolled ? "h-[72px]" : "h-20 lg:h-24",
+          "flex items-center justify-between gap-2 transition-all duration-300 sm:gap-5",
+          scrolled ? "h-16 lg:h-[72px]" : "h-16 lg:h-24",
         )}
       >
         <a
@@ -79,14 +79,17 @@ export function Navbar() {
           aria-label={uiCopy.philsagaMiningCorporationHome}
           className="flex shrink-0 items-center gap-3"
         >
-          <span className={cn("block shrink-0 transition-all duration-300", scrolled ? "h-[68px] w-[478px]" : "h-[76px] w-[531px]")}>
-            <img
-              src="/assets/logo-long.png"
-              alt={uiCopy.pmcAndMmprcASociallyResponsibleAndEnvironment}
-              width={1030}
-              height={147}
-              className="h-full w-full object-contain"
-            />
+          <span className={cn("block shrink-0 transition-all duration-300", scrolled ? "h-12 w-[100px] sm:h-[68px] sm:w-[478px]" : "h-12 w-[100px] sm:h-[76px] sm:w-[531px]")}>
+            <picture>
+              <source media="(max-width: 767px)" srcSet="/assets/pmc-mmprc.png" />
+              <img
+                src="/assets/logo-long.png"
+                alt={uiCopy.pmcAndMmprcASociallyResponsibleAndEnvironment}
+                width={1030}
+                height={147}
+                className="h-full w-full object-contain"
+              />
+            </picture>
           </span>
         </a>
         <NavigationMenu.Root className="relative hidden lg:block">
@@ -128,7 +131,7 @@ export function Navbar() {
             </NavigationMenu.Item>
           </NavigationMenu.List>
         </NavigationMenu.Root>
-        <div className="flex items-center gap-2 md:gap-4">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2 md:gap-4">
           <Dialog>
             <DialogTrigger asChild>
               <Button
@@ -219,3 +222,4 @@ export function Navbar() {
     </header>
   );
 }
+
