@@ -17,6 +17,8 @@ export function Carousel({
   });
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [snapCount, setSnapCount] = useState(0);
 
   useEffect(() => {
     if (!api) {
@@ -26,6 +28,8 @@ export function Carousel({
     const update = () => {
       setCanPrev(api.canScrollPrev());
       setCanNext(api.canScrollNext());
+      setSelectedIndex(api.selectedScrollSnap());
+      setSnapCount(api.scrollSnapList().length);
     };
 
     update();
@@ -57,32 +61,64 @@ export function Carousel({
         }
       }}
     >
-      <div ref={ref} className="overflow-hidden">
+      <div ref={ref} className="overflow-hidden cursor-grab active:cursor-grabbing">
         <div className="-ml-6 flex items-stretch">{children}</div>
       </div>
-      <div className="mt-7 flex justify-end gap-3">
-        <Button
-          variant="outline"
-          disabled={!canPrev}
-          aria-label={uiCopy.previousStory}
-          className="size-12 rounded-full p-0"
-          onClick={() => {
-            api?.scrollPrev();
-          }}
-        >
-          <ArrowLeft className="size-5" />
-        </Button>
-        <Button
-          variant="outline"
-          disabled={!canNext}
-          aria-label={uiCopy.nextStory}
-          className="size-12 rounded-full p-0"
-          onClick={() => {
-            api?.scrollNext();
-          }}
-        >
-          <ArrowRight className="size-5" />
-        </Button>
+      <div className="mt-6 flex items-center justify-between gap-4 sm:mt-8">
+        <div className="flex min-w-0 items-center gap-4">
+          <span
+            aria-live="polite"
+            className="shrink-0 font-mono text-xs tracking-[0.16em] text-[#f3a23a]"
+          >
+            {String(selectedIndex + 1).padStart(2, "0")}
+            <span className="px-1.5 text-white/40">/</span>
+            {String(snapCount).padStart(2, "0")}
+          </span>
+          <div className="flex items-center gap-1.5" aria-label="Choose story group">
+            {Array.from({ length: snapCount }, (_, index) => (
+              <button
+                key={index}
+                type="button"
+                aria-label={`Go to story group ${index + 1}`}
+                aria-current={index === selectedIndex ? "true" : undefined}
+                className={`h-1 rounded-full transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f3a23a] ${
+                  index === selectedIndex
+                    ? "w-7 bg-[#f3a23a]"
+                    : "w-3 bg-white/35 hover:bg-white/70"
+                }`}
+                onClick={() => {
+                  api?.scrollTo(index);
+                }}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="flex shrink-0 gap-2.5">
+          <Button
+            type="button"
+            variant="outline"
+            disabled={!canPrev}
+            aria-label={uiCopy.previousStory}
+            className="size-12 min-h-0 min-w-0 rounded-full border-white/30 bg-white/5 p-0 text-white shadow-[0_8px_22px_rgba(0,0,0,0.16)] transition duration-300 hover:-translate-y-0.5 hover:border-[#f3a23a] hover:bg-[#f3a23a] hover:text-[#08231f] active:scale-95 disabled:border-white/15 disabled:bg-transparent disabled:text-white/40"
+            onClick={() => {
+              api?.scrollPrev();
+            }}
+          >
+            <ArrowLeft className="size-[18px]" />
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            disabled={!canNext}
+            aria-label={uiCopy.nextStory}
+            className="size-12 min-h-0 min-w-0 rounded-full border-white/30 bg-white/5 p-0 text-white shadow-[0_8px_22px_rgba(0,0,0,0.16)] transition duration-300 hover:-translate-y-0.5 hover:border-[#f3a23a] hover:bg-[#f3a23a] hover:text-[#08231f] active:scale-95 disabled:border-white/15 disabled:bg-transparent disabled:text-white/40"
+            onClick={() => {
+              api?.scrollNext();
+            }}
+          >
+            <ArrowRight className="size-[18px]" />
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -93,7 +129,7 @@ export function CarouselItem({ children }: { children: ReactNode }) {
     <div
       role="group"
       aria-roledescription="slide"
-      className="min-w-0 shrink-0 grow-0 basis-full pl-6 md:basis-1/2 xl:basis-1/3"
+      className="min-w-0 shrink-0 grow-0 basis-full pl-6 md:basis-[72%] xl:basis-[43%]"
     >
       {children}
     </div>

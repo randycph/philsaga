@@ -73,3 +73,9 @@
 - Matched the eyebrow's orange color, type size, weight, spacing and uppercase treatment to the Vision and Mission labels, overriding the video paragraph styles that had taken precedence.
 - Confirmed the corrected rendering in the browser and rebuilt successfully.
 
+
+## SDMP story carousel
+
+- Added responsive carousel paging with premium previous/next controls, draggable cards, a slide counter and clickable progress indicators to the SDMP stories.
+- Verified arrow navigation in the browser and confirmed the production build passes.
+
