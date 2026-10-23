@@ -111,13 +111,13 @@ export function Navbar() {
           aria-label={uiCopy.philsagaMiningCorporationHome}
           className="flex shrink-0 items-center gap-3"
         >
-          <span className="block h-[51px] w-[106px] overflow-hidden rounded bg-white">
+          <span className="block h-[51px] w-[69px] shrink-0">
             <img
-              src="/assets/logo_2xb.png"
-              alt={uiCopy.pmcAndMmprcEmblems}
-              width={1030}
-              height={147}
-              className="h-[51px] w-auto max-w-none"
+              src="/assets/pmc-logo.png"
+              alt="PMC logo"
+              width={688}
+              height={514}
+              className="h-full w-full object-contain"
             />
           </span>
           <span className="hidden border-l border-black/20 pl-3 font-heading text-sm font-semibold leading-snug tracking-tight xl:block">

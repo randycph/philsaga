@@ -43,14 +43,14 @@ export function Footer() {
             aria-label={uiCopy.philsagaMiningCorporationHome}
             className="flex w-fit shrink-0 items-center gap-5"
           >
-            <span className="block h-[66px] w-[70px] overflow-hidden">
+            <span className="block h-[66px] w-[88px] shrink-0">
               <img
-                src="/assets/logo_2xb.png"
-                alt={uiCopy.pmcAndMmprcEmblems}
-                width={1030}
-                height={147}
+                src="/assets/pmc-logo.png"
+                alt="PMC logo"
+                width={688}
+                height={514}
                 loading="lazy"
-                className="h-[66px] w-auto max-w-none"
+                className="h-full w-full object-contain"
               />
             </span>
             <span className="hidden h-16 border-l border-white/20 sm:block" />
