@@ -36,3 +36,9 @@
 - Added supplied mine, planting, seedling, mountain and tiger artwork with diagonal CSS masks and reference copy.
 - Replaced the pinned values presentation with the four-card reference layout.
 - Production build passed; desktop Purpose, Approach and Values visually inspected and screenshots saved in artifacts/.
+
+## Community and video reference layout
+
+- Replaced community story cards with the four-priority strip from the supplied reference.
+- Added a dark video gallery with thumbnail selection, next-video control, and existing playback dialogs and error fallback.
+- Production build passed. Browser visual verification was unavailable because the previous tab had closed.

@@ -1,67 +1,35 @@
-import { uiCopy } from "../data/ui";
-import { ArrowRight } from "lucide-react";
-import { copy, programs } from "../data/site";
-import {
-  container,
-  Eyebrow,
-  heading,
-  ImageWithFallback,
-  Reveal,
-  TextLink,
-} from "./Shared";
-import { Card, CardContent } from "./ui/card";
+import { ChartNoAxesCombined, Heart, Leaf, UsersRound } from "lucide-react";
+import "./CommunityMedia.css";
+
+const priorities = [
+  { title: "Community Development", description: "Supporting programs that improve quality of life.", icon: UsersRound },
+  { title: "Health and Wellness", description: "Promoting healthier and safer communities.", icon: Heart },
+  { title: "Environment Protection", description: "Responsible resource management for a greener tomorrow.", icon: Leaf },
+  { title: "Livelihood Support", description: "Empowering local economies through skills and opportunities.", icon: ChartNoAxesCombined },
+];
 
 export function CommunityPrograms() {
   return (
-    <section
-      id="community"
-      aria-labelledby="community-heading"
-      className="scroll-mt-28 border-t border-black/10 bg-surface py-24 lg:py-32"
-    >
-      <div className={container}>
-        <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <Eyebrow>{copy.communityEyebrow}</Eyebrow>
-            <h2 id="community-heading" className={`${heading} max-w-3xl`}>
-              {copy.communityHeading}
-            </h2>
-          </div>
-          <p className="max-w-xs text-base leading-[1.7] text-muted-foreground">
-            {uiCopy.ourFeaturedCommunityPrograms}
-          </p>
-        </Reveal>
-        <div className="grid gap-x-14 gap-y-16 md:grid-cols-2">
-          {programs.map((program) => (
-            <Reveal key={program.title} className="h-full">
-              <Card className="flex h-full flex-col border-x-0 border-t-0 bg-transparent">
-                <a href={program.href} aria-label={program.title}>
-                  <ImageWithFallback src={program.image} alt={program.title} />
-                </a>
-                <CardContent className="flex flex-1 flex-col">
-                  <p className="mb-4 text-sm text-primary">
-                    {program.category}
-                  </p>
-                  <h3 className="mb-6 font-heading text-2xl font-medium leading-relaxed tracking-tight">
-                    {program.title}
-                  </h3>
-                  <div className="mt-auto">
-                    <TextLink href={program.href}>{uiCopy.learnMore}</TextLink>
-                  </div>
-                </CardContent>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal className="mt-12 flex flex-wrap items-center justify-between gap-5 border-y border-black/10 py-8">
-          <p className="text-base text-muted-foreground">{copy.archive}</p>
-          <a
-            href={uiCopy.httpsWwwPhilsagaComNews}
-            className="flex items-center gap-3 text-sm font-semibold text-primary hover:underline"
-          >
-            {uiCopy.goToArchivePage}
-            <ArrowRight className="size-5" />
-          </a>
-        </Reveal>
+    <section id="community" aria-labelledby="community-heading" className="community-strip">
+      <div className="community-strip__marker" aria-hidden="true">
+        07
+        <span />
+      </div>
+      <div className="community-strip__copy">
+        <h2 id="community-heading">Stronger communities.<br />Shared futures.</h2>
+        <p>
+          We work hand in hand with our host communities to create opportunities,
+          strengthen resilience, and build a better tomorrow.
+        </p>
+      </div>
+      <div className="community-strip__priorities">
+        {priorities.map(({ title, description, icon: Icon }) => (
+          <article key={title}>
+            <Icon aria-hidden="true" />
+            <h3>{title}</h3>
+            <p>{description}</p>
+          </article>
+        ))}
       </div>
     </section>
   );
