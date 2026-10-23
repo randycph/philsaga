@@ -1,5 +1,9 @@
 # Change record
 
+## PMC-MMPRC header logo
+
+- Updated the header to use the supplied PMC-MMPRC logo, with proportional sizing on desktop and mobile.
+
 ## Light editorial redesign
 
 - Replaced dark surfaces with warm white, pale stone, sage, and ink typography throughout the site.
