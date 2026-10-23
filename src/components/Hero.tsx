@@ -2,166 +2,138 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { site } from "../data/site";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function Hero() {
-  const root = useRef<HTMLElement>(null);
+  const track = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
+  const hint = useRef<HTMLSpanElement>(null);
+  const reducedMotion = useReducedMotion();
 
   useLayoutEffect(() => {
     const media = video.current;
-    const queries = gsap.matchMedia();
+    const trackElement = track.current;
+    const hintElement = hint.current;
 
-    if (!media) {
+    if (!media || !trackElement || !hintElement || reducedMotion) {
       return;
     }
 
-    const setup = () => {
-      queries.add(
-        "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-        () => {
-          const playhead = { time: 0 };
-          let desiredTime = 0;
-          const seek = () => {
-            if (
-              !media.seeking &&
-              Math.abs(media.currentTime - desiredTime) > 0.04
-            ) {
-              media.currentTime = desiredTime;
-            }
-          };
+    let trigger: ScrollTrigger | undefined;
+    let timeline: gsap.core.Timeline | undefined;
+    let frameRequest = 0;
+    let desiredTime = 0;
+    let lastSeekAt = 0;
 
-          const timeline = gsap.timeline({
-            scrollTrigger: {
-              trigger: root.current,
-              start: "top top",
-              end: "+=180%",
-              pin: true,
-              scrub: 0.6,
-              refreshPriority: 2,
-            },
-          });
+    const seekToDesiredTime = () => {
+      if (media.seeking) {
+        return;
+      }
 
-          timeline.to(
-            playhead,
-            {
-              time: Math.max(0, media.duration - 0.05),
-              ease: "none",
-              duration: 1,
-              onUpdate: () => {
-                desiredTime = playhead.time;
-                seek();
-              },
-            },
-            0,
-          );
-          timeline.fromTo(
-            media,
-            { scale: 1.12 },
-            { scale: 1, duration: 1, ease: "none" },
-            0,
-          );
-          timeline.fromTo(
-            "[data-film-progress]",
-            { scaleX: 0 },
-            { scaleX: 1, duration: 1, ease: "none" },
-            0,
-          );
-          timeline.to(
-            "[data-film-opening]",
-            { opacity: 0, duration: 0.18 },
-            0.22,
-          );
-          timeline.fromTo(
-            "[data-film-headframe]",
-            { opacity: 0 },
-            { opacity: 1, duration: 0.18 },
-            0.22,
-          );
-          timeline.to(
-            "[data-film-headframe]",
-            { opacity: 0, duration: 0.2 },
-            0.65,
-          );
-          timeline.fromTo(
-            "[data-film-photo]",
-            { scale: 1.08 },
-            { scale: 1, duration: 1, ease: "none" },
-            0,
-          );
-          media.addEventListener("seeked", seek);
-          ScrollTrigger.sort();
-          ScrollTrigger.refresh();
+      const now = performance.now();
 
-          return () => {
-            media.removeEventListener("seeked", seek);
-          };
-        },
-      );
+      if (now - lastSeekAt < 40) {
+        cancelAnimationFrame(frameRequest);
+        frameRequest = requestAnimationFrame(seekToDesiredTime);
+        return;
+      }
+
+      if (Math.abs(media.currentTime - desiredTime) < 0.035) {
+        return;
+      }
+
+      lastSeekAt = now;
+      media.currentTime = desiredTime;
     };
 
-    if (media.readyState >= 1) {
-      setup();
+    const onSeeked = () => {
+      if (Math.abs(media.currentTime - desiredTime) >= 0.035) {
+        cancelAnimationFrame(frameRequest);
+        frameRequest = requestAnimationFrame(seekToDesiredTime);
+      }
+    };
+
+    const createScrollTrigger = () => {
+      if (trigger || !Number.isFinite(media.duration) || media.duration <= 0) {
+        return;
+      }
+
+      const playhead = { time: 0 };
+      timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: trackElement,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.5,
+          onUpdate: seekToDesiredTime,
+        },
+      });
+
+      timeline.to(playhead, {
+        time: media.duration,
+        duration: 1,
+        ease: "none",
+        onUpdate: () => {
+          desiredTime = playhead.time;
+        },
+      });
+      timeline.to(hintElement, { opacity: 0, duration: 0.05 }, 0);
+      trigger = timeline.scrollTrigger;
+      media.addEventListener("seeked", onSeeked);
+      ScrollTrigger.refresh();
+    };
+
+    if (media.readyState >= HTMLMediaElement.HAVE_METADATA) {
+      createScrollTrigger();
     } else {
-      media.addEventListener("loadedmetadata", setup, { once: true });
+      media.addEventListener("loadedmetadata", createScrollTrigger, {
+        once: true,
+      });
     }
 
     return () => {
-      media.removeEventListener("loadedmetadata", setup);
-      queries.revert();
+      media.removeEventListener("loadedmetadata", createScrollTrigger);
+      media.removeEventListener("seeked", onSeeked);
+      cancelAnimationFrame(frameRequest);
+      trigger?.kill();
+      timeline?.kill();
     };
-  }, []);
+  }, [reducedMotion]);
 
   return (
-    <section
-      ref={root}
-      id="hero"
-      aria-label={site.name}
-      className="relative h-[82svh] min-h-[480px] overflow-hidden bg-paper md:h-svh"
-    >
-      <h1 className="sr-only">{site.name}</h1>
-      <img
-        src="/assets/hero-poster.jpg"
-        alt="PMC introduction film"
-        width={640}
-        height={360}
-        fetchPriority="high"
-        className="absolute inset-0 size-full object-cover"
-      />
-      <video
-        ref={video}
-        muted
-        playsInline
-        preload="metadata"
-        poster="/assets/hero-poster.jpg"
-        aria-hidden="true"
-        className="absolute inset-0 hidden size-full object-cover md:block motion-reduce:hidden"
+    <div ref={track} className="relative h-[300vh]" aria-label={site.name}>
+      <section
+        id="hero"
+        className="sticky top-0 h-svh min-h-[480px] w-full overflow-hidden bg-stone-950"
       >
-        <source src="/assets/intro3.mp4" type="video/mp4" />
-        <source src="/assets/intro3.webm" type="video/webm" />
-      </video>
-      <img
-        data-film-photo
-        data-film-headframe
-        src="/assets/E15.png"
-        alt=""
-        width={1575}
-        height={1280}
-        className="pointer-events-none absolute inset-0 size-full object-cover opacity-0"
-      />
-      <img
-        data-film-photo
-        data-film-opening
-        src="/assets/pic4.png"
-        alt="Philsaga miners at work underground"
-        width={852}
-        height={608}
-        className="pointer-events-none absolute inset-0 size-full object-cover"
-      />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-black/10">
-        <div data-film-progress className="h-full origin-left bg-primary" />
-      </div>
-    </section>
+        <h1 className="sr-only">{site.name}</h1>
+        <video
+          ref={video}
+          muted
+          playsInline
+          preload={reducedMotion ? "none" : "auto"}
+          poster="/assets/hero-poster.jpg"
+          aria-hidden="true"
+          className="absolute inset-0 size-full origin-top scale-[1.12] object-cover object-top"
+        >
+          {!reducedMotion && (
+            <>
+              <source src="/assets/intro3.mp4" type="video/mp4" />
+              <source src="/assets/intro3.webm" type="video/webm" />
+            </>
+          )}
+        </video>
+        {!reducedMotion && (
+          <span
+            ref={hint}
+            className="pointer-events-none absolute inset-x-0 bottom-7 text-center font-sans text-[10px] tracking-[0.2em] text-white/80"
+          >
+            Scroll
+          </span>
+        )}
+      </section>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 # Philsaga Mining Corporation
 
-Current design: warm light editorial surfaces with an unobstructed photographic/video hero. The hero pins for 180 viewport heights at 768px and above, crossfading underground and headframe imagery into the company video. Desktop company photographs also use restrained parallax. Mobile and reduced-motion users see a static mining photograph. Earlier dark-theme implementation details below are retained as project history where superseded by this update.
+Current design: warm light editorial surfaces with a video-only cinematic hero. The hero video stays sticky across a 300vh scroll track and scrubs from its first to last frame on desktop and mobile. The only hero overlay is a small Scroll hint that fades near the start of the sequence. Reduced-motion users see the poster without scrubbing.
 
 A local React, Vite, and TypeScript homepage redesign based on the supplied PMC brief. Tailwind CSS v4 provides all styling; `src/index.css` contains only its import and shared theme tokens. UI primitives follow the shadcn approach using locally owned components and Radix accessibility behavior.
 
@@ -28,9 +28,9 @@ The build runs TypeScript checking before producing `dist/`. Deploy `dist/` to a
 - `src/hooks`: `useLenis`, `useReducedMotion`, and `useCountUp`.
 - `public/assets`: original supplied imagery, recovered SDMP imagery, and optimized hero media.
 
-The desktop hero pins for 250 viewport heights and scrubs the introduction video. The tiger section pins for 200 viewport heights and advances through the five values. The upstream hero has a higher ScrollTrigger refresh priority so asynchronous metadata loading cannot misplace the tiger pin. Each component removes its triggers on cleanup. Other sections use one-time 600 ms fade-up reveals.
+The hero uses a sticky viewport inside a 300vh wrapper and creates its ScrollTrigger after video metadata loads. It does not add a second pin. The tiger section pins for 200 viewport heights and advances through the five values. Each component removes its triggers on cleanup. Other sections use one-time 600 ms fade-up reveals.
 
-At widths below 1024px, the hero uses its poster and neither section pins. Reduced motion disables Lenis, count-up animation, pinning, scrubbing, and translated reveals; all five values remain visible as a list.
+Reduced motion disables Lenis, count-up animation, pinning, scrubbing, and translated reveals; all five values remain visible as a list.
 
 ## Media
 
@@ -40,7 +40,15 @@ Rebuild hero derivatives from the original video outside `public/assets`:
 node scripts/prepare-media.mjs 'C:\Users\rncorpuz\Downloads\pmc\intro3.mp4'
 ```
 
-The script generates a first-frame JPEG poster, a silent H.264 MP4 with fast-start metadata, and a silent VP9 WebM. Short keyframe intervals support seeking. The script enforces a 5 MB ceiling per video. Current outputs: MP4 1,507,882 bytes; WebM 1,970,268 bytes; poster 31,468 bytes.
+The source has a Renderforest watermark in the bottom corners. Scale the video to about 112%, anchored at the top center, so the bottom edge falls outside the visible frame. The script extracts a poster from frame 0 and creates silent H.264 MP4 and VP9 WebM files with every frame encoded as a keyframe for scroll seeking. Equivalent FFmpeg commands are:
+
+```powershell
+ffmpeg -i intro3-source.mp4 -frames:v 1 -q:v 2 hero-poster.jpg
+ffmpeg -i intro3-source.mp4 -c:v libx264 -g 1 -crf 23 -pix_fmt yuv420p -an -movflags +faststart intro3.mp4
+ffmpeg -i intro3-source.mp4 -c:v libvpx-vp9 -g 1 -b:v 130k -deadline realtime -cpu-used 6 -an intro3.webm
+```
+
+The script enforces an 8 MB ceiling per video. Current derivatives were rebuilt from the attached source for this update.
 
 The original is only 640 × 360. Both optimized formats retain that resolution; a higher-resolution original would improve the full-screen presentation.
 

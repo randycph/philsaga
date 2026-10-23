@@ -36,9 +36,11 @@ execFileSync(ffmpeg, [
   "-preset",
   "fast",
   "-crf",
-  "25",
+  "23",
   "-g",
-  "15",
+  "1",
+  "-pix_fmt",
+  "yuv420p",
   "-movflags",
   "+faststart",
   `${output}/intro3.mp4`,
@@ -50,9 +52,9 @@ execFileSync(ffmpeg, [
   "-c:v",
   "libvpx-vp9",
   "-b:v",
-  "650k",
+  "130k",
   "-g",
-  "15",
+  "1",
   "-deadline",
   "realtime",
   "-cpu-used",
@@ -63,8 +65,8 @@ execFileSync(ffmpeg, [
 for (const name of ["intro3.mp4", "intro3.webm"]) {
   const size = statSync(`${output}/${name}`).size;
 
-  if (size >= 5_000_000) {
-    throw new Error(`${name} exceeds the 5 MB media budget.`);
+  if (size >= 8_000_000) {
+    throw new Error(`${name} exceeds the 8 MB media budget.`);
   }
 
   console.log(`${name}: ${(size / 1_000_000).toFixed(2)} MB`);
