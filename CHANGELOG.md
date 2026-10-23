@@ -1,5 +1,10 @@
 # Change record
 
+## About reference layout
+
+- Rebuilt only the About section with reference proportions, section marker, compact typography, diagonal right-side supplied artwork, and the reference statistics row.
+- Captured the rendered desktop section in artifacts/about-visual-check.png. The supplied artwork and available icon shapes differ from the reference.
+
 ## PMC-MMPRC header logo
 
 - Updated the header to use the supplied PMC-MMPRC logo, with proportional sizing on desktop and mobile.

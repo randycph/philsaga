@@ -1,74 +1,64 @@
+import { ArrowRight, HardHat, Mountain, UsersRound } from "lucide-react";
 import { uiCopy } from "../data/ui";
-import { ArrowUpRight } from "lucide-react";
-import { copy, site } from "../data/site";
-import { useCountUp } from "../hooks/useCountUp";
-import { container, Eyebrow, heading, Reveal } from "./Shared";
-import { Button } from "./ui/button";
+import "./CompanyIntro.css";
+
+const statistics = [
+  { value: "2000+", label: "People Empowered", icon: UsersRound },
+  { value: "25+", label: "Years of Operations", icon: HardHat },
+  { value: "50M+ MT", label: "Total Resources", icon: Mountain },
+];
 
 export function CompanyIntro() {
-  const founded = useCountUp(2000);
-  const years = useCountUp(25);
-
   return (
-    <section
-      id="about"
-      aria-labelledby="about-heading"
-      className="scroll-mt-28 px-4 py-4 md:px-8 md:py-6"
-    >
-      <div className="mx-auto max-w-[1440px] overflow-hidden border border-black/10 shadow-sm">
-        <div className="relative isolate grid min-h-[520px] items-stretch overflow-hidden bg-[#f4f2ed] md:min-h-[540px] lg:min-h-[560px] lg:grid-cols-[0.8fr_1.2fr]">
-          <img src="/assets/about-fullwidth.png" alt="" aria-hidden="true" className="absolute inset-y-0 right-0 -z-10 h-full w-full object-cover object-right md:w-1/2" />
-          <div aria-hidden="true" className="absolute inset-x-0 top-0 h-3 bg-[#18321f]/80" />
-          <span aria-hidden="true" className="absolute left-5 top-12 z-10 hidden font-heading text-sm font-semibold tracking-wide text-foreground/70 md:block lg:left-8">02<span className="mx-auto mt-3 block h-12 w-px bg-foreground/30" /></span>
-          <Reveal className="flex flex-col justify-center bg-[#f4f2ed] px-10 py-16 md:px-20 md:pl-32 lg:pl-36" parallax>
-            <Eyebrow>{copy.aboutEyebrow}</Eyebrow>
-            <h2 id="about-heading" className={heading}>
-              Rooted
-              <br />
-              in Progress
-            </h2>
-            <p className="mt-7 max-w-lg text-base leading-[1.75] text-muted-foreground md:text-lg">
-              Philsaga Mining Corporation is committed to responsible mining that creates lasting value for communities, the environment, and future generations.
-            </p>
-            <Button asChild variant="ghost" className="mt-8 w-fit border-b border-primary/40 px-0 text-primary">
-              <a href={uiCopy.httpsWwwPhilsagaComAboutUs}>
-                {uiCopy.learnMore2}
-                <ArrowUpRight className="size-4" />
-              </a>
-            </Button>
-          </Reveal>
-          <div className="min-h-[260px] lg:min-h-full" aria-hidden="true" />
+    <section id="about" aria-labelledby="about-heading" className="company-about">
+      <div className="company-about__main">
+        <div className="company-about__marker" aria-hidden="true">
+          02
+          <span />
         </div>
-        <Reveal className="mt-16 grid gap-8 border-y border-black/10 py-10 sm:grid-cols-3 md:mt-20 md:py-12">
-          <div className="sm:border-r sm:border-black/10">
-            <p className="font-heading text-7xl font-semibold tracking-tight text-primary">
-              <span ref={founded.ref}>{founded.value}</span>
-            </p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              {uiCopy.foundedInMindanao}
-            </p>
+        <span className="company-about__watermark" aria-hidden="true">
+          01
+        </span>
+        <div className="company-about__copy">
+          <p className="company-about__eyebrow">
+            <span />
+            About Us
+          </p>
+          <h2 id="about-heading">
+            Rooted
+            <br />
+            in Progress
+          </h2>
+          <p className="company-about__description">
+            Philsaga Mining Corporation is committed to responsible mining that
+            creates lasting value for communities, the environment, and future
+            generations.
+          </p>
+          <a className="company-about__link" href={uiCopy.httpsWwwPhilsagaComAboutUs}>
+            Learn More
+            <ArrowRight aria-hidden="true" />
+          </a>
+        </div>
+        <div className="company-about__art">
+          <img
+            src="/assets/about-fullwidth.png"
+            alt="Mining worker overlooking a processing plant and forested mountains"
+            width={1448}
+            height={1088}
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div className="company-about__statistics">
+        {statistics.map(({ value, label, icon: Icon }) => (
+          <div className="company-about__stat" key={label}>
+            <Icon aria-hidden="true" />
+            <div>
+              <p className="company-about__value">{value}</p>
+              <p className="company-about__label">{label}</p>
+            </div>
           </div>
-          <div className="sm:border-r sm:border-black/10 sm:pl-6">
-            <p className="font-heading text-7xl font-semibold tracking-tight text-primary">
-              <span ref={years.ref}>{years.value}</span>
-              {uiCopy.label}
-            </p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              {uiCopy.yearsOfOperation}
-            </p>
-          </div>
-          <div className="sm:pl-6">
-            <p className="font-heading text-4xl font-semibold tracking-tight text-primary">
-              {uiCopy.iso}
-              <span className="text-xl md:text-2xl xl:text-3xl">
-                {uiCopy.label140012015}
-              </span>
-            </p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              {uiCopy.certifiedEnvironmentalManagement}
-            </p>
-          </div>
-        </Reveal>
+        ))}
       </div>
     </section>
   );

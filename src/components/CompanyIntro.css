@@ -1,0 +1,195 @@
+.company-about {
+  background: #f6f4ef;
+  color: #102b2b;
+  scroll-margin-top: 72px;
+}
+
+.company-about__main {
+  position: relative;
+  min-height: 34.2vw;
+  overflow: hidden;
+}
+
+.company-about__marker {
+  position: absolute;
+  top: 4.9vw;
+  left: 3.5%;
+  color: #7c8584;
+  font-size: clamp(10px, 1.3vw, 20px);
+  font-weight: 700;
+}
+
+.company-about__marker span {
+  display: block;
+  height: 4.4vw;
+  width: 1px;
+  margin: 1.1vw auto 0;
+  background: #afb6b3;
+}
+
+.company-about__watermark {
+  position: absolute;
+  top: 6vw;
+  left: 45.5%;
+  color: #eeece6;
+  font-size: 6vw;
+  font-weight: 700;
+}
+
+.company-about__copy {
+  position: relative;
+  z-index: 1;
+  width: 28%;
+  margin-left: 10.9%;
+  padding-top: 6.2vw;
+  padding-bottom: 4.3vw;
+}
+
+.company-about__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.7vw;
+  margin-bottom: 1.6vw;
+  color: #f59a17;
+  font-size: clamp(8px, 0.8vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.company-about__eyebrow span {
+  width: 2.8vw;
+  height: 2px;
+  background: #f59a17;
+}
+
+.company-about h2 {
+  font-size: clamp(30px, 3.9vw, 68px);
+  font-weight: 700;
+  line-height: 0.99;
+  letter-spacing: -0.045em;
+}
+
+.company-about__description {
+  margin-top: 1.8vw;
+  font-size: clamp(12px, 1.4vw, 23px);
+  line-height: 1.22;
+  color: #515c5b;
+}
+
+.company-about__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2vw;
+  margin-top: 2.7vw;
+  padding-bottom: 0.45vw;
+  border-bottom: 2px solid #ffd08b;
+  font-size: clamp(12px, 1.4vw, 23px);
+  font-weight: 600;
+}
+
+.company-about__link svg {
+  width: 3vw;
+  height: 1.7vw;
+  color: #f59a17;
+}
+
+.company-about__art {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 61%;
+  clip-path: polygon(36% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.company-about__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right 42%;
+}
+
+.company-about__statistics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 3.1vw 7%;
+  background: #f6f4ef;
+}
+
+.company-about__stat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+}
+
+.company-about__stat + .company-about__stat {
+  border-left: 1px solid #d2d3cc;
+}
+
+.company-about__stat > svg {
+  width: 5vw;
+  height: 4.5vw;
+  color: #ff9918;
+  stroke-width: 2;
+}
+
+.company-about__value {
+  font-size: clamp(16px, 2.1vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.company-about__label {
+  margin-top: 0.6vw;
+  color: #646b69;
+  font-size: clamp(10px, 1.3vw, 20px);
+}
+
+@media (max-width: 639px) {
+  .company-about__main {
+    padding-bottom: 72vw;
+  }
+
+  .company-about__copy {
+    width: 77%;
+    padding-top: 42px;
+    padding-bottom: 32px;
+    margin-left: 15%;
+  }
+
+  .company-about__marker {
+    top: 42px;
+  }
+
+  .company-about__description {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .company-about__art {
+    top: auto;
+    height: 72vw;
+    width: 100%;
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .company-about__link {
+    margin-top: 24px;
+  }
+
+  .company-about__statistics {
+    padding: 24px 12px;
+    gap: 12px;
+  }
+
+  .company-about__stat {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .company-about__stat > svg {
+    width: 30px;
+    height: 30px;
+  }
+}
