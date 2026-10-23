@@ -1,6 +1,6 @@
+import { ChevronRight, ArrowUp, Mail } from "lucide-react";
 import { uiCopy } from "../data/ui";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
-import { copy, faqs, footerLinks, footerLegalLinks, site } from "../data/site";
+import { faqs, footerLinks, footerLegalLinks, site } from "../data/site";
 import {
   Dialog,
   DialogContent,
@@ -8,137 +8,123 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { container, heading } from "./Shared";
+
+const footerLinkColumns = [
+  footerLinks.slice(0, 3),
+  footerLinks.slice(3, 5),
+  footerLinks.slice(5),
+];
 
 export function Footer() {
   return (
     <footer
       id="contact"
       aria-labelledby="footer-heading"
-      className="relative scroll-mt-28 overflow-hidden border-t border-black/10"
+      className="relative scroll-mt-20 overflow-hidden border-t border-white/10 bg-[#0b151b] text-[#f2eee7]"
     >
       <img
         src="/assets/foot-bg.png"
-        alt={uiCopy.aerialViewOfThePhilsagaProcessingPlant}
+        alt=""
+        aria-hidden="true"
         width={2300}
         height={479}
         loading="lazy"
-        className="absolute inset-0 size-full object-cover"
+        className="absolute inset-0 size-full object-cover object-center"
       />
-      <div className="absolute inset-0 bg-background/95" />
-      <div className={`${container} relative py-20 md:py-24`}>
-        <div className="flex flex-wrap items-end justify-between gap-8 border-b border-black/15 pb-12">
-          <h2 id="footer-heading" className={`${heading} max-w-2xl`}>
-            {copy.footerHeading}
-          </h2>
+      <div
+        aria-hidden="true"
+            className="absolute inset-0 bg-[#08151d]/45"
+      />
+
+      <div className="relative mx-auto w-full max-w-[1440px] px-6 md:px-12 lg:px-16 xl:px-20">
+        <div className="flex flex-col gap-5 border-b border-white/15 py-8 sm:flex-row sm:items-center sm:gap-6 md:py-10">
           <a
-            href={`mailto:${site.email}`}
-            className="flex items-center gap-3 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-white hover:bg-[#843d0c]"
+            href={uiCopy.home}
+            aria-label={uiCopy.philsagaMiningCorporationHome}
+            className="flex w-fit shrink-0 items-center gap-5"
           >
-            {uiCopy.getInTouch}
-            <ArrowUpRight className="size-4" />
-          </a>
-        </div>
-        <div className="grid gap-12 py-12 md:grid-cols-[1.3fr_1fr_1fr]">
-          <div>
-            <a
-              href={uiCopy.home}
-              aria-label={uiCopy.philsagaMiningCorporationHome}
-            >
+            <span className="block h-[66px] w-[70px] overflow-hidden">
               <img
                 src="/assets/logo_2xb.png"
-                alt={uiCopy.pmcAndMmprcASociallyResponsibleAndEnvironment}
+                alt={uiCopy.pmcAndMmprcEmblems}
                 width={1030}
                 height={147}
                 loading="lazy"
-                className="w-full max-w-sm rounded bg-white p-2"
+                className="h-[66px] w-auto max-w-none"
               />
-            </a>
-            <p className="mt-5 max-w-xs text-sm leading-[1.8] text-muted-foreground">
-              {site.tagline}
-            </p>
-            <p className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
-              <MapPin className="size-4 text-primary" />
-              {site.location}
-            </p>
-          </div>
-          <nav
-            aria-label={uiCopy.footerNavigation}
-            className="grid grid-cols-2 gap-x-6 gap-y-4 text-sm"
+            </span>
+            <span className="hidden h-16 border-l border-white/20 sm:block" />
+          </a>
+          <p
+            id="footer-heading"
+            className="max-w-2xl text-sm leading-6 text-white/90 sm:text-base"
           >
-            {footerLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-foreground/80 hover:text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <div className="space-y-5">
-            <a
-              href={site.phoneHref}
-              className="flex items-center gap-3 text-sm"
-            >
-              <Phone className="size-4 text-primary" />
-              {site.phone}
-            </a>
-            <a
-              href={`mailto:${site.email}`}
-              className="flex items-center gap-3 text-sm"
-            >
-              <Mail className="size-4 text-primary" />
-              {site.email}
-            </a>
-            <div className="flex items-center gap-5">
-              <img
-                src="/assets/ISO-LOGO.png"
-                alt={uiCopy.iso140012015CertifiedByCertificationInternational}
-                width={391}
-                height={390}
-                loading="lazy"
-                className="size-20 rounded bg-white p-1"
-              />
-              <a
-                href={site.facebook}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded bg-paper p-2"
-              >
-                <img
-                  src="/assets/fb9.png"
-                  alt={uiCopy.followPhilsagaOnFacebook}
-                  width={367}
-                  height={102}
-                  loading="lazy"
-                  className="h-8 w-auto"
-                />
-              </a>
-            </div>
-          </div>
+            <span className="font-semibold">A Socially Responsible &amp;</span>{" "}
+            Environment Friendly Company
+          </p>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-black/15 pt-8 text-sm text-muted-foreground">
-          <div>
-            <p>{site.copyright}</p>
-            <div className="mt-3 flex flex-wrap gap-4">
-              {footerLegalLinks.map((link) => (
+
+        <nav
+          aria-label={uiCopy.footerNavigation}
+          className="grid grid-cols-1 gap-x-12 gap-y-4 border-b border-white/15 py-8 text-sm sm:grid-cols-3 sm:py-10 md:gap-x-20 md:py-12"
+        >
+          {footerLinkColumns.map((column, columnIndex) => (
+            <div key={columnIndex} className="space-y-3">
+              {column.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="hover:text-primary"
+                  className="group flex w-fit items-center gap-2.5 text-white/90 transition-colors hover:text-[#f5a623]"
                 >
+                  <ChevronRight className="size-3.5 text-[#f5a623] transition-transform group-hover:translate-x-0.5" />
                   {link.label}
                 </a>
               ))}
             </div>
+          ))}
+        </nav>
+      </div>
+
+      <div className="relative border-t border-white/5 bg-black/20">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-col justify-between gap-6 px-6 py-7 text-sm text-white/65 md:flex-row md:items-center md:px-12 lg:px-16 xl:px-20">
+          <div className="space-y-2">
+            <p>{site.copyright}</p>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              {footerLegalLinks.map((link, index) => (
+                <span key={link.label} className="flex items-center gap-3">
+                  {index > 0 && <span aria-hidden="true">/</span>}
+                  <a
+                    href={link.href}
+                    className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </span>
+              ))}
+            </div>
           </div>
-          <nav aria-label={uiCopy.quickLinks} className="flex flex-wrap gap-5">
-            <a href={uiCopy.home}>{uiCopy.home2}</a>
-            <a href={uiCopy.about}>{uiCopy.aboutUs}</a>
-            <a href={uiCopy.httpsWwwPhilsagaComCareers}>{uiCopy.careers}</a>
+
+          <nav
+            aria-label={uiCopy.quickLinks}
+            className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm"
+          >
+            <a href={uiCopy.home} className="hover:text-white">
+              {uiCopy.home2}
+            </a>
+            <span aria-hidden="true">/</span>
+            <a href={uiCopy.about} className="hover:text-white">
+              {uiCopy.aboutUs}
+            </a>
+            <span aria-hidden="true">/</span>
+            <a
+              href={uiCopy.httpsWwwPhilsagaComCareers}
+              className="hover:text-white"
+            >
+              {uiCopy.careers}
+            </a>
+            <span aria-hidden="true">/</span>
             <Dialog>
-              <DialogTrigger className="hover:text-primary">
+              <DialogTrigger className="hover:text-white">
                 {uiCopy.faqs}
               </DialogTrigger>
               <DialogContent className="max-w-2xl">
@@ -162,8 +148,23 @@ export function Footer() {
                 </div>
               </DialogContent>
             </Dialog>
-            <a href={`mailto:${site.email}`}>{uiCopy.contact}</a>
+            <span aria-hidden="true">/</span>
+            <a
+              href={`mailto:${site.email}`}
+              className="inline-flex items-center gap-1.5 hover:text-white"
+            >
+              <Mail className="size-3.5" />
+              {uiCopy.contact}
+            </a>
           </nav>
+
+          <a
+            href={uiCopy.home}
+            aria-label="Back to top"
+            className="absolute bottom-6 right-5 hidden size-10 items-center justify-center bg-black/35 text-white transition-colors hover:bg-[#f28c1b] sm:flex md:static md:shrink-0"
+          >
+            <ArrowUp className="size-4" />
+          </a>
         </div>
       </div>
     </footer>
