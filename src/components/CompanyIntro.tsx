@@ -27,7 +27,7 @@ export function CompanyIntro() {
             <p className="mt-7 max-w-lg text-base leading-[1.75] text-muted-foreground md:text-lg">
               {site.intro}
             </p>
-            <Button asChild variant="link" className="mt-8 w-fit px-0 text-primary">
+            <Button asChild variant="ghost" className="mt-8 w-fit px-0 text-primary">
               <a href={uiCopy.httpsWwwPhilsagaComAboutUs}>
                 {uiCopy.learnMore2}
                 <ArrowUpRight className="size-4" />
