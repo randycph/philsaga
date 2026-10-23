@@ -113,6 +113,11 @@ export function Hero() {
           ref={video}
           muted
           playsInline
+          onLoadedMetadata={() => {
+            if (video.current && video.current.duration > 2) {
+              video.current.currentTime = 2;
+            }
+          }}
           preload={reducedMotion ? "none" : "auto"}
           poster="/assets/hero-poster.jpg"
           aria-hidden="true"

@@ -88,13 +88,6 @@ export function Navbar() {
               className="h-full w-full object-contain"
             />
           </span>
-          <span className="hidden border-l border-black/20 pl-3 font-heading text-sm font-semibold leading-snug tracking-tight xl:block">
-            {uiCopy.philsagaMining}
-            <br />
-            <span className="text-[14px] font-normal tracking-widest text-foreground/60">
-              {uiCopy.corporation}
-            </span>
-          </span>
         </a>
         <NavigationMenu.Root className="relative hidden lg:block">
           <NavigationMenu.List className="flex items-center gap-8 text-sm font-medium">
@@ -187,12 +180,6 @@ export function Navbar() {
               </ul>
             </DialogContent>
           </Dialog>
-          <Button asChild className="hidden px-5 sm:inline-flex">
-            <a href={uiCopy.contact2}>
-              {uiCopy.contact}
-              <ArrowUpRight className="size-4" />
-            </a>
-          </Button>
           <Sheet>
             <SheetTrigger asChild>
               <Button
