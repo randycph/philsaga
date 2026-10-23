@@ -21,7 +21,7 @@ export function DialogContent({
       <Primitive.Content
         data-lenis-prevent
         className={cn(
-          "fixed left-1/2 top-1/2 z-[101] max-h-[90dvh] w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border border-white/15 bg-surface p-6 text-foreground shadow-2xl focus:outline-none",
+          "fixed left-1/2 top-1/2 z-[101] max-h-[90dvh] w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-none border border-black/15 bg-surface p-6 text-foreground shadow-2xl focus:outline-none",
           className,
         )}
         {...props}

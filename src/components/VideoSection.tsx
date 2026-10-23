@@ -52,7 +52,7 @@ export function VideoSection() {
             </a>
           </Button>
         </Reveal>
-        <Reveal className="overflow-hidden rounded-2xl border border-white/10 bg-surface lg:grid lg:grid-cols-[1.5fr_1fr]">
+        <Reveal className="overflow-hidden rounded-none border border-black/10 bg-surface lg:grid lg:grid-cols-[1.5fr_1fr]">
           <button
             onClick={() => {
               playVideo(featured);
@@ -67,7 +67,7 @@ export function VideoSection() {
             />
             <span className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             <span className="absolute inset-0 flex items-center justify-center">
-              <span className="flex size-20 items-center justify-center rounded-full border border-white/30 bg-primary text-background">
+              <span className="flex size-20 items-center justify-center rounded-full border border-black/30 bg-primary text-white">
                 <Play className="ml-1 size-7" fill="currentColor" />
               </span>
             </span>
@@ -102,7 +102,7 @@ export function VideoSection() {
           {videos.slice(1).map((video) => (
             <Reveal
               key={video.title}
-              className="overflow-hidden rounded-2xl border border-white/10 bg-surface sm:grid sm:grid-cols-[0.8fr_1fr] md:block xl:grid"
+              className="overflow-hidden rounded-none border border-black/10 bg-surface sm:grid sm:grid-cols-[0.8fr_1fr] md:block xl:grid"
             >
               <button
                 onClick={() => {
@@ -181,7 +181,7 @@ export function VideoSection() {
             </video>
           )}
           {failed && (
-            <p className="mt-6 rounded-xl bg-background p-5 leading-relaxed">
+            <p className="mt-6 rounded-sm bg-background p-5 leading-relaxed">
               {uiCopy.thisVideoIsCurrentlyUnavailableFromPmcS}
             </p>
           )}

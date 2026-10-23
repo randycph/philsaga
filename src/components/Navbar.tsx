@@ -64,15 +64,17 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b border-white/10 transition-colors duration-300",
-        scrolled ? "bg-background/95 backdrop-blur-xl" : "bg-background/20",
+        "fixed inset-x-0 top-0 z-50 border-b border-black/10 transition-colors duration-300",
+        scrolled
+          ? "bg-background/95 backdrop-blur-xl"
+          : "bg-background/90 backdrop-blur-xl",
       )}
     >
-      <div className="hidden border-b border-white/10 md:block">
+      <div className="hidden border-b border-black/10 md:block">
         <div
           className={cn(
             container,
-            "flex min-h-10 items-center justify-between gap-4 text-sm text-white/75",
+            "flex min-h-10 items-center justify-between gap-4 text-sm text-foreground/75",
           )}
         >
           <div className="flex gap-6">
@@ -118,10 +120,10 @@ export function Navbar() {
               className="h-[51px] w-auto max-w-none"
             />
           </span>
-          <span className="hidden border-l border-white/20 pl-3 font-heading text-sm font-semibold leading-snug tracking-tight xl:block">
+          <span className="hidden border-l border-black/20 pl-3 font-heading text-sm font-semibold leading-snug tracking-tight xl:block">
             {uiCopy.philsagaMining}
             <br />
-            <span className="text-[14px] font-normal tracking-widest text-white/60">
+            <span className="text-[14px] font-normal tracking-widest text-foreground/60">
               {uiCopy.corporation}
             </span>
           </span>
@@ -143,12 +145,12 @@ export function Navbar() {
                 {uiCopy.sustainability}
                 <ChevronDown className="size-3.5" />
               </NavigationMenu.Trigger>
-              <NavigationMenu.Content className="absolute top-full rounded-xl border border-white/10 bg-surface p-3 shadow-xl">
+              <NavigationMenu.Content className="absolute top-full rounded-sm border border-black/10 bg-surface p-3 shadow-xl">
                 {sustainabilityLinks.map((link) => (
                   <NavigationMenu.Link
                     key={link.label}
                     href={link.href}
-                    className="block whitespace-nowrap rounded-lg px-4 py-3 hover:bg-white/10"
+                    className="block whitespace-nowrap rounded-lg px-4 py-3 hover:bg-black/5"
                   >
                     {link.label}
                   </NavigationMenu.Link>
@@ -193,7 +195,7 @@ export function Navbar() {
                   setQuery(event.target.value);
                 }}
                 placeholder={uiCopy.whatAreYouLookingFor}
-                className="mt-6 w-full rounded-lg border border-white/20 bg-background px-4 py-3 focus:outline-primary"
+                className="mt-6 w-full rounded-lg border border-black/20 bg-background px-4 py-3 focus:outline-primary"
               />
               <ul className="mt-4 space-y-1">
                 {results.map((link) => (
@@ -201,7 +203,7 @@ export function Navbar() {
                     <DialogClose asChild>
                       <a
                         href={link.href}
-                        className="flex justify-between rounded-lg px-3 py-3 hover:bg-white/10"
+                        className="flex justify-between rounded-lg px-3 py-3 hover:bg-black/5"
                       >
                         {link.label}
                         <ArrowUpRight className="size-4" />
@@ -248,7 +250,7 @@ export function Navbar() {
                   <SheetClose asChild key={link.label}>
                     <a
                       href={link.href}
-                      className="border-b border-white/10 py-4 text-lg hover:text-primary"
+                      className="border-b border-black/10 py-4 text-lg hover:text-primary"
                     >
                       {link.label}
                     </a>

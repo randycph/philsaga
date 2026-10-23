@@ -16,17 +16,17 @@ export function CompanyIntro() {
       className="scroll-mt-28 py-24 lg:py-32"
     >
       <div className={container}>
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <Reveal className="relative">
+        <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-28">
+          <Reveal className="relative overflow-hidden" parallax>
             <img
               src="/assets/E15.png"
               alt={uiCopy.philsagaMineHeadframeInRosarioAgusanDelSur}
               width={1575}
               height={1280}
               loading="lazy"
-              className="aspect-[5/5.2] w-full rounded-2xl object-cover"
+              className="aspect-[3/4] w-full rounded-none object-cover"
             />
-            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-xl border border-white/20 bg-background/80 px-5 py-4 backdrop-blur-md">
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-sm border border-black/20 bg-background/80 px-5 py-4 backdrop-blur-md">
               <span className="text-sm">{uiCopy.rosarioAgusanDelSur}</span>
               <span className="size-2 rounded-full bg-primary" />
             </div>
@@ -47,17 +47,17 @@ export function CompanyIntro() {
             </Button>
           </Reveal>
         </div>
-        <Reveal className="mt-16 grid gap-8 border-y border-white/10 py-10 sm:grid-cols-3 md:mt-20 md:py-12">
-          <div className="sm:border-r sm:border-white/10">
-            <p className="font-heading text-5xl font-semibold tracking-tight text-primary">
+        <Reveal className="mt-16 grid gap-8 border-y border-black/10 py-10 sm:grid-cols-3 md:mt-20 md:py-12">
+          <div className="sm:border-r sm:border-black/10">
+            <p className="font-heading text-7xl font-semibold tracking-tight text-primary">
               <span ref={founded.ref}>{founded.value}</span>
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
               {uiCopy.foundedInMindanao}
             </p>
           </div>
-          <div className="sm:border-r sm:border-white/10 sm:pl-6">
-            <p className="font-heading text-5xl font-semibold tracking-tight text-primary">
+          <div className="sm:border-r sm:border-black/10 sm:pl-6">
+            <p className="font-heading text-7xl font-semibold tracking-tight text-primary">
               <span ref={years.ref}>{years.value}</span>
               {uiCopy.label}
             </p>

@@ -6,13 +6,13 @@ export function VisionMission() {
   return (
     <section
       aria-labelledby="purpose-heading"
-      className="bg-paper text-background"
+      className="mx-auto max-w-[1600px] bg-paper px-6 py-24 text-foreground md:px-12"
     >
       <h2 id="purpose-heading" className="sr-only">
         {uiCopy.ourVisionAndMission}
       </h2>
-      <div className="grid lg:grid-cols-2">
-        <Reveal>
+      <div className="grid gap-8 border-t border-black/15 pt-12 lg:grid-cols-[1.2fr_1fr]">
+        <Reveal className="overflow-hidden" parallax>
           <img
             src="/assets/pic4.png"
             alt={
@@ -31,12 +31,12 @@ export function VisionMission() {
             <br />
             {uiCopy.theHorizon}
           </h3>
-          <p className="mt-7 max-w-lg text-lg leading-[1.8] text-background/70">
+          <p className="mt-7 max-w-lg text-lg leading-[1.8] text-foreground/70">
             {site.vision}
           </p>
         </Reveal>
       </div>
-      <div className="grid lg:grid-cols-2">
+      <div className="mt-24 grid gap-8 border-t border-black/15 pt-12 lg:grid-cols-[1fr_0.85fr]">
         <Reveal className="order-2 flex flex-col justify-center px-6 py-24 md:px-16 lg:order-1 lg:px-20">
           <Eyebrow light>{uiCopy.ourMission}</Eyebrow>
           <h3 className={heading}>
@@ -44,11 +44,14 @@ export function VisionMission() {
             <br />
             {uiCopy.everyOperation}
           </h3>
-          <p className="mt-7 max-w-lg text-lg leading-[1.8] text-background/70">
+          <p className="mt-7 max-w-lg text-lg leading-[1.8] text-foreground/70">
             {site.mission}
           </p>
         </Reveal>
-        <Reveal className="order-1 lg:order-2">
+        <Reveal
+          className="order-1 overflow-hidden lg:order-2 lg:mt-24"
+          parallax
+        >
           <img
             src="/assets/pic3.png"
             alt={

@@ -15,7 +15,7 @@ export function Footer() {
     <footer
       id="contact"
       aria-labelledby="footer-heading"
-      className="relative scroll-mt-28 overflow-hidden border-t border-white/10"
+      className="relative scroll-mt-28 overflow-hidden border-t border-black/10"
     >
       <img
         src="/assets/foot-bg.png"
@@ -25,15 +25,15 @@ export function Footer() {
         loading="lazy"
         className="absolute inset-0 size-full object-cover"
       />
-      <div className="absolute inset-0 bg-background/85" />
+      <div className="absolute inset-0 bg-background/95" />
       <div className={`${container} relative py-20 md:py-24`}>
-        <div className="flex flex-wrap items-end justify-between gap-8 border-b border-white/15 pb-12">
+        <div className="flex flex-wrap items-end justify-between gap-8 border-b border-black/15 pb-12">
           <h2 id="footer-heading" className={`${heading} max-w-2xl`}>
             {copy.footerHeading}
           </h2>
           <a
             href={`mailto:${site.email}`}
-            className="flex items-center gap-3 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-background hover:bg-orange-300"
+            className="flex items-center gap-3 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-white hover:bg-[#843d0c]"
           >
             {uiCopy.getInTouch}
             <ArrowUpRight className="size-4" />
@@ -70,7 +70,7 @@ export function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-white/80 hover:text-primary"
+                className="text-foreground/80 hover:text-primary"
               >
                 {link.label}
               </a>
@@ -118,7 +118,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-white/15 pt-8 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-black/15 pt-8 text-sm text-muted-foreground">
           <div>
             <p>{site.copyright}</p>
             <div className="mt-3 flex flex-wrap gap-4">

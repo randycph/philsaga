@@ -48,7 +48,7 @@ export function TigerValues() {
       ref={root}
       id="values"
       aria-labelledby="values-heading"
-      className="border-y border-white/10 bg-surface py-24 lg:flex lg:min-h-dvh lg:items-center lg:py-32"
+      className="border-y border-black/10 bg-[#e4e8dc] py-24 lg:flex lg:min-h-dvh lg:items-center lg:py-32"
     >
       <div className={container}>
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
@@ -62,8 +62,8 @@ export function TigerValues() {
             {uiCopy.fiveValuesOneSharedCommitmentToThePeople}
           </p>
         </div>
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
-          <Reveal className="relative overflow-hidden rounded-2xl bg-paper p-6 md:p-10">
+        <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <Reveal className="relative overflow-hidden rounded-none bg-paper p-6 md:p-10">
             {/* TODO: Replace pic5.png with a transparent, high-resolution tiger cutout. */}
             <img
               src="/assets/pic5.png"
@@ -75,7 +75,7 @@ export function TigerValues() {
               loading="lazy"
               className="aspect-[731/510] w-full rounded-lg object-contain"
             />
-            <p className="mt-6 border-t border-black/10 pt-5 text-sm font-medium text-background/70">
+            <p className="mt-6 border-t border-black/10 pt-5 text-sm font-medium text-foreground/70">
               {uiCopy.theStrengthBehindEverythingWeDo}
             </p>
           </Reveal>
@@ -90,7 +90,7 @@ export function TigerValues() {
                     key={value.word}
                     className={cn(
                       "h-1 rounded-full transition-all duration-500",
-                      index === active ? "w-16 bg-primary" : "w-8 bg-white/15",
+                      index === active ? "w-16 bg-primary" : "w-8 bg-black/15",
                     )}
                   />
                 ))}
@@ -102,7 +102,7 @@ export function TigerValues() {
                   {uiCopy.label05}
                 </p>
                 <h3 className="font-heading text-[clamp(32px,3.5vw,56px)] font-semibold tracking-tight">
-                  <span className="text-7xl text-tiger">
+                  <span className="text-9xl text-tiger">
                     {values[active].word[0]}
                   </span>
                   {values[active].word.slice(1)}
@@ -116,7 +116,7 @@ export function TigerValues() {
               {values.map((value) => (
                 <Reveal
                   key={value.word}
-                  className="border-b border-white/10 pb-6"
+                  className="border-b border-black/10 pb-6"
                 >
                   <h3 className="font-heading text-3xl font-semibold tracking-tight">
                     <span className="text-tiger">{value.word[0]}</span>
@@ -128,7 +128,7 @@ export function TigerValues() {
                 </Reveal>
               ))}
             </div>
-            <p className="mt-8 border-t border-white/10 pt-6 text-sm leading-[1.8] text-muted-foreground">
+            <p className="mt-8 border-t border-black/10 pt-6 text-sm leading-[1.8] text-muted-foreground">
               {site.valuesClosing}
             </p>
           </div>

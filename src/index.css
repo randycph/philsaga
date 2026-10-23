@@ -2,14 +2,14 @@
 
 /* Tailwind's theme entry point defines shared shadcn design tokens. */
 @theme {
-  --color-background: #0e1111;
-  --color-surface: #161a1a;
-  --color-primary: #f7941d;
+  --color-background: #f7f6f2;
+  --color-surface: #eeede7;
+  --color-primary: #a34d11;
   --color-primary-foreground: #0e1111;
   --color-forest: #1f5130;
   --color-paper: #f6f3ee;
-  --color-foreground: #f5f5f5;
-  --color-muted-foreground: #a3a8a8;
+  --color-foreground: #182d27;
+  --color-muted-foreground: #626a63;
   --color-tiger: #d91e18;
   --font-sans: "Inter", sans-serif;
   --font-heading: "Sora", sans-serif;

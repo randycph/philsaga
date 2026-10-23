@@ -68,7 +68,7 @@ export function Sdmp() {
             ))}
           </Carousel>
         </Reveal>
-        <Reveal className="mt-10 flex flex-wrap items-center justify-between gap-7 rounded-2xl border border-primary/20 bg-forest/20 p-7 md:p-10">
+        <Reveal className="mt-10 flex flex-wrap items-center justify-between gap-7 rounded-none border-y border-primary/20 bg-paper p-7 md:p-10">
           <div className="flex items-center gap-5">
             <FileText
               className="hidden size-10 text-primary sm:block"

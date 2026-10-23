@@ -16,7 +16,7 @@ export function CommunityPrograms() {
     <section
       id="community"
       aria-labelledby="community-heading"
-      className="scroll-mt-28 border-t border-white/10 bg-surface py-24 lg:py-32"
+      className="scroll-mt-28 border-t border-black/10 bg-surface py-24 lg:py-32"
     >
       <div className={container}>
         <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-6">
@@ -30,10 +30,10 @@ export function CommunityPrograms() {
             {uiCopy.ourFeaturedCommunityPrograms}
           </p>
         </Reveal>
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-x-14 gap-y-16 md:grid-cols-2">
           {programs.map((program) => (
             <Reveal key={program.title} className="h-full">
-              <Card className="flex h-full flex-col bg-background">
+              <Card className="flex h-full flex-col border-x-0 border-t-0 bg-transparent">
                 <a href={program.href} aria-label={program.title}>
                   <ImageWithFallback src={program.image} alt={program.title} />
                 </a>
@@ -41,7 +41,7 @@ export function CommunityPrograms() {
                   <p className="mb-4 text-sm text-primary">
                     {program.category}
                   </p>
-                  <h3 className="mb-6 font-heading text-lg font-medium leading-relaxed tracking-tight">
+                  <h3 className="mb-6 font-heading text-2xl font-medium leading-relaxed tracking-tight">
                     {program.title}
                   </h3>
                   <div className="mt-auto">
@@ -52,7 +52,7 @@ export function CommunityPrograms() {
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-12 flex flex-wrap items-center justify-between gap-5 border-y border-white/10 py-8">
+        <Reveal className="mt-12 flex flex-wrap items-center justify-between gap-5 border-y border-black/10 py-8">
           <p className="text-base text-muted-foreground">{copy.archive}</p>
           <a
             href={uiCopy.httpsWwwPhilsagaComNews}

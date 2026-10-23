@@ -6,7 +6,7 @@ import { useReducedMotion } from "../hooks/useReducedMotion";
 
 export const container = "mx-auto w-full max-w-[1440px] px-6 md:px-12 lg:px-20";
 export const heading =
-  "font-heading text-4xl font-semibold leading-[1.15] tracking-[-0.045em] md:text-5xl lg:text-6xl";
+  "font-heading text-4xl font-semibold leading-[1.15] tracking-[-0.045em] md:text-6xl lg:text-7xl";
 
 export function Eyebrow({
   children,
@@ -31,9 +31,11 @@ export function Eyebrow({
 export function Reveal({
   children,
   className,
+  parallax = false,
 }: {
   children: ReactNode;
   className?: string;
+  parallax?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
@@ -62,6 +64,7 @@ export function Reveal({
   return (
     <div
       ref={ref}
+      data-parallax={parallax || undefined}
       className={cn(
         "transition-[opacity,translate] duration-600 ease-out",
         visible ? "translate-y-0 opacity-100" : "opacity-0",
@@ -89,7 +92,7 @@ export function ImageWithFallback({
     return (
       <div
         className={cn(
-          "flex aspect-[16/10] items-center justify-center bg-gradient-to-br from-forest/70 via-surface to-background",
+          "flex aspect-[16/10] items-center justify-center bg-gradient-to-br from-[#dedfd0] via-[#ece8dc] to-paper",
           className,
         )}
         role="img"

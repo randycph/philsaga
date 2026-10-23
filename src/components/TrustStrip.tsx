@@ -7,7 +7,7 @@ export function TrustStrip() {
   return (
     <aside
       aria-label={uiCopy.certificationAndSocialMedia}
-      className="border-y border-white/10 bg-surface"
+      className="border-y border-black/10 bg-white"
     >
       <div
         className={`${container} flex flex-wrap items-center justify-between gap-6 py-7`}
@@ -45,7 +45,7 @@ export function TrustStrip() {
             loading="lazy"
             className="h-9 w-auto"
           />
-          <ArrowUpRight className="size-4 text-background" />
+          <ArrowUpRight className="size-4 text-foreground" />
         </a>
       </div>
     </aside>

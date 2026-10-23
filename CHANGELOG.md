@@ -1,5 +1,13 @@
 # Change record
 
+## Light editorial redesign
+
+- Replaced dark surfaces with warm white, pale stone, sage, and ink typography throughout the site.
+- Removed all visible hero text and buttons. The pinned opening now crossfades original mining photographs into the scrubbed company film, with eased zoom and a thin progress indicator.
+- Added reduced-motion-aware image parallax to the headframe, vision, and mission photographs.
+- Reworked section proportions, oversized statistics, offset vision/mission layouts, two-column community stories, lighter video presentation, and the footer.
+- Retained original company imagery; no synthetic mining photos were introduced. The source film remains limited to its original resolution.
+
 ## 2026-10-23
 
 - Initialized the empty local workspace as a React/Vite/TypeScript project and Git repository.

@@ -1,5 +1,7 @@
 # Philsaga Mining Corporation
 
+Current design: warm light editorial surfaces with an unobstructed photographic/video hero. The hero pins for 180 viewport heights at 768px and above, crossfading underground and headframe imagery into the company video. Desktop company photographs also use restrained parallax. Mobile and reduced-motion users see a static mining photograph. Earlier dark-theme implementation details below are retained as project history where superseded by this update.
+
 A local React, Vite, and TypeScript homepage redesign based on the supplied PMC brief. Tailwind CSS v4 provides all styling; `src/index.css` contains only its import and shared theme tokens. UI primitives follow the shadcn approach using locally owned components and Radix accessibility behavior.
 
 ## Run
