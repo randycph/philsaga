@@ -129,22 +129,6 @@ export function Navbar() {
           </NavigationMenu.List>
         </NavigationMenu.Root>
         <div className="flex items-center gap-2 md:gap-4">
-          <div className="group relative hidden sm:block">
-            <img
-              src="/assets/ISO-LOGO.png"
-              alt={uiCopy.iso140012015Certified}
-              width={391}
-              height={391}
-              className="size-10 rounded-sm object-contain"
-            />
-            <div className="pointer-events-none absolute right-0 top-full z-50 mt-3 w-56 origin-top-right scale-95 rounded-md border border-black/10 bg-white p-2 opacity-0 shadow-xl transition duration-200 group-hover:scale-100 group-hover:opacity-100 group-focus-within:scale-100 group-focus-within:opacity-100">
-              <img
-                src="/assets/ISO-LOGO.png"
-                alt={uiCopy.certificationInternationalIso140012015}
-                className="h-auto w-full"
-              />
-            </div>
-          </div>
           <Dialog>
             <DialogTrigger asChild>
               <Button
