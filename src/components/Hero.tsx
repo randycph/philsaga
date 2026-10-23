@@ -114,7 +114,7 @@ export function Hero() {
   return (
     <section
       ref={root}
-      id="home"
+      id="hero"
       aria-labelledby="hero-heading"
       className="relative flex min-h-[850px] flex-col justify-end overflow-hidden bg-background pb-10 pt-40 lg:h-dvh lg:min-h-[780px]"
     >
@@ -149,7 +149,7 @@ export function Hero() {
         </div>
         <h1
           id="hero-heading"
-          className="max-w-[1100px] font-heading text-[clamp(40px,5.55vw,96px)] font-semibold leading-[1.12] tracking-[-0.055em]"
+          className="max-w-[1100px] font-heading text-[clamp(40px,min(5.55vw,9vh),96px)] font-semibold leading-[1.12] tracking-[-0.055em]"
         >
           {site.heroLines.map((line, index) => (
             <span

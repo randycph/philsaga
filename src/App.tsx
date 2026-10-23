@@ -24,7 +24,9 @@ export default function App() {
       </a>
       <Navbar />
       <main id="main">
-        <Hero />
+        <div id="home">
+          <Hero />
+        </div>
         <TrustStrip />
         <CompanyIntro />
         <VisionMission />

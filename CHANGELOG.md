@@ -12,3 +12,4 @@
 - Moved text into typed content files, formatted source with Prettier, and split motion/UI dependencies into separate build chunks.
 - Fixed asynchronous ScrollTrigger refresh order, tablet statistic overflow, light-section label contrast, and closing search after local navigation.
 - Validated the build and inspected the four requested responsive widths. Outstanding artwork and verification limits are recorded in README.md.
+- Moved the Home anchor outside the pinned hero and bounded headline sizing by viewport height to keep navigation and hero content clear on wide, short screens.
