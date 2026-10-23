@@ -79,11 +79,11 @@ export function Navbar() {
           aria-label={uiCopy.philsagaMiningCorporationHome}
           className="flex shrink-0 items-center gap-3"
         >
-          <span className={cn("block shrink-0 transition-all duration-300", scrolled ? "h-[44px] w-[104px]" : "h-[60px] w-[142px]")}>
+          <span className={cn("block shrink-0 transition-all duration-300", scrolled ? "h-[40px] w-[280px]" : "h-[60px] w-[420px]")}>
             <img
-              src="/assets/pmc-mmprc.png"
-              alt={uiCopy.pmcAndMmprcEmblems}
-              width={310}
+              src="/assets/logo-long.png"
+              alt={uiCopy.pmcAndMmprcASociallyResponsibleAndEnvironment}
+              width={1030}
               height={147}
               className="h-full w-full object-contain"
             />
