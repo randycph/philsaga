@@ -78,7 +78,7 @@ export function Navbar() {
           aria-label={uiCopy.philsagaMiningCorporationHome}
           className="flex shrink-0 items-center gap-3"
         >
-          <span className="block h-[60px] w-[420px] shrink-0">
+          <span className="block h-[72px] w-[505px] shrink-0">
             <img
               src="/assets/logo-long.png"
               alt={uiCopy.pmcAndMmprcASociallyResponsibleAndEnvironment}
