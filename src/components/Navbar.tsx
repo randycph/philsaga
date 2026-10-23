@@ -70,8 +70,7 @@ export function Navbar() {
       <div
         className={cn(
           container,
-          "flex items-center justify-between gap-5 transition-all duration-300",
-          scrolled ? "h-16" : "h-20 lg:h-24",
+          "flex h-20 items-center justify-between gap-5 lg:h-24",
         )}
       >
         <a
@@ -79,7 +78,7 @@ export function Navbar() {
           aria-label={uiCopy.philsagaMiningCorporationHome}
           className="flex shrink-0 items-center gap-3"
         >
-          <span className={cn("block shrink-0 transition-all duration-300", scrolled ? "h-[40px] w-[280px]" : "h-[60px] w-[420px]")}>
+          <span className="block h-[60px] w-[420px] shrink-0">
             <img
               src="/assets/logo-long.png"
               alt={uiCopy.pmcAndMmprcASociallyResponsibleAndEnvironment}
