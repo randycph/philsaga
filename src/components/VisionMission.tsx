@@ -30,7 +30,7 @@ export function VisionMission() {
           <span />
         </div>
         <div className="editorial-approach__copy">
-          <p className="editorial-eyebrow">Our Mission</p>
+          <p className="editorial-eyebrow">Our Approach</p>
           <h2 id="approach-heading">Purpose in<br />every operation.</h2>
           <p className="editorial-description">
             We are a highly-motivated team committed to growth by discovering mineral resources and operating within the highest mining industry standards, and with strict adherence to our corporate, social and environmental responsibilities.
@@ -41,8 +41,10 @@ export function VisionMission() {
           </a>
         </div>
         <div className="editorial-approach__art">
-          <img className="editorial-approach__planting" src="/assets/approach-planting.png" alt="Gloved worker planting a seedling" loading="lazy" />
-          <img className="editorial-approach__mountains" src="/assets/approach-mountains.png" alt="Forested mountains and mist-filled valleys" loading="lazy" />
+          <img className="editorial-approach__worker" src="/assets/approach-worker.png" alt="Worker planting a seedling in rocky soil" loading="lazy" />
+          <img className="editorial-approach__lake" src="/assets/approach-lake.png" alt="Forested lake surrounded by tropical mountains" loading="lazy" />
+          <span className="editorial-approach__accent" aria-hidden="true" />
+          <span className="editorial-approach__accent editorial-approach__accent--green" aria-hidden="true" />
         </div>
       </section>
     </>

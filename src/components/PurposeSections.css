@@ -155,16 +155,29 @@
   object-fit: cover;
 }
 
-.editorial-approach__planting {
+.editorial-approach__worker {
   left: 0;
-  width: 64%;
-  clip-path: polygon(70% 0, 100% 0, 44% 100%, 0 100%);
+  width: 58%;
+  clip-path: polygon(48% 0, 100% 0, 48% 100%, 0 100%);
 }
 
-.editorial-approach__mountains {
+.editorial-approach__lake {
   right: 0;
-  width: 64%;
-  clip-path: polygon(70% 0, 100% 0, 100% 100%, 0 100%);
+  width: 72%;
+  clip-path: polygon(48% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.editorial-approach__accent {
+  position: absolute;
+  inset: 0;
+  background: #f6931c;
+  clip-path: polygon(48% 0, 51% 0, 0 100%, 0 94%);
+  pointer-events: none;
+}
+
+.editorial-approach__accent--green {
+  background: #073c2b;
+  clip-path: polygon(53% 0, 57% 0, 6% 100%, 2% 100%);
 }
 
 .editorial-values {
@@ -258,6 +271,10 @@
     top: auto;
     height: 65vw;
     width: 100%;
+  }
+
+  .editorial-approach__accent {
+    display: none;
   }
 
   .editorial-values {
