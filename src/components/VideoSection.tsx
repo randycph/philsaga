@@ -1,7 +1,7 @@
 import "./CommunityMedia.css";
 import { uiCopy } from "../data/ui";
 import { useState } from "react";
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowDown, ArrowUp, Play } from "lucide-react";
 import { videos, type VideoItem } from "../data/site";
 import { ImageWithFallback, TextLink } from "./Shared";
 import {
@@ -16,6 +16,22 @@ export function VideoSection() {
   const [failed, setFailed] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const featured = videos[activeIndex];
+  const thumbnails = Array.from(
+    { length: Math.min(3, Math.max(0, videos.length - 1)) },
+    (_, offset) => {
+      const index = (activeIndex + offset + 1) % videos.length;
+
+      return { video: videos[index], index };
+    },
+  );
+
+  const showNextVideo = () => {
+    setActiveIndex((index) => (index + 1) % videos.length);
+  };
+
+  const showPreviousVideo = () => {
+    setActiveIndex((index) => (index - 1 + videos.length) % videos.length);
+  };
 
   const playVideo = (video: VideoItem) => {
     setFailed(false);
@@ -55,11 +71,10 @@ export function VideoSection() {
           <span className="community-media__play"><Play fill="currentColor" aria-hidden="true" /></span>
         </button>
         <div className="community-media__thumbnails" aria-label="Select featured video">
-          {videos.map((video, index) => (
+          {thumbnails.map(({ video, index }) => (
             <button
               key={video.title}
               aria-label={`Select ${video.title}`}
-              aria-pressed={index === activeIndex}
               onClick={() => {
                 setActiveIndex(index);
               }}
@@ -69,10 +84,11 @@ export function VideoSection() {
           ))}
         </div>
         <div className="community-media__controls">
-          <button aria-label="Next video" onClick={() => {
-            setActiveIndex((index) => (index + 1) % videos.length);
-          }}>
-            <ArrowUpRight aria-hidden="true" />
+          <button aria-label="Next video" onClick={showNextVideo}>
+            <ArrowUp aria-hidden="true" />
+          </button>
+          <button aria-label="Previous video" onClick={showPreviousVideo}>
+            <ArrowDown aria-hidden="true" />
           </button>
           <a href={uiCopy.httpsWwwPhilsagaComVideos} aria-label="View all videos">+</a>
         </div>

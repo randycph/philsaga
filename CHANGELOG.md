@@ -47,3 +47,10 @@
 
 - Moved the former footer background to the video gallery and replaced the footer with a light two-row logo, navigation, social and legal layout.
 - Production build passed; desktop layout visually inspected.
+
+## Video gallery sizing and navigation
+
+- Reduced the gallery section height and thumbnail dimensions for a more compact layout.
+- Added up and down navigation that advances or reverses the featured video and shifts the following thumbnails. The current video data contains three entries.
+- Production build passed and the browser rendering and thumbnail cycling were visually checked.
+
