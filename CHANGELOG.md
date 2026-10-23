@@ -42,3 +42,8 @@
 - Replaced community story cards with the four-priority strip from the supplied reference.
 - Added a dark video gallery with thumbnail selection, next-video control, and existing playback dialogs and error fallback.
 - Production build passed. Browser visual verification was unavailable because the previous tab had closed.
+
+## Footer reference update
+
+- Moved the former footer background to the video gallery and replaced the footer with a light two-row logo, navigation, social and legal layout.
+- Production build passed; desktop layout visually inspected.

@@ -26,7 +26,7 @@ export function VideoSection() {
     <section
       id="videos"
       aria-labelledby="video-heading"
-      className="community-media"
+      className="community-media community-media--forest"
     >
       <div className="community-strip__marker" aria-hidden="true">
         08

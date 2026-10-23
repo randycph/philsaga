@@ -84,7 +84,9 @@
   padding-top: 2.2vw;
   padding-bottom: 2.2vw;
   color: #f6f4ef;
-  background: linear-gradient(100deg, #062922db, #06201dd9), url("/assets/approach-mountains.png") center 50% / cover;
+  background:
+    linear-gradient(100deg, #062922db, #06201dd9),
+    url("/assets/approach-mountains.png") center 50% / cover;
 }
 
 .community-media__copy {
@@ -226,5 +228,146 @@
     display: flex;
     gap: 12px;
     justify-content: flex-end;
+  }
+}
+.community-media--forest {
+  background:
+    linear-gradient(100deg, #08151d73, #08151d73),
+    url("/assets/foot-bg.png") center / cover;
+}
+
+.site-footer {
+  padding: 0 7.8%;
+  background: #f6f4ef;
+  color: #102b2b;
+}
+
+.site-footer__main,
+.site-footer__legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.site-footer__main {
+  min-height: 124px;
+  border-bottom: 1px solid #dcdcd5;
+}
+
+.site-footer__main > a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.site-footer__main > a img {
+  width: 76px;
+  height: 68px;
+  object-fit: contain;
+}
+
+.site-footer nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(16px, 3vw, 48px);
+  font-size: 14px;
+}
+
+.site-footer a:hover {
+  color: #c57710;
+}
+
+.site-footer__socials {
+  display: flex;
+  gap: 20px;
+}
+
+.site-footer__socials a {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #102b2b;
+  color: #fff;
+}
+
+.site-footer__socials svg {
+  width: 16px;
+  height: 16px;
+}
+
+.site-footer__legal {
+  min-height: 78px;
+  color: #66716d;
+  font-size: 12px;
+}
+
+.site-footer__legal nav {
+  gap: 28px;
+  font-size: 12px;
+}
+
+@media (max-width: 1050px) {
+  .site-footer__main {
+    padding: 24px 0;
+    flex-wrap: wrap;
+  }
+
+  .site-footer__main nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-footer__main > a {
+    font-size: 15px;
+  }
+
+  .site-footer__main > a img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .site-footer__socials {
+    gap: 10px;
+  }
+
+  .site-footer__main nav {
+    font-size: 12px;
+  }
+
+  .site-footer__legal {
+    padding: 20px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+.site-footer__main > a {
+  flex-shrink: 0;
+}
+
+.site-footer__main nav {
+  flex-wrap: nowrap;
+  gap: clamp(14px, 2.5vw, 36px);
+}
+
+.site-footer__socials {
+  flex-shrink: 0;
+}
+
+@media (max-width: 1050px) {
+  .site-footer__main nav {
+    flex-wrap: wrap;
   }
 }
