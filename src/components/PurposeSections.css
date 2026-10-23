@@ -157,20 +157,14 @@
 
 .editorial-approach__planting {
   left: 0;
-  width: 58%;
-  clip-path: polygon(62% 0, 100% 0, 43% 100%, 0 100%);
-}
-
-.editorial-approach__seedling {
-  left: 25.5%;
-  width: 53%;
-  clip-path: polygon(61% 0, 100% 0, 40% 100%, 0 100%);
+  width: 64%;
+  clip-path: polygon(70% 0, 100% 0, 44% 100%, 0 100%);
 }
 
 .editorial-approach__mountains {
   right: 0;
-  width: 54%;
-  clip-path: polygon(61% 0, 100% 0, 100% 100%, 0 100%);
+  width: 64%;
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .editorial-values {

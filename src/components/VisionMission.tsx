@@ -42,7 +42,6 @@ export function VisionMission() {
         </div>
         <div className="editorial-approach__art">
           <img className="editorial-approach__planting" src="/assets/approach-planting.png" alt="Gloved worker planting a seedling" loading="lazy" />
-          <img className="editorial-approach__seedling" src="/assets/approach-seedling.png" alt="Young plant taking root in rocky soil" loading="lazy" />
           <img className="editorial-approach__mountains" src="/assets/approach-mountains.png" alt="Forested mountains and mist-filled valleys" loading="lazy" />
         </div>
       </section>
