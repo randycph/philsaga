@@ -24,7 +24,8 @@ export function Hero() {
     let trigger: ScrollTrigger | undefined;
     let timeline: gsap.core.Timeline | undefined;
     let frameRequest = 0;
-    let desiredTime = 0;
+    const startTime = Math.min(2, media.duration || 2);
+    let desiredTime = startTime;
     let lastSeekAt = 0;
 
     const seekToDesiredTime = () => {
@@ -60,7 +61,8 @@ export function Hero() {
         return;
       }
 
-      const playhead = { time: 0 };
+      const playhead = { time: startTime };
+      desiredTime = startTime;
       timeline = gsap.timeline({
         scrollTrigger: {
           trigger: trackElement,
@@ -113,11 +115,6 @@ export function Hero() {
           ref={video}
           muted
           playsInline
-          onLoadedMetadata={() => {
-            if (video.current && video.current.duration > 2) {
-              video.current.currentTime = 2;
-            }
-          }}
           preload={reducedMotion ? "none" : "auto"}
           poster="/assets/hero-poster.jpg"
           aria-hidden="true"
