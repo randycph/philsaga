@@ -197,6 +197,15 @@ export const videos: VideoItem[] = [
     source: "https://www.philsaga.com/videos/Consuelo-Farm%20inputs.mp4",
     href: "https://www.philsaga.com/video/video1",
   },
+  {
+    title: "PMC Provides Learning Materials for San Marcos Daycare",
+    duration: "01:05",
+    description:
+      "PMC partnered with Brgy. San Marcos through its Social Development and Management Program to provide school supplies to about 40 daycare pupils and learning materials for their center.",
+    image: "https://www.philsaga.com/videos/thumbnails/b.png",
+    source: "https://www.philsaga.com/videos/DCC.mp4",
+    href: "https://www.philsaga.com/video/video2",
+  },
 ];
 
 export const copy = {

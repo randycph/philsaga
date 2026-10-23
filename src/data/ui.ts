@@ -85,7 +85,7 @@ export const uiCopy = {
   nextStory: "Next story",
   close: "Close",
   companyAvpAndVideoClips: "Company AVP and Video Clips",
-  httpsWwwPhilsagaComVideos: "https://www.philsaga.com/videos",
+  httpsWwwPhilsagaComVideos: "https://www.philsaga.com/avps",
   viewAllVideos: "View All Videos",
   label25YearsOfSharedPurpose: "25 years of shared purpose",
   playVideo: "Play Video",

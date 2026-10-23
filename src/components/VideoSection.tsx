@@ -1,7 +1,8 @@
 import "./CommunityMedia.css";
 import { uiCopy } from "../data/ui";
-import { useState } from "react";
-import { ArrowDown, ArrowUp, Play } from "lucide-react";
+import { useLayoutEffect, useRef, useState, type MouseEvent } from "react";
+import gsap from "gsap";
+import { ArrowDown, ArrowRight, ArrowUp, Play } from "lucide-react";
 import { videos, type VideoItem } from "../data/site";
 import { ImageWithFallback, TextLink } from "./Shared";
 import {
@@ -12,6 +13,7 @@ import {
 } from "./ui/dialog";
 
 export function VideoSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [selected, setSelected] = useState<VideoItem | null>(null);
   const [failed, setFailed] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -33,13 +35,51 @@ export function VideoSection() {
     setActiveIndex((index) => (index - 1 + videos.length) % videos.length);
   };
 
+  const animateArrowClick = (event: MouseEvent<HTMLButtonElement>) => {
+    gsap.fromTo(
+      event.currentTarget,
+      { scale: 0.86 },
+      { scale: 1, duration: 0.42, ease: "back.out(2)" },
+    );
+  };
+
   const playVideo = (video: VideoItem) => {
     setFailed(false);
     setSelected(video);
   };
 
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const context = gsap.context(() => {
+      gsap.fromTo(
+        ".community-media__featured",
+        { autoAlpha: 0, y: 12, scale: 0.985 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" },
+      );
+      gsap.fromTo(
+        ".community-media__thumbnails button",
+        { autoAlpha: 0, y: -9 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.42,
+          stagger: 0.07,
+          ease: "power2.out",
+        },
+      );
+    }, section);
+
+    return () => context.revert();
+  }, [activeIndex]);
+
   return (
     <section
+      ref={sectionRef}
       id="videos"
       aria-labelledby="video-heading"
       className="community-media community-media--forest"
@@ -52,12 +92,16 @@ export function VideoSection() {
         <span className="community-media__rule" aria-hidden="true" />
         <h2 id="video-heading">A closer look<br />at Philsaga.</h2>
         <p>Explore our journey, milestones,<br />and the people behind our progress.</p>
-        <button className="community-media__watch" onClick={() => {
-          playVideo(featured);
-        }}>
+        <a
+          className="community-media__watch"
+          href={uiCopy.httpsWwwPhilsagaComVideos}
+          target="_blank"
+          rel="noreferrer"
+        >
           <span><Play fill="currentColor" aria-hidden="true" /></span>
-          Watch Video
-        </button>
+          Watch All Videos
+          <ArrowRight aria-hidden="true" className="community-media__watch-arrow" />
+        </a>
       </div>
       <div className="community-media__gallery">
         <button
@@ -67,7 +111,7 @@ export function VideoSection() {
             playVideo(featured);
           }}
         >
-          <ImageWithFallback src={featured.image} alt={featured.title} className="community-media__image" />
+          <ImageWithFallback key={featured.title} src={featured.image} alt={featured.title} className="community-media__image" />
           <span className="community-media__play"><Play fill="currentColor" aria-hidden="true" /></span>
         </button>
         <div className="community-media__thumbnails" aria-label="Select featured video">
@@ -84,13 +128,18 @@ export function VideoSection() {
           ))}
         </div>
         <div className="community-media__controls">
-          <button aria-label="Next video" onClick={showNextVideo}>
+          <button aria-label="Next video" onClick={(event) => {
+            animateArrowClick(event);
+            showNextVideo();
+          }}>
             <ArrowUp aria-hidden="true" />
           </button>
-          <button aria-label="Previous video" onClick={showPreviousVideo}>
+          <button aria-label="Previous video" onClick={(event) => {
+            animateArrowClick(event);
+            showPreviousVideo();
+          }}>
             <ArrowDown aria-hidden="true" />
           </button>
-          <a href={uiCopy.httpsWwwPhilsagaComVideos} aria-label="View all videos">+</a>
         </div>
       </div>
       <Dialog

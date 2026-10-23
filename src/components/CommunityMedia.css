@@ -121,7 +121,23 @@
   align-items: center;
   margin-top: 1.7vw;
   font-size: clamp(13px, 1.1vw, 20px);
-  cursor: pointer;
+  width: fit-content;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 220ms ease, transform 220ms ease;
+}
+
+.community-media__watch:hover {
+  color: #ffc06b;
+  transform: translateX(4px);
+}
+
+.community-media__watch:focus-visible,
+.community-media__controls button:focus-visible,
+.community-media__thumbnails button:focus-visible {
+  outline: 2px solid #ffc06b;
+  outline-offset: 4px;
 }
 
 .community-media__watch span,
@@ -134,6 +150,28 @@
   min-width: 40px;
   min-height: 40px;
   background: #f6931c;
+}
+
+.community-media__watch span {
+  transition: background-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+
+.community-media__watch:hover span {
+  background: #ffab3d;
+  box-shadow: 0 0 0 7px #f6931c33;
+  transform: scale(1.06);
+}
+
+.community-media__watch-arrow {
+  width: 18px;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.community-media__watch:hover .community-media__watch-arrow {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .community-media__watch svg,
@@ -185,6 +223,22 @@
 .community-media__thumbnails button {
   min-height: 0;
   max-height: 92px;
+  transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+
+.community-media__thumbnails button:hover {
+  border-color: #f6931c;
+  box-shadow: 0 8px 22px #00000040;
+  transform: translateY(-2px);
+}
+
+.community-media__thumbnails button .community-media__image {
+  transition: transform 420ms cubic-bezier(0.2, 0.7, 0.25, 1);
+}
+
+.community-media__thumbnails button:hover .community-media__image,
+.community-media__featured:hover .community-media__image {
+  transform: scale(1.045);
 }
 
 .community-media__controls {
@@ -201,6 +255,21 @@
   width: 36px;
   height: 36px;
   cursor: pointer;
+  color: #f6f4ef;
+  background: #08151d26;
+  transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.community-media__controls > *:hover {
+  color: #102b2b;
+  border-color: #f6931c;
+  background: #f6931c;
+  box-shadow: 0 0 0 6px #f6931c33;
+  transform: translateY(-2px);
+}
+
+.community-media__controls > *:active {
+  transform: scale(0.92);
 }
 
 .community-media__controls svg {
@@ -232,6 +301,17 @@
 
   .community-media__thumbnails button {
     max-height: 76px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .community-media__watch,
+  .community-media__watch span,
+  .community-media__watch-arrow,
+  .community-media__thumbnails button,
+  .community-media__thumbnails button .community-media__image,
+  .community-media__controls > * {
+    transition: none;
   }
 }
 .community-media--forest {

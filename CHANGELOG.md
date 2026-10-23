@@ -54,3 +54,10 @@
 - Added up and down navigation that advances or reverses the featured video and shifts the following thumbnails. The current video data contains three entries.
 - Production build passed and the browser rendering and thumbnail cycling were visually checked.
 
+
+## Video gallery transitions and controls
+
+- Added the fourth official video entry so the gallery opens with one featured video and three upcoming thumbnails.
+- Removed the plus control, linked Watch All Videos to the official listing, and added GSAP gallery transitions with hover and press feedback for the CTA and arrow controls.
+- Verified cycling and the rendered gallery in the browser; production build passed.
+
