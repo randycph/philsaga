@@ -13,12 +13,14 @@ export function CompanyIntro() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="scroll-mt-28"
+      className="scroll-mt-28 px-4 py-4 md:px-8 md:py-6"
     >
-      <div>
-        <div className="relative isolate grid min-h-[680px] items-stretch overflow-hidden bg-[#f4f2ed] md:min-h-[620px] lg:min-h-[640px] lg:grid-cols-[0.8fr_1.2fr]">
-          <img src="/assets/about-fullwidth.png" alt="" aria-hidden="true" className="absolute inset-0 -z-10 size-full object-cover object-center" />
-          <Reveal className="flex flex-col justify-center bg-[#f4f2ed]/90 px-8 py-12 md:px-14 lg:bg-transparent lg:px-16" parallax>
+      <div className="mx-auto max-w-[1440px] overflow-hidden border border-black/10 shadow-sm">
+        <div className="relative isolate grid min-h-[520px] items-stretch overflow-hidden bg-[#f4f2ed] md:min-h-[540px] lg:min-h-[560px] lg:grid-cols-[0.8fr_1.2fr]">
+          <img src="/assets/about-fullwidth.png" alt="" aria-hidden="true" className="absolute inset-y-0 right-0 -z-10 h-full w-full object-cover object-right md:w-1/2" />
+          <div aria-hidden="true" className="absolute inset-x-0 top-0 h-3 bg-[#18321f]/80" />
+          <span aria-hidden="true" className="absolute left-5 top-12 z-10 hidden font-heading text-sm font-semibold tracking-wide text-foreground/70 md:block lg:left-8">02<span className="mx-auto mt-3 block h-12 w-px bg-foreground/30" /></span>
+          <Reveal className="flex flex-col justify-center bg-[#f4f2ed] px-10 py-16 md:px-20 md:pl-32 lg:pl-36" parallax>
             <Eyebrow>{copy.aboutEyebrow}</Eyebrow>
             <h2 id="about-heading" className={heading}>
               Rooted
@@ -26,16 +28,16 @@ export function CompanyIntro() {
               in Progress
             </h2>
             <p className="mt-7 max-w-lg text-base leading-[1.75] text-muted-foreground md:text-lg">
-              {site.intro}
+              Philsaga Mining Corporation is committed to responsible mining that creates lasting value for communities, the environment, and future generations.
             </p>
-            <Button asChild variant="ghost" className="mt-8 w-fit px-0 text-primary">
+            <Button asChild variant="ghost" className="mt-8 w-fit border-b border-primary/40 px-0 text-primary">
               <a href={uiCopy.httpsWwwPhilsagaComAboutUs}>
                 {uiCopy.learnMore2}
                 <ArrowUpRight className="size-4" />
               </a>
             </Button>
           </Reveal>
-          <div className="min-h-[320px] lg:min-h-full" aria-hidden="true" />
+          <div className="min-h-[260px] lg:min-h-full" aria-hidden="true" />
         </div>
         <Reveal className="mt-16 grid gap-8 border-y border-black/10 py-10 sm:grid-cols-3 md:mt-20 md:py-12">
           <div className="sm:border-r sm:border-black/10">
