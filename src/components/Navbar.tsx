@@ -83,7 +83,7 @@ export function Navbar() {
             <img
               src="/assets/pmc-mmprc.png"
               alt={uiCopy.pmcAndMmprcEmblems}
-              width={348}
+              width={310}
               height={147}
               className="h-full w-full object-contain"
             />
