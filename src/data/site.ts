@@ -6,12 +6,17 @@ export const site = {
   phoneHref: "tel:+63822350045",
   email: "info@philsaga.com",
   facebook: "https://facebook.com/philsagaminingcorp",
-  intro: "Founded in 2000, Philsaga Mining Corporation (PMC) is a company dealing in the exploration and extraction of gold. The gold is then processed by its affiliate, the Mindanao Mineral Processing and Refining Corporation (MMPRC). This came about through the acquisition of properties and interest of Banahaw Mining and Development Corporation.",
-  heroSubline: "Philsaga Mining Corporation: exploring and extracting gold in Mindanao since 2000.",
+  intro:
+    "Founded in 2000, Philsaga Mining Corporation (PMC) is a company dealing in the exploration and extraction of gold. The gold is then processed by its affiliate, the Mindanao Mineral Processing and Refining Corporation (MMPRC). This came about through the acquisition of properties and interest of Banahaw Mining and Development Corporation.",
+  heroSubline:
+    "Philsaga Mining Corporation: exploring and extracting gold in Mindanao since 2000.",
   heroLines: ["A Socially Responsible", "and Environment", "Friendly Company"],
-  vision: "To be the leading, world class, highly sustainable mining company delivering excellent value to all stakeholders.",
-  mission: "We are a highly-motivated team committed to growth by discovering mineral resources and operating within the highest mining industry standards, and with strict adherence to our corporate, social and environmental responsibilities.",
-  valuesClosing: "We will succeed through Teamwork, Act with Integrity to Achieve Growth, Commit to Excellence and Operate with Responsibility.",
+  vision:
+    "To be the leading, world class, highly sustainable mining company delivering excellent value to all stakeholders.",
+  mission:
+    "We are a highly-motivated team committed to growth by discovering mineral resources and operating within the highest mining industry standards, and with strict adherence to our corporate, social and environmental responsibilities.",
+  valuesClosing:
+    "We will succeed through Teamwork, Act with Integrity to Achieve Growth, Commit to Excellence and Operate with Responsibility.",
   sdmp: "SDMP is a five-year comprehensive plan geared towards sustained improvement in the living standards of host and neighboring communities by creating responsible, self-reliant and resource-based communities capable of developing, implementing and managing community development programs, projects, and activities in a manner consistent with the principles of sustainable development.",
   copyright: "Copyright © 2023 All Rights Reserved by PMC",
 };
@@ -31,10 +36,23 @@ export const sustainabilityLinks: LinkItem[] = [
   { label: "SDMP Report", href: "https://www.philsaga.com/annual-reports" },
 ];
 
+export const mobileNavLinks: LinkItem[] = [
+  ...navLinks,
+  ...sustainabilityLinks,
+  { label: "Careers", href: "https://www.philsaga.com/careers" },
+  { label: "Contact", href: "#contact" },
+];
+
 export const legalLinks: LinkItem[] = [
   { label: "Site Map", href: "https://www.philsaga.com/sitemap" },
-  { label: "Terms & Conditions", href: "https://www.philsaga.com/terms-and-conditions" },
-  { label: "Data Privacy Policy", href: "https://www.philsaga.com/data-privacy-policy" },
+  {
+    label: "Terms & Conditions",
+    href: "https://www.philsaga.com/terms-and-conditions",
+  },
+  {
+    label: "Data Privacy Policy",
+    href: "https://www.philsaga.com/data-privacy-policy",
+  },
 ];
 
 export const footerLinks: LinkItem[] = [
@@ -47,12 +65,44 @@ export const footerLinks: LinkItem[] = [
   legalLinks[0],
 ];
 
+export const footerLegalLinks: LinkItem[] = [
+  { label: "Terms of Use", href: legalLinks[1].href },
+  { label: "Privacy Policy", href: legalLinks[2].href },
+];
+
+export const faqs = [
+  {
+    question: "Where is Philsaga Mining Corporation located?",
+    answer: "PMC is based in Rosario, Agusan del Sur, Philippines.",
+  },
+  {
+    question: "What does PMC do?",
+    answer:
+      "PMC explores for and extracts gold. Its affiliate, Mindanao Mineral Processing and Refining Corporation (MMPRC), processes the gold.",
+  },
+  {
+    question: "What is the Social Development & Management Program?",
+    answer:
+      "SDMP is a five-year comprehensive plan supporting sustained improvement in the living standards of host and neighboring communities.",
+  },
+];
+
 export const values = [
   { word: "Teamwork", meaning: "We succeed together." },
   { word: "Integrity", meaning: "We act with honesty and do what is right." },
-  { word: "Growth", meaning: "We commit to achieving growth for our people, our communities, and our company." },
-  { word: "Excellence", meaning: "We hold ourselves to the highest standards." },
-  { word: "Responsibility", meaning: "We operate with accountability to people and planet." },
+  {
+    word: "Growth",
+    meaning:
+      "We commit to achieving growth for our people, our communities, and our company.",
+  },
+  {
+    word: "Excellence",
+    meaning: "We hold ourselves to the highest standards.",
+  },
+  {
+    word: "Responsibility",
+    meaning: "We operate with accountability to people and planet.",
+  },
 ];
 
 export interface Story {
@@ -64,7 +114,8 @@ export interface Story {
 
 export const stories: Story[] = [
   {
-    title: "PMC-MMPRC Foundation, Inc. Extends Aid to 48 Household Fire Victims in Bislig City",
+    title:
+      "PMC-MMPRC Foundation, Inc. Extends Aid to 48 Household Fire Victims in Bislig City",
     category: "Community support",
     href: "https://www.philsaga.com/news/pmc-mmprc-foundation-inc-extends-aid-to-48-household-fire-victims-in-bislig-city",
     image: "/assets/story-1.jpg",
@@ -76,7 +127,8 @@ export const stories: Story[] = [
     image: "/assets/story-2.jpg",
   },
   {
-    title: "Communities for Conservation: PMC and MMPRC Launch Mining Forest Program on National Arbor Day",
+    title:
+      "Communities for Conservation: PMC and MMPRC Launch Mining Forest Program on National Arbor Day",
     category: "Growing together",
     href: "https://www.philsaga.com/news/communities-for-conservation-pmc-and-mmprc-launch-mining-forest-program-on-national-arbor-day",
     image: "/assets/story-3.jpg",
@@ -85,12 +137,14 @@ export const stories: Story[] = [
 
 export const programs: Story[] = [
   {
-    title: "Provision of Medical Equipment for Barangay Health Workers in Agusan del Sur",
+    title:
+      "Provision of Medical Equipment for Barangay Health Workers in Agusan del Sur",
     category: "Health & well-being",
     href: "https://www.philsaga.com/news/provision-of-medical-equipment-a-lifeline-for-barangay-health-workers-in-agusan-del-sur",
   },
   {
-    title: "Revitalizing Coconut Farming in Brgy. Consuelo through Public-Private Partnership",
+    title:
+      "Revitalizing Coconut Farming in Brgy. Consuelo through Public-Private Partnership",
     category: "Sustainable livelihoods",
     href: "https://www.philsaga.com/news/revitalizing-coconut-farming-in-brgy-consuelo-through-public-private-partnership",
   },
@@ -118,8 +172,9 @@ export interface VideoItem {
 export const videos: VideoItem[] = [
   {
     title: "Silver Years, Golden Legacy",
-    duration: "01:00",
-    description: "Celebrating 25 years of Philsaga Mining Corporation: a story of resilience, shared purpose, and the people and communities behind our golden legacy.",
+    duration: "07:00",
+    description:
+      "Celebrating 25 years of Philsaga Mining Corporation: a story of resilience, shared purpose, and the people and communities behind our golden legacy.",
     image: "/assets/hero-poster.jpg",
     source: "https://www.philsaga.com/storage/videos/PMC%20Silver%20Anniv.mov",
     href: "https://www.philsaga.com/video/silver-years-golden-legacy",
@@ -127,15 +182,17 @@ export const videos: VideoItem[] = [
   {
     title: "Solidarity Movement",
     duration: "06:37",
-    description: "Employees, community figures, and officials came together at Philsaga Mining Corporation on April 3, 2023. Watch the highlights of the solidarity movement.",
+    description:
+      "Employees, community figures, and officials came together at Philsaga Mining Corporation on April 3, 2023. Watch the highlights of the solidarity movement.",
     image: "https://www.philsaga.com/videos/thumbnails/solidarity.png",
-    source: "https://www.philsaga.com/videos/solidarity.mp4",
+    source: "https://www.philsaga.com/videos/SOLIDARITY_MOVEMENT.mp4",
     href: "https://www.philsaga.com/video/solidarity-movement",
   },
   {
     title: "PMC gives rice sacks to Farmers in Brgy Consuelo",
     duration: "01:18",
-    description: "Through its Social Development and Management Program, PMC provided rice seeds to 177 farmers in Brgy. Consuelo during a turn-over ceremony on May 29, 2022.",
+    description:
+      "Through its Social Development and Management Program, PMC provided rice seeds to 177 farmers in Brgy. Consuelo during a turn-over ceremony on May 29, 2022.",
     image: "https://www.philsaga.com/videos/thumbnails/a.png",
     source: "https://www.philsaga.com/videos/Consuelo-Farm%20inputs.mp4",
     href: "https://www.philsaga.com/video/video1",

@@ -1,10 +1,20 @@
+import { uiCopy } from "../../data/ui";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "./button";
 
-export function Carousel({ children, label }: { children: ReactNode; label: string }) {
-  const [ref, api] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps" });
+export function Carousel({
+  children,
+  label,
+}: {
+  children: ReactNode;
+  label: string;
+}) {
+  const [ref, api] = useEmblaCarousel({
+    align: "start",
+    containScroll: "trimSnaps",
+  });
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
 
@@ -47,10 +57,32 @@ export function Carousel({ children, label }: { children: ReactNode; label: stri
         }
       }}
     >
-      <div ref={ref} className="overflow-hidden"><div className="-ml-6 flex items-stretch">{children}</div></div>
+      <div ref={ref} className="overflow-hidden">
+        <div className="-ml-6 flex items-stretch">{children}</div>
+      </div>
       <div className="mt-7 flex justify-end gap-3">
-        <Button variant="outline" disabled={!canPrev} aria-label="Previous story" className="size-12 rounded-full p-0" onClick={() => { api?.scrollPrev(); }}><ArrowLeft className="size-5" /></Button>
-        <Button variant="outline" disabled={!canNext} aria-label="Next story" className="size-12 rounded-full p-0" onClick={() => { api?.scrollNext(); }}><ArrowRight className="size-5" /></Button>
+        <Button
+          variant="outline"
+          disabled={!canPrev}
+          aria-label={uiCopy.previousStory}
+          className="size-12 rounded-full p-0"
+          onClick={() => {
+            api?.scrollPrev();
+          }}
+        >
+          <ArrowLeft className="size-5" />
+        </Button>
+        <Button
+          variant="outline"
+          disabled={!canNext}
+          aria-label={uiCopy.nextStory}
+          className="size-12 rounded-full p-0"
+          onClick={() => {
+            api?.scrollNext();
+          }}
+        >
+          <ArrowRight className="size-5" />
+        </Button>
       </div>
     </div>
   );
@@ -58,7 +90,11 @@ export function Carousel({ children, label }: { children: ReactNode; label: stri
 
 export function CarouselItem({ children }: { children: ReactNode }) {
   return (
-    <div role="group" aria-roledescription="slide" className="min-w-0 shrink-0 grow-0 basis-full pl-6 md:basis-1/2 xl:basis-1/3">
+    <div
+      role="group"
+      aria-roledescription="slide"
+      className="min-w-0 shrink-0 grow-0 basis-full pl-6 md:basis-1/2 xl:basis-1/3"
+    >
       {children}
     </div>
   );

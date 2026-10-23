@@ -16,7 +16,10 @@ for (const [index, filename] of filenames.entries()) {
   try {
     const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
 
-    if (!response.ok || !response.headers.get("content-type")?.startsWith("image/")) {
+    if (
+      !response.ok ||
+      !response.headers.get("content-type")?.startsWith("image/")
+    ) {
       console.log(`Story ${index + 1}: unavailable; fallback retained.`);
       continue;
     }
@@ -31,7 +34,9 @@ for (const [index, filename] of filenames.entries()) {
   }
 }
 
-const programLinks = [...html.matchAll(/href="([^"]+)"[^>]*><img[^>]+alt="([^"]+)"/g)];
+const programLinks = [
+  ...html.matchAll(/href="([^"]+)"[^>]*><img[^>]+alt="([^"]+)"/g),
+];
 
 for (const [, url, title] of programLinks) {
   if (/Medical Equipment|Coconut|Motor Parts|Libertad/i.test(title)) {

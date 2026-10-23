@@ -10,34 +10,53 @@ if (!source) {
 }
 
 const output = resolve("public/assets");
-const common = ["-y", "-hide_banner", "-loglevel", "error", "-i", resolve(source)];
+const common = [
+  "-y",
+  "-hide_banner",
+  "-loglevel",
+  "error",
+  "-i",
+  resolve(source),
+];
 
 execFileSync(ffmpeg, [
   ...common,
-  "-frames:v", "1",
-  "-q:v", "2",
+  "-frames:v",
+  "1",
+  "-q:v",
+  "2",
   `${output}/hero-poster.jpg`,
 ]);
 
 execFileSync(ffmpeg, [
   ...common,
   "-an",
-  "-c:v", "libx264",
-  "-preset", "fast",
-  "-crf", "25",
-  "-g", "15",
-  "-movflags", "+faststart",
+  "-c:v",
+  "libx264",
+  "-preset",
+  "fast",
+  "-crf",
+  "25",
+  "-g",
+  "15",
+  "-movflags",
+  "+faststart",
   `${output}/intro3.mp4`,
 ]);
 
 execFileSync(ffmpeg, [
   ...common,
   "-an",
-  "-c:v", "libvpx-vp9",
-  "-b:v", "650k",
-  "-g", "15",
-  "-deadline", "realtime",
-  "-cpu-used", "6",
+  "-c:v",
+  "libvpx-vp9",
+  "-b:v",
+  "650k",
+  "-g",
+  "15",
+  "-deadline",
+  "realtime",
+  "-cpu-used",
+  "6",
   `${output}/intro3.webm`,
 ]);
 
