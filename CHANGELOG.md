@@ -61,3 +61,9 @@
 - Removed the plus control, linked Watch All Videos to the official listing, and added GSAP gallery transitions with hover and press feedback for the CTA and arrow controls.
 - Verified cycling and the rendered gallery in the browser; production build passed.
 
+
+## Video section eyebrow and responsive action
+
+- Added the Our Stories eyebrow using the same style as the Vision and Mission labels.
+- Corrected the Watch All Videos play control to remain circular and adjusted the mobile gallery to stack thumbnails and arrow controls cleanly.
+

@@ -89,7 +89,7 @@ export function VideoSection() {
         <span />
       </div>
       <div className="community-media__copy">
-        <span className="community-media__rule" aria-hidden="true" />
+        <p className="editorial-eyebrow community-media__eyebrow">Our Stories</p>
         <h2 id="video-heading">A closer look<br />at Philsaga.</h2>
         <p>Explore our journey, milestones,<br />and the people behind our progress.</p>
         <a
