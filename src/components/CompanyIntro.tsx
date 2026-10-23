@@ -16,9 +16,6 @@ export function CompanyIntro() {
           02
           <span />
         </div>
-        <span className="company-about__watermark" aria-hidden="true">
-          01
-        </span>
         <div className="company-about__copy">
           <p className="company-about__eyebrow">
             <span />

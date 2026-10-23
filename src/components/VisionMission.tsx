@@ -13,11 +13,10 @@ export function VisionMission() {
           <span />
         </div>
         <div className="editorial-purpose__copy">
-          <p className="editorial-eyebrow">Our Purpose</p>
+          <p className="editorial-eyebrow">Our Vision</p>
           <h2 id="purpose-heading">Looking beyond<br />the horizon.</h2>
           <p className="editorial-description">
-            We strive to unlock opportunities, drive inclusive growth, and build
-            a more resilient tomorrow through responsible mining.
+           To be the leading, world class, highly sustainable mining company delivering excellent value to all stakeholders.
           </p>
           <a className="editorial-purpose__link" href="https://www.philsaga.com/about-us">
             <span><ArrowRight aria-hidden="true" /></span>
@@ -31,12 +30,10 @@ export function VisionMission() {
           <span />
         </div>
         <div className="editorial-approach__copy">
-          <p className="editorial-eyebrow">Our Approach</p>
+          <p className="editorial-eyebrow">Our Mission</p>
           <h2 id="approach-heading">Purpose in<br />every operation.</h2>
           <p className="editorial-description">
-            Our work goes beyond mining. We aim to create positive and lasting
-            impact by supporting local communities, protecting the environment,
-            and building shared opportunities.
+            We are a highly-motivated team committed to growth by discovering mineral resources and operating within the highest mining industry standards, and with strict adherence to our corporate, social and environmental responsibilities.
           </p>
           <a className="editorial-approach__link" href="https://www.philsaga.com/about-us">
             Learn More

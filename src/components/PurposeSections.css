@@ -194,7 +194,7 @@
 
 .editorial-values__cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5vw;
   margin-top: 3vw;
 }
@@ -209,7 +209,7 @@
 .editorial-values__cards svg {
   width: 3.2vw;
   height: 3.2vw;
-  color: #124b31;
+  color: #f6931c;
 }
 
 .editorial-values__cards h3 {

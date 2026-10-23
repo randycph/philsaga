@@ -1,9 +1,10 @@
-import { ChartNoAxesCombined, Leaf, Shield, UsersRound } from "lucide-react";
+import { ChartNoAxesCombined, Leaf, Shield, UsersRound, ArrowRight } from "lucide-react";
 import "./PurposeSections.css";
 
 const cards = [
   { title: "Teamwork", description: "We achieve more together.", icon: UsersRound },
   { title: "Integrity", description: "We do what is right, always.", icon: Shield },
+  { title: "Growth", description: "We grow our people, our communities, and our company.", icon: ArrowRight },
   { title: "Excellence", description: "We pursue continuous improvement.", icon: ChartNoAxesCombined },
   { title: "Responsibility", description: "We care for people, communities and the environment.", icon: Leaf },
 ];
