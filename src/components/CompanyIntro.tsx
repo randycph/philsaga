@@ -13,38 +13,36 @@ export function CompanyIntro() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="scroll-mt-28 py-24 lg:py-32"
+      className="scroll-mt-28 py-12 lg:py-16"
     >
       <div className={container}>
-        <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-28">
-          <Reveal className="relative overflow-hidden" parallax>
-            <img
-              src="/assets/E15.png"
-              alt={uiCopy.philsagaMineHeadframeInRosarioAgusanDelSur}
-              width={1575}
-              height={1280}
-              loading="lazy"
-              className="aspect-[3/4] w-full rounded-none object-cover"
-            />
-            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-sm border border-black/20 bg-background/80 px-5 py-4 backdrop-blur-md">
-              <span className="text-sm">{uiCopy.rosarioAgusanDelSur}</span>
-              <span className="size-2 rounded-full bg-primary" />
-            </div>
-          </Reveal>
-          <Reveal>
+        <div className="grid items-stretch overflow-hidden bg-[#f4f2ed] lg:min-h-[500px] lg:grid-cols-[0.8fr_1.2fr]">
+          <Reveal className="flex flex-col justify-center px-8 py-12 md:px-14 lg:px-16" parallax>
             <Eyebrow>{copy.aboutEyebrow}</Eyebrow>
             <h2 id="about-heading" className={heading}>
-              {copy.aboutHeading}
+              Rooted
+              <br />
+              in Progress
             </h2>
-            <p className="mt-7 text-base leading-[1.85] text-muted-foreground md:text-lg">
+            <p className="mt-7 max-w-lg text-base leading-[1.75] text-muted-foreground md:text-lg">
               {site.intro}
             </p>
-            <Button asChild className="mt-8">
+            <Button asChild variant="link" className="mt-8 w-fit px-0 text-primary">
               <a href={uiCopy.httpsWwwPhilsagaComAboutUs}>
                 {uiCopy.learnMore2}
                 <ArrowUpRight className="size-4" />
               </a>
             </Button>
+          </Reveal>
+          <Reveal className="relative min-h-[320px] overflow-hidden lg:min-h-full" parallax>
+            <img
+              src="/assets/about-mining.png"
+              alt={uiCopy.philsagaMiningOperationsInMindanao}
+              width={1448}
+              height={1088}
+              loading="lazy"
+              className="absolute inset-0 size-full object-cover"
+            />
           </Reveal>
         </div>
         <Reveal className="mt-16 grid gap-8 border-y border-black/10 py-10 sm:grid-cols-3 md:mt-20 md:py-12">
