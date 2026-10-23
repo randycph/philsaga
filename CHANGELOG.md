@@ -67,3 +67,9 @@
 - Added the Our Stories eyebrow using the same style as the Vision and Mission labels.
 - Corrected the Watch All Videos play control to remain circular and adjusted the mobile gallery to stack thumbnails and arrow controls cleanly.
 
+
+## Our Stories eyebrow color
+
+- Matched the eyebrow's orange color, type size, weight, spacing and uppercase treatment to the Vision and Mission labels, overriding the video paragraph styles that had taken precedence.
+- Confirmed the corrected rendering in the browser and rebuilt successfully.
+
