@@ -13,11 +13,11 @@ export function CompanyIntro() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="scroll-mt-28 py-12 lg:py-16"
+      className="scroll-mt-28"
     >
-      <div className={container}>
-        <div className="relative isolate grid items-stretch overflow-hidden bg-[#f4f2ed] lg:min-h-[500px] lg:grid-cols-[0.8fr_1.2fr]">
-          <img src="/assets/about-collage.png" alt="" aria-hidden="true" className="absolute inset-0 -z-10 size-full object-cover object-center" />
+      <div>
+        <div className="relative isolate grid min-h-[680px] items-stretch overflow-hidden bg-[#f4f2ed] md:min-h-[620px] lg:min-h-[640px] lg:grid-cols-[0.8fr_1.2fr]">
+          <img src="/assets/about-fullwidth.png" alt="" aria-hidden="true" className="absolute inset-0 -z-10 size-full object-cover object-center" />
           <Reveal className="flex flex-col justify-center bg-[#f4f2ed]/90 px-8 py-12 md:px-14 lg:bg-transparent lg:px-16" parallax>
             <Eyebrow>{copy.aboutEyebrow}</Eyebrow>
             <h2 id="about-heading" className={heading}>
