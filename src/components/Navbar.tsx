@@ -207,7 +207,7 @@ export function Navbar() {
                 <a
                   href={uiCopy.home}
                   aria-label={uiCopy.philsagaMiningCorporationHome}
-                  className="mt-10 inline-flex rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                  className="flex w-fit rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:mt-10"
                 >
                   <img
                     src={assetPath("assets/pmc-mmprc.png")}
