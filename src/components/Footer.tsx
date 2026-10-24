@@ -52,6 +52,12 @@ export function Footer() {
             <a href="https://www.philsaga.com/sitemap">Sitemap</a>
           </nav>
         </div>
+        <p className="site-footer__credit">
+          Developed by{" "}
+          <a href="https://www.webfocus.ph" target="_blank" rel="noreferrer">
+            Webfocus Solutions Inc
+          </a>
+        </p>
         <a
           href={uiCopy.home}
           data-scroll-to-top
