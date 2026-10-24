@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import "./PurposeSections.css";
 import { assetPath } from "./Shared";
+import { uiCopy } from "../data/ui";
 
 export function VisionMission() {
   return (
@@ -15,7 +16,10 @@ export function VisionMission() {
           <p className="editorial-description">
            To be the leading, world class, highly sustainable mining company delivering excellent value to all stakeholders.
           </p>
-          <a className="section-text-cta editorial-approach__link editorial-purpose__link !text-white" >
+          <a
+            href="#mission"
+            className="section-text-cta editorial-approach__link editorial-purpose__link !text-white"
+          >
             Our Purpose
             <ArrowRight aria-hidden="true" />
           </a>
@@ -28,7 +32,10 @@ export function VisionMission() {
           <p className="editorial-description">
             We are a highly-motivated team committed to growth by discovering mineral resources and operating within the highest mining industry standards, and with strict adherence to our corporate, social and environmental responsibilities.
           </p>
-          <a className="section-text-cta editorial-approach__link">
+          <a
+            href={uiCopy.httpsWwwPhilsagaComAboutUs}
+            className="section-text-cta editorial-approach__link"
+          >
             Learn More
             <ArrowRight aria-hidden="true" />
           </a>

@@ -36,7 +36,7 @@ import {
 } from "./ui/dialog";
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(window.scrollY > 80);
+  const [scrolled, setScrolled] = useState(false);
   const [query, setQuery] = useState("");
   const results = [...navLinks, ...sustainabilityLinks, ...footerLinks].filter(
     (link, index, links) => {
@@ -52,6 +52,7 @@ export function Navbar() {
       setScrolled(window.scrollY > 80);
     };
 
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {

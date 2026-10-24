@@ -1,0 +1,13 @@
+# Philsaga Mining Corporation
+
+> A Socially Responsible and Environment Friendly Company. Located in Rosario, Agusan del Sur, Philippines.
+
+## Website
+
+- [Homepage](https://www.philsaga.com/): Company overview, values, community programs, and contact information.
+- [Company information in Markdown](https://www.philsaga.com/index.md): Text version for readers and AI tools.
+- [Sitemap](https://www.philsaga.com/sitemap.xml): Canonical page URL.
+
+## Contact
+
+Rosario, Agusan del Sur, Philippines. Telephone: (082) 235 0045. Email: info@philsaga.com.

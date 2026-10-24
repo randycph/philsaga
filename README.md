@@ -28,6 +28,26 @@ Run `npm install` and `npm run build` in the server checkout, or deploy the comp
 
 The production base in `vite.config.ts` is already `/philsaga/`. After deploying the root `.htaccess` and the build output, refresh the page with Ctrl + F5. The page should request `/philsaga/assets/` JavaScript rather than `/src/main.tsx`.
 
+## SEO and AI-readable content
+
+`npm run build` prerenders the real React homepage into `dist/index.html`, then the browser hydrates that markup. Text, headings, links, company contact details, and structured data are available without executing JavaScript. Development mode still uses the usual client renderer. Test the finished SEO output with `npm run preview -- --port 5174` and `npm run check:seo`.
+
+The generated head contains a title, description, favicon, canonical URL, robots directives, Open Graph and Twitter share tags, and JSON-LD. The linked schema graph describes the Organization, WebSite, WebPage, section elements, logo, and primary image. Company details come from `src/data/site.ts`; the phone, email, and locality are also displayed in the footer. The page uses one H1, section H2s, article H3s, image alternatives, and real destinations for the About and Mission calls to action.
+
+The canonical address defaults to `https://www.philsaga.com/`, as requested. `.env.example` documents the configuration:
+
+- `SEO_SITE_URL`: canonical site address used consistently in metadata, schema, sitemap, and Markdown links.
+- `SEO_INDEXABLE=false`: emits `noindex, follow` for a build that should not be indexed. The default is `true`.
+- `VITE_BASE_PATH`: `/philsaga/` for the current cPanel preview, or `/` when publishing at the main domain root. Canonical URLs and deployment paths are independent.
+
+For the final root-domain deployment, set `VITE_BASE_PATH=/` in `.env` or the build environment, run a fresh build, and deploy its entire output. The canonical image, sitemap, and text URLs target that root-domain deployment; those resources must exist on the canonical host before launch. The current preview points search engines toward the selected main domain rather than declaring itself the primary site.
+
+The build generates `sitemap.xml` for the one real homepage URL, `robots.txt`, `llms.txt`, and `index.md`. Section fragments and external company pages are not listed as separate pages in this site's sitemap. `llms.txt` and the linked Markdown summary are optional reading aids for AI tools, not a ranking or inclusion guarantee. No fabricated reviews, hidden FAQs, invented dates, or unsupported video metadata are included in the schema.
+
+Robots rules must be served from the domain root at `/robots.txt`. On the preview host, `/philsaga/robots.txt` alone does not control crawling. Merge the generated sitemap declaration into the host's existing root robots file and ensure the project path is crawlable; do not overwrite rules for other sites or apps. When publishing at `www.philsaga.com`, deploy the generated root files there and submit its sitemap in Search Console. Validate the deployed page with Google's Rich Results Test and URL Inspection after launch. No production server, indexing submission, or existing domain-level crawler policy is changed by a local build.
+
+If the main domain retains the existing corporate content pages, preserve their sitemap entries when merging this homepage into the live sitemap. The generated one-page sitemap covers this checkout only; it is not an inventory of every page on the existing corporate website.
+
 ## Content and components
 
 Section content, navigation, and the footer share `--page-gutter` in `src/index.css`: `clamp(20px, 3vw, 48px)`. Use `.page-container` for full-width content wrappers and the same variable for composed section margins so the page keeps consistent, compact side spacing.

@@ -74,6 +74,11 @@ export function Footer() {
           </a>
         </div>
       </div>
+      <address className="site-footer__contact">
+        <span>{site.location}, Philippines</span>
+        <a href={site.phoneHref}>{site.phone}</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </address>
       <nav className="site-footer__links" aria-label={uiCopy.footerNavigation}>
         {footerLinkGroups.map((links) => (
           <ul key={links[0].label}>

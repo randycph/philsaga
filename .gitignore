@@ -3,3 +3,6 @@ site-source.html
 *.log
 tools/
 *.tsbuildinfo
+.env
+.env.local
+.env.*.local

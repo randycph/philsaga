@@ -60,7 +60,10 @@ export function CompanyIntro() {
             creates lasting value for communities, the environment, and future
             generations.
           </p>
-          <a className="section-text-cta company-about__link">
+          <a
+            href={uiCopy.httpsWwwPhilsagaComAboutUs}
+            className="section-text-cta company-about__link"
+          >
             Learn More
             <ArrowRight aria-hidden="true" />
           </a>

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/prepare-seo.mjs",
+    "check:seo": "node --test scripts/verify-seo.mjs",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

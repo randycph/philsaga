@@ -368,6 +368,16 @@
   border-bottom: 1px solid #dcdcd5;
 }
 
+.site-footer__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding-top: 20px;
+  color: #66716d;
+  font-size: 13px;
+  font-style: normal;
+}
+
 .site-footer__links a {
   display: inline-flex;
   min-height: 40px;
