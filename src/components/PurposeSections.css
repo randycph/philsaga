@@ -39,7 +39,7 @@
 
 .editorial-purpose__copy {
   position: relative;
-  width: 27%;
+  width: calc(31.8% - var(--page-gutter));
   margin-left: 68.2%;
   padding: 6.2vw 0 5.8vw;
 }
@@ -106,7 +106,7 @@
 
 .editorial-approach__copy {
   width: 31%;
-  margin-left: 10.9%;
+  margin-left: var(--page-gutter);
   padding: 5.5vw 0 4.4vw;
 }
 
@@ -164,7 +164,7 @@
 }
 
 .editorial-values {
-  padding: 5.5vw 9.7% 2.5vw 10.9%;
+  padding: 5.5vw var(--page-gutter) 2.5vw;
   background: #f6f4ef url("/assets/values-tiger.png") center 40% / cover;
 }
 
@@ -232,8 +232,8 @@
 
   .editorial-purpose__copy,
   .editorial-approach__copy {
-    width: 78%;
-    margin-left: 7%;
+    width: calc(100% - 2 * var(--page-gutter));
+    margin-left: var(--page-gutter);
     padding: 36px 0;
   }
 
@@ -261,7 +261,7 @@
   }
 
   .editorial-values {
-    padding: 36px 7% 30px;
+    padding: 36px var(--page-gutter) 30px;
   }
 
   .editorial-values__heading {
@@ -300,7 +300,7 @@
   position: relative;
   z-index: 1;
   width: 31%;
-  margin-left: 7%;
+  margin-left: var(--page-gutter);
   padding: 5.45vw 0 4.9vw;
 }
 
@@ -374,7 +374,7 @@
   .editorial-approach__copy {
     width: auto;
     margin: 0;
-    padding: 40px 24px 32px;
+    padding: 40px var(--page-gutter) 32px;
   }
 
   .editorial-approach .editorial-eyebrow {

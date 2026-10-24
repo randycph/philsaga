@@ -69,7 +69,7 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "flex w-full items-center justify-between gap-2 px-6 transition-all duration-300 sm:gap-5 md:px-12 lg:px-16 xl:px-20",
+          "page-container flex items-center justify-between gap-2 transition-all duration-300 sm:gap-5",
           scrolled ? "h-16 lg:h-[72px]" : "h-16 lg:h-24",
         )}
       >

@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+:root {
+  --page-gutter: clamp(20px, 3vw, 48px);
+}
+
+.page-container {
+  width: 100%;
+  padding-inline: var(--page-gutter);
+}
+
 /* Tailwind's theme entry point defines shared shadcn design tokens. */
 @theme {
   --color-background: #f7f6f2;

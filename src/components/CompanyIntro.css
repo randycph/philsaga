@@ -23,7 +23,7 @@
   position: relative;
   z-index: 1;
   width: 28%;
-  margin-left: 7%;
+  margin-left: var(--page-gutter);
   padding-top: 6.2vw;
   padding-bottom: 4.3vw;
 }
@@ -94,7 +94,7 @@
 .company-about__statistics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 3.1vw 7%;
+  padding: 3.1vw var(--page-gutter);
   background: #f6f4ef;
 }
 
@@ -134,10 +134,10 @@
   }
 
   .company-about__copy {
-    width: 84%;
+    width: calc(100% - 2 * var(--page-gutter));
     padding-top: 42px;
     padding-bottom: 32px;
-    margin-left: 7%;
+    margin-left: var(--page-gutter);
   }
 
   .company-about__description {
@@ -158,7 +158,7 @@
   }
 
   .company-about__statistics {
-    padding: 24px 12px;
+    padding: 24px var(--page-gutter);
     gap: 12px;
   }
 

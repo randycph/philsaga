@@ -30,6 +30,8 @@ The production base in `vite.config.ts` is already `/philsaga/`. After deploying
 
 ## Content and components
 
+Section content, navigation, and the footer share `--page-gutter` in `src/index.css`: `clamp(20px, 3vw, 48px)`. Use `.page-container` for full-width content wrappers and the same variable for composed section margins so the page keeps consistent, compact side spacing.
+
 - `src/data/site.ts`: company copy, navigation, values, stories, programs, and videos.
 - `src/data/ui.ts`: UI text, image descriptions, and supporting links.
 - `src/components`: the eleven requested homepage components, plus shared helpers and UI primitives.

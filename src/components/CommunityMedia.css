@@ -1,7 +1,7 @@
 .community-strip,
 .community-media {
   position: relative;
-  padding: 4vw 6% 3.5vw 7%;
+  padding: 4vw var(--page-gutter) 3.5vw;
 }
 
 .community-strip {
@@ -272,7 +272,7 @@
   .community-strip,
   .community-media {
     grid-template-columns: 1fr;
-    padding: 36px 6%;
+    padding: 36px var(--page-gutter);
     gap: 30px;
   }
 
@@ -317,7 +317,7 @@
 }
 
 .site-footer {
-  padding: 0 7.8%;
+  padding: 0 var(--page-gutter);
   background: #f6f4ef;
   color: #102b2b;
 }
