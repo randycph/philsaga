@@ -6,7 +6,7 @@ import {
   CarouselItem,
 } from "./ui/carousel";
 import { Card, CardContent } from "./ui/card";
-import { ImageWithFallback } from "./Shared";
+import { assetPath, ImageWithFallback } from "./Shared";
 
 export function Sdmp() {
   return (
@@ -15,7 +15,7 @@ export function Sdmp() {
       aria-labelledby="sdmp-heading"
       className="relative scroll-mt-20 overflow-hidden bg-[#102d23] py-20 text-[#faf7f1] sm:py-24 lg:py-28"
       style={{
-        backgroundImage: "url('/assets/sdmp-forest-bg.png')",
+        backgroundImage: `url('${assetPath("assets/sdmp-forest-bg.png")}')`,
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}

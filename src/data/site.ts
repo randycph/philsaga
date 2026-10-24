@@ -1,3 +1,5 @@
+import { assetPath } from "../lib/assets";
+
 export const site = {
   name: "Philsaga Mining Corporation",
   tagline: "A Socially Responsible and Environment Friendly Company",
@@ -118,20 +120,20 @@ export const stories: Story[] = [
       "PMC-MMPRC Foundation, Inc. Extends Aid to 48 Household Fire Victims in Bislig City",
     category: "Community support",
     href: "https://www.philsaga.com/news/pmc-mmprc-foundation-inc-extends-aid-to-48-household-fire-victims-in-bislig-city",
-    image: "/assets/story-1.jpg",
+    image: assetPath("assets/story-1.jpg"),
   },
   {
     title: "PMC and MMPRC Conduct Biodiversity Assessment",
     category: "Environmental stewardship",
     href: "https://www.philsaga.com/news/pmc-and-mmprc-conduct-biodiversity-assessment",
-    image: "/assets/story-2.jpg",
+    image: assetPath("assets/story-2.jpg"),
   },
   {
     title:
       "Communities for Conservation: PMC and MMPRC Launch Mining Forest Program on National Arbor Day",
     category: "Growing together",
     href: "https://www.philsaga.com/news/communities-for-conservation-pmc-and-mmprc-launch-mining-forest-program-on-national-arbor-day",
-    image: "/assets/story-3.jpg",
+    image: assetPath("assets/story-3.jpg"),
   },
 ];
 
@@ -175,7 +177,7 @@ export const videos: VideoItem[] = [
     duration: "07:00",
     description:
       "Celebrating 25 years of Philsaga Mining Corporation: a story of resilience, shared purpose, and the people and communities behind our golden legacy.",
-    image: "/assets/hero-poster.jpg",
+    image: assetPath("assets/hero-poster.jpg"),
     source: "https://www.philsaga.com/storage/videos/PMC%20Silver%20Anniv.mov",
     href: "https://www.philsaga.com/video/silver-years-golden-legacy",
   },
