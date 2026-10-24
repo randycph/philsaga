@@ -1,9 +1,22 @@
-import { ChevronUp } from "lucide-react";
+import { ChevronRight, ChevronUp } from "lucide-react";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { uiCopy } from "../data/ui";
 import { assetPath } from "./Shared";
-import { footerLegalLinks, site } from "../data/site";
+import { footerLegalLinks, footerLinks, site } from "../data/site";
+
+const footerLinkGroups = [
+  footerLinks.slice(0, 3),
+  [
+    ...footerLinks.slice(3, 5),
+    { label: "Sustainability", href: "#sustainability" },
+  ],
+  [
+    ...footerLinks.slice(5),
+    { label: "News", href: "https://www.philsaga.com/news" },
+    { label: "Contact", href: "#contact" },
+  ],
+];
 
 export function Footer() {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
@@ -43,13 +56,6 @@ export function Footer() {
             Environment Friendly Company
           </span>
         </a>
-        <nav aria-label={uiCopy.footerNavigation}>
-          <a href={uiCopy.about}>About</a>
-          <a href="#sustainability">Sustainability</a>
-          <a href="#community">Programs</a>
-          <a href="https://www.philsaga.com/news">News</a>
-          <a href="#contact">Contact</a>
-        </nav>
         <div className="site-footer__socials">
           <a href={site.facebook} aria-label="Facebook">
             <FaFacebookF aria-hidden="true" />
@@ -68,6 +74,20 @@ export function Footer() {
           </a>
         </div>
       </div>
+      <nav className="site-footer__links" aria-label={uiCopy.footerNavigation}>
+        {footerLinkGroups.map((links) => (
+          <ul key={links[0].label}>
+            {links.map((link) => (
+              <li key={link.label}>
+                <a href={link.href}>
+                  <ChevronRight aria-hidden="true" />
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </nav>
       <div className="site-footer__legal">
         <div className="site-footer__copyright">
           <p>{site.copyright}</p>

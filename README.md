@@ -48,6 +48,8 @@ The About statistics count from zero to 2000+, 25+, and 50M+ MT over 1.4 seconds
 
 The footer keeps its light background with copyright text, legal links, navigation, and a scroll-to-top control. The rounded, translucent arrow floats at the bottom-right only after scrolling past 50% of the page's scrollable height. Visibility updates on scroll, resize, and content height changes. The arrow uses Lenis for smooth scrolling and falls back to the native home anchor when reduced motion is enabled.
 
+Footer navigation uses three columns on desktop and two on mobile. It includes Home, About, Community Programs, Supplier Portal, The Vein, Career, Site Map, Sustainability, News, and Contact, using the existing company destinations and homepage anchors.
+
 ## Media
 
 Rebuild hero derivatives from the original video outside `public/assets`:

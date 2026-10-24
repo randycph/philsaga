@@ -17,6 +17,7 @@ const revealGroups = [
   ".community-strip__priorities",
   ".community-media__copy",
   ".site-footer__main",
+  ".site-footer__links",
   ".site-footer__legal",
 ];
 
