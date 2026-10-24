@@ -4,6 +4,7 @@ import * as NavigationMenu from "./ui/navigation-menu";
 import {
   ArrowUpRight,
   ChevronDown,
+  Facebook,
   Menu,
   Search,
 } from "lucide-react";
@@ -239,6 +240,41 @@ export function Navbar() {
                   </SheetClose>
                 ))}
               </nav>
+              <div
+                role="group"
+                aria-label={uiCopy.certificationAndSocialMedia}
+                className="mt-6 space-y-4"
+              >
+                <a
+                  href={site.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 items-center gap-3 rounded-sm text-sm font-medium hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                >
+                  <span className="flex size-10 items-center justify-center rounded-full bg-[#102b2b] text-white">
+                    <Facebook className="size-5" aria-hidden="true" />
+                  </span>
+                  {uiCopy.followUsOnFacebook}
+                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                </a>
+                <div className="flex items-center gap-3">
+                  <img
+                    src={assetPath("assets/ISO-LOGO.png")}
+                    alt={uiCopy.certificationInternationalIso140012015}
+                    width={391}
+                    height={390}
+                    className="size-14 shrink-0 rounded bg-white p-1"
+                  />
+                  <div>
+                    <p className="text-sm font-semibold">
+                      {uiCopy.iso140012015Certified}
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {uiCopy.certifiedByCertificationInternational}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </SheetContent>
           </Sheet>
         </div>
