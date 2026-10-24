@@ -70,18 +70,18 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "page-container flex items-center justify-between gap-2 transition-all duration-300 sm:gap-5",
+          "page-container flex items-center justify-between gap-2 transition-all duration-300 sm:gap-5 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]",
           scrolled ? "h-16 lg:h-[72px]" : "h-16 lg:h-24",
         )}
       >
         <a
           href={uiCopy.home}
           aria-label={uiCopy.philsagaMiningCorporationHome}
-          className="flex shrink-0 items-center gap-3"
+          className="flex shrink-0 items-center gap-3 lg:min-w-0"
         >
           <span
             className={cn(
-              "block shrink-0 transition-all duration-300",
+              "block shrink-0 transition-all duration-300 lg:max-w-full",
               scrolled
                 ? "h-12 w-[100px] sm:h-[68px] sm:w-[478px] lg:w-[clamp(280px,32vw,478px)]"
                 : "h-12 w-[100px] sm:h-[76px] sm:w-[531px] lg:w-[clamp(280px,32vw,531px)]",
@@ -102,7 +102,7 @@ export function Navbar() {
             </picture>
           </span>
         </a>
-        <NavigationMenu.Root className="relative hidden lg:block">
+        <NavigationMenu.Root className="relative hidden lg:block lg:justify-self-center">
           <NavigationMenu.List className="flex items-center gap-8 text-sm font-medium">
             {navLinks.map((link) => (
               <NavigationMenu.Item key={link.label}>
@@ -141,7 +141,7 @@ export function Navbar() {
             </NavigationMenu.Item>
           </NavigationMenu.List>
         </NavigationMenu.Root>
-        <div className="flex shrink-0 items-center gap-1 sm:gap-2 md:gap-4">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2 md:gap-4 lg:justify-self-end">
           <Dialog>
             <DialogTrigger asChild>
               <Button
