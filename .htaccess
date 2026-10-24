@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Stop rewriting once the request points into the production build.
+RewriteRule ^dist(?:/|$) - [L]
+
+RewriteRule ^$ dist/index.html [L]
+RewriteRule ^(.+)$ dist/$1 [L]

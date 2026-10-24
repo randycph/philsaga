@@ -20,6 +20,14 @@ npm run preview -- --port 5174
 
 The build runs TypeScript checking before producing `dist/`. Deploy `dist/` to a static host. This task implements the local project and does not modify PMC's live website.
 
+### cPanel deployment at `/philsaga/`
+
+When the repository is cloned directly into the folder serving `/philsaga/`, keep the root `.htaccess` alongside `dist/`. It internally routes the homepage and asset requests into `dist/` while preserving the public `/philsaga/` URL. There is no need to copy the build output into the repository root.
+
+Run `npm install` and `npm run build` in the server checkout, or deploy the complete locally generated `dist/` directory with the repository. Pulling source changes alone does not rebuild the site. Apache must allow `.htaccess` rewrite rules and have `mod_rewrite` enabled.
+
+The production base in `vite.config.ts` is already `/philsaga/`. After deploying the root `.htaccess` and the build output, refresh the page with Ctrl + F5. The page should request `/philsaga/assets/` JavaScript rather than `/src/main.tsx`.
+
 ## Content and components
 
 - `src/data/site.ts`: company copy, navigation, values, stories, programs, and videos.
