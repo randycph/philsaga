@@ -38,6 +38,8 @@ Section content, navigation, and the footer share `--page-gutter` in `src/index.
 - `src/hooks`: `useLenis`, `useReducedMotion`, and `useCountUp`.
 - `public/assets`: original supplied imagery, recovered SDMP imagery, and optimized hero media.
 
+Social brand icons use the Font Awesome 6 set from `react-icons/fa6` in the footer, burger menu, and certification strip. General interface controls continue to use Lucide.
+
 The hero uses a sticky viewport inside a 300vh wrapper and creates its ScrollTrigger after video metadata loads. It does not add a second pin. The header enters with a staggered fade and the hero fades in on page load. `useEntranceAnimations` gives section copy, value cards, community priorities, certification, and footer content one-time 750 ms fade-up reveals with 90 ms staggering as they enter the viewport. Focusing a link completes its reveal immediately. Animations clean up on unmount and revert when reduced motion is enabled.
 
 Reduced motion disables Lenis, count-up animation, pinning, scrubbing, and translated reveals; all five values remain visible as a list.

@@ -4,10 +4,10 @@ import * as NavigationMenu from "./ui/navigation-menu";
 import {
   ArrowUpRight,
   ChevronDown,
-  Facebook,
   Menu,
   Search,
 } from "lucide-react";
+import { FaFacebookF } from "react-icons/fa6";
 import {
   navLinks,
   site,
@@ -252,7 +252,7 @@ export function Navbar() {
                   className="inline-flex min-h-11 items-center gap-3 rounded-sm text-sm font-medium hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
                 >
                   <span className="flex size-10 items-center justify-center rounded-full bg-[#102b2b] text-white">
-                    <Facebook className="size-5" aria-hidden="true" />
+                    <FaFacebookF className="size-5" aria-hidden="true" />
                   </span>
                   {uiCopy.followUsOnFacebook}
                   <ArrowUpRight className="size-4" aria-hidden="true" />

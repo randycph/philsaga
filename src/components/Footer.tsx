@@ -1,4 +1,5 @@
-import { ChevronUp, Facebook, Linkedin, Youtube } from "lucide-react";
+import { ChevronUp } from "lucide-react";
+import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { uiCopy } from "../data/ui";
 import { assetPath } from "./Shared";
@@ -51,19 +52,19 @@ export function Footer() {
         </nav>
         <div className="site-footer__socials">
           <a href={site.facebook} aria-label="Facebook">
-            <Facebook />
+            <FaFacebookF aria-hidden="true" />
           </a>
           <a
             href="https://www.youtube.com/@PhilsagaMiningCorporation"
             aria-label="YouTube"
           >
-            <Youtube />
+            <FaYoutube aria-hidden="true" />
           </a>
           <a
             href="https://www.linkedin.com/company/philsaga-mining-corporation/"
             aria-label="LinkedIn"
           >
-            <Linkedin />
+            <FaLinkedinIn aria-hidden="true" />
           </a>
         </div>
       </div>

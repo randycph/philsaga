@@ -1,6 +1,7 @@
 import { uiCopy } from "../data/ui";
 import { assetPath } from "./Shared";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
+import { FaFacebookF } from "react-icons/fa6";
 import { site } from "../data/site";
 import { container } from "./Shared";
 
@@ -38,14 +39,11 @@ export function TrustStrip() {
           rel="noreferrer"
           className="flex items-center gap-5 rounded-lg bg-paper px-4 py-2 focus-visible:outline-2 focus-visible:outline-primary"
         >
-          <img
-            src={assetPath("assets/fb9.png")}
-            alt={uiCopy.followUsOnFacebook}
-            width={367}
-            height={102}
-            loading="lazy"
-            className="h-9 w-auto"
+          <FaFacebookF
+            className="size-6 shrink-0 text-[#1877f2]"
+            aria-hidden="true"
           />
+          <span className="text-sm font-semibold">{uiCopy.followUsOnFacebook}</span>
           <ArrowUpRight className="size-4 text-foreground" />
         </a>
       </div>
