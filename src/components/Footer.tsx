@@ -15,6 +15,13 @@ export function Footer() {
             Environment Friendly Company
           </span>
         </a>
+        <nav aria-label={uiCopy.footerNavigation}>
+          <a href={uiCopy.about}>About</a>
+          <a href="#sustainability">Sustainability</a>
+          <a href="#community">Programs</a>
+          <a href="https://www.philsaga.com/news">News</a>
+          <a href="#contact">Contact</a>
+        </nav>
         <div className="site-footer__socials">
           <a href={site.facebook} aria-label="Facebook">
             <Facebook />
@@ -45,18 +52,6 @@ export function Footer() {
             <a href="https://www.philsaga.com/sitemap">Sitemap</a>
           </nav>
         </div>
-        <nav
-          className="site-footer__navigation"
-          aria-label={uiCopy.footerNavigation}
-        >
-          <a href={uiCopy.home}>Home</a>
-          <a href={uiCopy.about}>About Us</a>
-          <a href="#sustainability">Sustainability</a>
-          <a href="#community">Programs</a>
-          <a href="https://www.philsaga.com/news">News</a>
-          <a href={uiCopy.httpsWwwPhilsagaComCareers}>Careers</a>
-          <a href="#contact">Contact</a>
-        </nav>
         <a
           href={uiCopy.home}
           data-scroll-to-top
