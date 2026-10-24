@@ -1,4 +1,4 @@
-import { ChevronRight, ChevronUp } from "lucide-react";
+import { ChevronRight, ChevronUp, MapPin, Phone, Mail } from "lucide-react";
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { uiCopy } from "../data/ui";
@@ -75,9 +75,18 @@ export function Footer() {
         </div>
       </div>
       <address className="site-footer__contact">
-        <span>{site.location}, Philippines</span>
-        <a href={site.phoneHref}>{site.phone}</a>
-        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <div className="flex items-center gap-2">
+          <MapPin aria-hidden="true" className="w-4 h-4" />
+          <span>{site.location}, Philippines</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Phone aria-hidden="true" className="w-4 h-4" />
+          <a href={site.phoneHref}>{site.phone}</a>
+        </div>
+        <div className="flex items-center gap-2">
+          <Mail aria-hidden="true" className="w-4 h-4" />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
       </address>
       <nav className="site-footer__links" aria-label={uiCopy.footerNavigation}>
         {footerLinkGroups.map((links) => (

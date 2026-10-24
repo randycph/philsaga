@@ -20,7 +20,7 @@ export const site = {
   valuesClosing:
     "We will succeed through Teamwork, Act with Integrity to Achieve Growth, Commit to Excellence and Operate with Responsibility.",
   sdmp: "SDMP is a five-year comprehensive plan geared towards sustained improvement in the living standards of host and neighboring communities by creating responsible, self-reliant and resource-based communities capable of developing, implementing and managing community development programs, projects, and activities in a manner consistent with the principles of sustainable development.",
-  copyright: "Copyright © 2023 All Rights Reserved. Philsaga Mining Corporation. ",
+  copyright: "Copyright © 2026 All Rights Reserved. Philsaga Mining Corporation. ",
 };
 
 export interface LinkItem {

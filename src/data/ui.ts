@@ -10,7 +10,7 @@ export const uiCopy = {
   philsagaMineHeadframeInRosarioAgusanDelSur:
     "Philsaga mine headframe in Rosario, Agusan del Sur",
   rosarioAgusanDelSur: "Rosario, Agusan del Sur",
-  httpsWwwPhilsagaComAboutUs: "https://www.philsaga.com/about-us",
+  httpsWwwPhilsagaComAboutUs: "https://www.philsaga.com/history",
   learnMore2: "Learn More",
   foundedInMindanao: "Founded in Mindanao",
   label: "+",

@@ -56,9 +56,7 @@ export function CompanyIntro() {
             in Progress
           </h2>
           <p className="company-about__description">
-            Philsaga Mining Corporation is committed to responsible mining that
-            creates lasting value for communities, the environment, and future
-            generations.
+            Founded in 2000, Philsaga Mining Corporation (PMC) is a company dealing in the exploration and extraction of gold. The gold is then processed by its affiliate, the Mindanao Mineral Processing and Refining Corporation (MMPRC). This came about through the acquisition of properties and interest of Banahaw Mining and Development Corporation.
           </p>
           <a
             href={uiCopy.httpsWwwPhilsagaComAboutUs}
