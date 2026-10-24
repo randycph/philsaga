@@ -243,7 +243,7 @@ export function Navbar() {
               <div
                 role="group"
                 aria-label={uiCopy.certificationAndSocialMedia}
-                className="mt-6 space-y-4"
+                className="mt-6 flex flex-1 flex-col gap-4"
               >
                 <a
                   href={site.facebook}
@@ -257,7 +257,7 @@ export function Navbar() {
                   {uiCopy.followUsOnFacebook}
                   <ArrowUpRight className="size-4" aria-hidden="true" />
                 </a>
-                <div className="flex items-center gap-3">
+                <div className="mt-auto flex items-center gap-3">
                   <img
                     src={assetPath("assets/ISO-LOGO.png")}
                     alt={uiCopy.certificationInternationalIso140012015}
