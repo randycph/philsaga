@@ -49,7 +49,7 @@ export function useLenis() {
 
       lenis.scrollTo(isHome ? 0 : target, {
         offset: isHome ? 0 : -headerHeight,
-        immediate: isHome,
+        immediate: isHome && !anchor?.hasAttribute("data-scroll-to-top"),
       });
     };
 

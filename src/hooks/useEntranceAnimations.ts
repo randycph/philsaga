@@ -53,6 +53,8 @@ export function useEntranceAnimations() {
 
       revealGroups.forEach((selector) => {
         document.querySelectorAll<HTMLElement>(selector).forEach((group) => {
+          const isFooter = group.closest("footer") !== null;
+
           Array.from(group.children).forEach((element, index) => {
             const animation = gsap.fromTo(
               element,
@@ -65,8 +67,9 @@ export function useEntranceAnimations() {
                 ease: "power3.out",
                 clearProps: "opacity,transform",
                 scrollTrigger: {
-                  trigger: element,
-                  start: "top 92%",
+                  // Footer children may never reach 92% at the end of the page.
+                  trigger: isFooter ? group : element,
+                  start: isFooter ? "top bottom" : "top 92%",
                   once: true,
                 },
               },
