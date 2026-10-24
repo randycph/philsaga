@@ -24,7 +24,7 @@ export function Sdmp() {
         aria-hidden="true"
         className="absolute inset-0 bg-gradient-to-r from-[#061b18]/95 via-[#09251f]/80 to-[#09251f]/55"
       />
-      <div className="relative mx-auto grid w-full max-w-[1440px] gap-12 px-6 md:px-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-12 lg:px-16 xl:px-20">
+      <div className="relative grid w-full gap-12 px-6 md:px-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-12 lg:px-16 xl:px-20">
         <div className="max-w-xl">
           <p className="editorial-eyebrow">{copy.sdmpEyebrow}</p>
           <h2
