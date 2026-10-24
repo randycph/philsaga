@@ -203,7 +203,22 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent>
-              <SheetTitle className="mt-10 font-heading text-2xl">
+              <SheetClose asChild>
+                <a
+                  href={uiCopy.home}
+                  aria-label={uiCopy.philsagaMiningCorporationHome}
+                  className="mt-10 inline-flex rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                >
+                  <img
+                    src={assetPath("assets/pmc-mmprc.png")}
+                    alt={uiCopy.pmcAndMmprcEmblems}
+                    width={100}
+                    height={48}
+                    className="h-12 w-[100px] object-contain"
+                  />
+                </a>
+              </SheetClose>
+              <SheetTitle className="mt-5 font-heading text-2xl">
                 {uiCopy.philsaga}
               </SheetTitle>
               <SheetDescription className="mt-3 text-sm text-muted-foreground">
