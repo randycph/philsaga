@@ -44,7 +44,7 @@ Reduced motion disables Lenis, count-up animation, pinning, scrubbing, and trans
 
 The About statistics count from zero to 2000+, 25+, and 50M+ MT over 1.4 seconds on their first entry into view. Numeric widths remain stable, suffixes stay visible, and screen readers receive the final values. Reduced motion shows the final values immediately.
 
-The footer keeps its light background with copyright text, legal links, navigation, and a scroll-to-top control. The arrow uses Lenis for smooth scrolling and falls back to the native home anchor when reduced motion is enabled.
+The footer keeps its light background with copyright text, legal links, navigation, and a scroll-to-top control. The rounded, translucent arrow floats at the bottom-right only after scrolling past 50% of the page's scrollable height. Visibility updates on scroll, resize, and content height changes. The arrow uses Lenis for smooth scrolling and falls back to the native home anchor when reduced motion is enabled.
 
 ## Media
 

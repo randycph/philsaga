@@ -1,9 +1,36 @@
 import { ChevronUp, Facebook, Linkedin, Youtube } from "lucide-react";
+import { useEffect, useState } from "react";
 import { uiCopy } from "../data/ui";
 import { assetPath } from "./Shared";
 import { footerLegalLinks, site } from "../data/site";
 
 export function Footer() {
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  useEffect(() => {
+    const updateVisibility = () => {
+      const scrollableHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      setShowScrollToTop(
+        scrollableHeight > 0 && window.scrollY / scrollableHeight > 0.5,
+      );
+    };
+
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+
+    const resizeObserver = new ResizeObserver(updateVisibility);
+    resizeObserver.observe(document.body);
+
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
   return (
     <footer className="site-footer" id="contact">
       <div className="site-footer__main">
@@ -58,6 +85,8 @@ export function Footer() {
             Webfocus Solutions Inc
           </a>
         </p>
+      </div>
+      {showScrollToTop && (
         <a
           href={uiCopy.home}
           data-scroll-to-top
@@ -66,7 +95,7 @@ export function Footer() {
         >
           <ChevronUp aria-hidden="true" />
         </a>
-      </div>
+      )}
     </footer>
   );
 }
