@@ -2,12 +2,44 @@ import { ArrowRight, HardHat, Pickaxe, ContactRound } from "lucide-react";
 import { uiCopy } from "../data/ui";
 import "./CompanyIntro.css";
 import { assetPath } from "./Shared";
+import { useCountUp } from "../hooks/useCountUp";
 
 const statistics = [
-  { value: "2000+", label: "People Empowered", icon: ContactRound },
-  { value: "25+", label: "Years of Operations", icon: HardHat },
-  { value: "50M+ MT", label: "Total Resources", icon: Pickaxe },
+  { value: 2000, suffix: "+", label: "People Empowered", icon: ContactRound },
+  { value: 25, suffix: "+", label: "Years of Operations", icon: HardHat },
+  { value: 50, suffix: "M+ MT", label: "Total Resources", icon: Pickaxe },
 ];
+
+function Statistic({
+  value,
+  suffix,
+  label,
+  icon: Icon,
+}: (typeof statistics)[number]) {
+  const { ref, value: animatedValue } = useCountUp(value);
+
+  return (
+    <div className="company-about__stat">
+      <Icon aria-hidden="true" />
+      <div>
+        <p className="company-about__value">
+          <span className="sr-only">{value}{suffix}</span>
+          <span aria-hidden="true">
+            <span
+              ref={ref}
+              className="inline-block"
+              style={{ minWidth: `${String(value).length}ch` }}
+            >
+              {animatedValue}
+            </span>
+            {suffix}
+          </span>
+        </p>
+        <p className="company-about__label">{label}</p>
+      </div>
+    </div>
+  );
+}
 
 export function CompanyIntro() {
   return (
@@ -44,14 +76,8 @@ export function CompanyIntro() {
         </div>
       </div>
       <div className="company-about__statistics">
-        {statistics.map(({ value, label, icon: Icon }) => (
-          <div className="company-about__stat" key={label}>
-            <Icon aria-hidden="true" />
-            <div>
-              <p className="company-about__value">{value}</p>
-              <p className="company-about__label">{label}</p>
-            </div>
-          </div>
+        {statistics.map((statistic) => (
+          <Statistic key={statistic.label} {...statistic} />
         ))}
       </div>
     </section>

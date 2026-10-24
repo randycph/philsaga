@@ -42,6 +42,8 @@ The hero uses a sticky viewport inside a 300vh wrapper and creates its ScrollTri
 
 Reduced motion disables Lenis, count-up animation, pinning, scrubbing, and translated reveals; all five values remain visible as a list.
 
+The About statistics count from zero to 2000+, 25+, and 50M+ MT over 1.4 seconds on their first entry into view. Numeric widths remain stable, suffixes stay visible, and screen readers receive the final values. Reduced motion shows the final values immediately.
+
 ## Media
 
 Rebuild hero derivatives from the original video outside `public/assets`:
