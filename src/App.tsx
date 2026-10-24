@@ -11,10 +11,12 @@ import { VideoSection } from "./components/VideoSection";
 import { Footer } from "./components/Footer";
 import { useLenis } from "./hooks/useLenis";
 import { useImageParallax } from "./hooks/useImageParallax";
+import { useEntranceAnimations } from "./hooks/useEntranceAnimations";
 
 export default function App() {
   useLenis();
   useImageParallax();
+  useEntranceAnimations();
 
   return (
     <div className="min-h-dvh bg-background font-sans text-base leading-[1.7] text-foreground selection:bg-primary selection:text-background [&_a]:focus-visible:outline-2 [&_a]:focus-visible:outline-offset-4 [&_a]:focus-visible:outline-primary [&_button]:focus-visible:outline-2 [&_button]:focus-visible:outline-offset-4 [&_button]:focus-visible:outline-primary">
