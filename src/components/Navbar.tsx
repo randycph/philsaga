@@ -15,7 +15,7 @@ import {
   mobileNavLinks,
 } from "../data/site";
 import { cn } from "../lib/utils";
-import { container } from "./Shared";
+import { assetPath, container } from "./Shared";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -81,9 +81,9 @@ export function Navbar() {
         >
           <span className={cn("block shrink-0 transition-all duration-300", scrolled ? "h-12 w-[100px] sm:h-[68px] sm:w-[478px]" : "h-12 w-[100px] sm:h-[76px] sm:w-[531px]")}>
             <picture>
-              <source media="(max-width: 767px)" srcSet="/assets/pmc-mmprc.png" />
+              <source media="(max-width: 767px)" srcSet={assetPath("assets/pmc-mmprc.png")} />
               <img
-                src="/assets/logo-long.png"
+                src={assetPath("assets/logo-long.png")}
                 alt={uiCopy.pmcAndMmprcASociallyResponsibleAndEnvironment}
                 width={1030}
                 height={147}

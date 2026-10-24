@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { site } from "../data/site";
 import { useReducedMotion } from "../hooks/useReducedMotion";
+import { assetPath } from "./Shared";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,13 +118,13 @@ export function Hero() {
           muted
           playsInline
           preload={reducedMotion ? "none" : "auto"}
-          poster="/assets/hero-poster.jpg"
+          poster={assetPath("assets/hero-poster.jpg")}
           aria-hidden="true"
           className="absolute inset-0 size-full origin-top scale-[1.12] object-cover object-top"
         >
           {!reducedMotion && (
             <>
-              <source src="/assets/intro3.mp4" type="video/mp4" />
+              <source src={assetPath("assets/intro3.mp4")} type="video/mp4" />
             </>
           )}
         </video>

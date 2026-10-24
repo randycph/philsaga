@@ -1,11 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import "./PurposeSections.css";
+import { assetPath } from "./Shared";
 
 export function VisionMission() {
   return (
     <>
       <section className="editorial-purpose" aria-labelledby="purpose-heading">
-        <img className="editorial-purpose__photo" src="/assets/purpose-mine.png" alt="Haul truck carrying rock through a mine" loading="lazy" />
+        <img className="editorial-purpose__photo" src={assetPath("assets/purpose-mine.png")} alt="Haul truck carrying rock through a mine" loading="lazy" />
         <div className="editorial-purpose__amber" aria-hidden="true" />
         <div className="editorial-purpose__panel" aria-hidden="true" />
         <div className="editorial-purpose__copy">
@@ -33,8 +34,8 @@ export function VisionMission() {
           </a>
         </div>
         <div className="editorial-approach__art">
-          <img className="editorial-approach__worker" src="/assets/mission-worker.png" alt="Worker tending rocky soil" loading="lazy" />
-          <img className="editorial-approach__lake" src="/assets/mission-lake.png" alt="Forested lake surrounded by tropical mountains" loading="lazy" />
+          <img className="editorial-approach__worker" src={assetPath("assets/mission-worker.png")} alt="Worker tending rocky soil" loading="lazy" />
+          <img className="editorial-approach__lake" src={assetPath("assets/mission-lake.png")} alt="Forested lake surrounded by tropical mountains" loading="lazy" />
           <span className="editorial-approach__accent" aria-hidden="true" />
           <span className="editorial-approach__accent editorial-approach__accent--green" aria-hidden="true" />
         </div>

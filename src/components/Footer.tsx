@@ -1,5 +1,6 @@
 import { Facebook, Linkedin, Youtube } from "lucide-react";
 import { uiCopy } from "../data/ui";
+import { assetPath } from "./Shared";
 import { footerLegalLinks, site } from "../data/site";
 
 export function Footer() {
@@ -7,7 +8,7 @@ export function Footer() {
     <footer className="site-footer" id="contact">
       <div className="site-footer__main">
         <a href={uiCopy.home} aria-label={uiCopy.philsagaMiningCorporationHome}>
-          <img src="/assets/pmc-logo.png" alt="PMC" />
+          <img src={assetPath("assets/pmc-logo.png")} alt="PMC" />
           <span>
             A Socially Responsible &
             <br />

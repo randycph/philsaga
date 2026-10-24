@@ -5,6 +5,7 @@ import { cn } from "../lib/utils";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 
 export const container = "mx-auto w-full max-w-[1440px] px-6 md:px-12 lg:px-20";
+export const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 export const heading =
   "font-heading text-4xl font-semibold leading-[1.15] tracking-[-0.045em] md:text-6xl lg:text-7xl";
 

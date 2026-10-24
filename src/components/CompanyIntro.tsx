@@ -1,6 +1,7 @@
 import { ArrowRight, HardHat, Pickaxe, ContactRound } from "lucide-react";
 import { uiCopy } from "../data/ui";
 import "./CompanyIntro.css";
+import { assetPath } from "./Shared";
 
 const statistics = [
   { value: "2000+", label: "People Empowered", icon: ContactRound },
@@ -34,7 +35,7 @@ export function CompanyIntro() {
         </div>
         <div className="company-about__art">
           <img
-            src="/assets/about-fullwidth.png"
+            src={assetPath("assets/about-fullwidth.png")}
             alt="Mining worker overlooking a processing plant and forested mountains"
             width={1448}
             height={1088}

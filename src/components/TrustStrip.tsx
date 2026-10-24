@@ -1,4 +1,5 @@
 import { uiCopy } from "../data/ui";
+import { assetPath } from "./Shared";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import { site } from "../data/site";
 import { container } from "./Shared";
@@ -14,7 +15,7 @@ export function TrustStrip() {
       >
         <div className="flex items-center gap-4">
           <img
-            src="/assets/ISO-LOGO.png"
+            src={assetPath("assets/ISO-LOGO.png")}
             alt={uiCopy.certificationInternationalIso140012015}
             width={391}
             height={390}
@@ -38,7 +39,7 @@ export function TrustStrip() {
           className="flex items-center gap-5 rounded-lg bg-paper px-4 py-2 focus-visible:outline-2 focus-visible:outline-primary"
         >
           <img
-            src="/assets/fb9.png"
+            src={assetPath("assets/fb9.png")}
             alt={uiCopy.followUsOnFacebook}
             width={367}
             height={102}
