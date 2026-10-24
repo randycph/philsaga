@@ -15,7 +15,7 @@ import {
   mobileNavLinks,
 } from "../data/site";
 import { cn } from "../lib/utils";
-import { assetPath, container } from "./Shared";
+import { assetPath } from "./Shared";
 import { Button } from "./ui/button";
 import {
   Sheet,
@@ -69,8 +69,7 @@ export function Navbar() {
     >
       <div
         className={cn(
-          container,
-          "flex items-center justify-between gap-2 transition-all duration-300 sm:gap-5",
+          "flex w-full items-center justify-between gap-2 px-6 transition-all duration-300 sm:gap-5 md:px-12 lg:px-16 xl:px-20",
           scrolled ? "h-16 lg:h-[72px]" : "h-16 lg:h-24",
         )}
       >
@@ -79,9 +78,19 @@ export function Navbar() {
           aria-label={uiCopy.philsagaMiningCorporationHome}
           className="flex shrink-0 items-center gap-3"
         >
-          <span className={cn("block shrink-0 transition-all duration-300", scrolled ? "h-12 w-[100px] sm:h-[68px] sm:w-[478px]" : "h-12 w-[100px] sm:h-[76px] sm:w-[531px]")}>
+          <span
+            className={cn(
+              "block shrink-0 transition-all duration-300",
+              scrolled
+                ? "h-12 w-[100px] sm:h-[68px] sm:w-[478px] lg:w-[clamp(280px,32vw,478px)]"
+                : "h-12 w-[100px] sm:h-[76px] sm:w-[531px] lg:w-[clamp(280px,32vw,531px)]",
+            )}
+          >
             <picture>
-              <source media="(max-width: 767px)" srcSet={assetPath("assets/pmc-mmprc.png")} />
+              <source
+                media="(max-width: 767px)"
+                srcSet={assetPath("assets/pmc-mmprc.png")}
+              />
               <img
                 src={assetPath("assets/logo-long.png")}
                 alt={uiCopy.pmcAndMmprcASociallyResponsibleAndEnvironment}
