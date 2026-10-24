@@ -6,7 +6,7 @@ export function VisionMission() {
   return (
     <>
       <section className="editorial-purpose" aria-labelledby="purpose-heading">
-        <img className="editorial-purpose__photo" src={assetPath("assets/purpose-mine.png")} alt="Haul truck carrying rock through a mine" loading="lazy" />
+        <img className="editorial-purpose__photo" src={assetPath("assets/loading-truck.png")} alt="Haul truck carrying rock through a mine" loading="lazy" />
         <div className="editorial-purpose__amber" aria-hidden="true" />
         <div className="editorial-purpose__panel" aria-hidden="true" />
         <div className="editorial-purpose__copy">
