@@ -28,7 +28,7 @@ Run `npm install` and `npm run build` in the server checkout, or deploy the comp
 
 ### GitHub Actions deployment
 
-`.github/workflows/deploy.yml` builds and checks the site on pull requests and pushes to `master`. A push to `master` deploys `.htaccess` and the generated `dist/` folder to cPanel over explicit FTPS on port 21. The FTP account is scoped in cPanel to `/home/webfocusprod/cms4.webfocusprod.wsiph2.com/philsaga`, so the workflow deploys to `/`, the account's FTP-visible root.
+`.github/workflows/deploy.yml` builds and checks the site on pull requests and pushes to `master`. A push to `master` deploys `.htaccess` and the generated `dist/` folder to cPanel over FTP on port 21. The FTP account is scoped in cPanel to `/home/webfocusprod/cms4.webfocusprod.wsiph2.com/philsaga`, so the workflow deploys to `/`, the account's FTP-visible root. The current host rejects FTP over TLS, so this connection does not encrypt the FTP password or file contents in transit.
 
 Add this repository or environment secret in GitHub before enabling deployment:
 
