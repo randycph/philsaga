@@ -20,7 +20,8 @@ export const site = {
   valuesClosing:
     "We will succeed through Teamwork, Act with Integrity to Achieve Growth, Commit to Excellence and Operate with Responsibility.",
   sdmp: "SDMP is a five-year comprehensive plan geared towards sustained improvement in the living standards of host and neighboring communities by creating responsible, self-reliant and resource-based communities capable of developing, implementing and managing community development programs, projects, and activities in a manner consistent with the principles of sustainable development.",
-  copyright: "Copyright © 2026 All Rights Reserved. Philsaga Mining Corporation. ",
+  copyright:
+    "Copyright © 2026 All Rights Reserved. Philsaga Mining Corporation. ",
 };
 
 export interface LinkItem {
@@ -30,18 +31,20 @@ export interface LinkItem {
 
 export const navLinks: LinkItem[] = [
   { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
+  { label: "About Us", href: assetPath("about.html") },
+  { label: "News & Articles", href: assetPath("articles.html") },
 ];
 
 export const sustainabilityLinks: LinkItem[] = [
-  { label: "Community Programs", href: "#community" },
-  { label: "SDMP Report", href: "https://www.philsaga.com/annual-reports" },
+  { label: "The Vien", href: "https://www.philsaga.com/the-vein" },
+  { label: "Annual Reports", href: assetPath("annual-reports.html") },
+  { label: "Hospital Services", href: assetPath("hospital.html") },
 ];
 
 export const mobileNavLinks: LinkItem[] = [
   ...navLinks,
   ...sustainabilityLinks,
-  { label: "Careers", href: "https://www.philsaga.com/careers" },
+  { label: "Careers", href: assetPath("careers.html") },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -59,11 +62,11 @@ export const legalLinks: LinkItem[] = [
 
 export const footerLinks: LinkItem[] = [
   { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
+  { label: "About", href: assetPath("about.html") },
   { label: "Community Programs", href: "#community" },
   { label: "Supplier Portal", href: "https://vendor.philsaga.com" },
   { label: "The Vein", href: "https://www.philsaga.com/the-vein" },
-  { label: "Career", href: "https://www.philsaga.com/careers" },
+  { label: "Career", href: assetPath("careers.html") },
   legalLinks[0],
 ];
 

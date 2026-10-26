@@ -23,7 +23,10 @@ function Statistic({
       <Icon aria-hidden="true" />
       <div>
         <p className="company-about__value">
-          <span className="sr-only">{value}{suffix}</span>
+          <span className="sr-only">
+            {value}
+            {suffix}
+          </span>
           <span aria-hidden="true">
             <span
               ref={ref}
@@ -43,7 +46,11 @@ function Statistic({
 
 export function CompanyIntro() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="company-about">
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="company-about"
+    >
       <div className="company-about__main">
         <div className="company-about__copy">
           <p className="company-about__eyebrow">
@@ -56,10 +63,15 @@ export function CompanyIntro() {
             in Progress
           </h2>
           <p className="company-about__description">
-            Founded in 2000, Philsaga Mining Corporation (PMC) is a company dealing in the exploration and extraction of gold. The gold is then processed by its affiliate, the Mindanao Mineral Processing and Refining Corporation (MMPRC). This came about through the acquisition of properties and interest of Banahaw Mining and Development Corporation.
+            Founded in 2000, Philsaga Mining Corporation (PMC) is a company
+            dealing in the exploration and extraction of gold. The gold is then
+            processed by its affiliate, the Mindanao Mineral Processing and
+            Refining Corporation (MMPRC). This came about through the
+            acquisition of properties and interest of Banahaw Mining and
+            Development Corporation.
           </p>
           <a
-            href={uiCopy.httpsWwwPhilsagaComAboutUs}
+            href={assetPath("about.html")}
             className="section-text-cta company-about__link"
           >
             Learn More

@@ -1,12 +1,8 @@
 import { uiCopy } from "../data/ui";
+import type { SitePage } from "../App";
 import { useEffect, useState } from "react";
 import * as NavigationMenu from "./ui/navigation-menu";
-import {
-  ArrowUpRight,
-  ChevronDown,
-  Menu,
-  Search,
-} from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu, Search } from "lucide-react";
 import { FaFacebookF } from "react-icons/fa6";
 import {
   navLinks,
@@ -35,9 +31,16 @@ import {
   DialogClose,
 } from "./ui/dialog";
 
-export function Navbar() {
+export function Navbar({ page = "home" }: { page?: SitePage }) {
   const [scrolled, setScrolled] = useState(false);
   const [query, setQuery] = useState("");
+  function resolveLink(href: string) {
+    if (page !== "home" && href.startsWith("#") && href !== "#contact") {
+      return assetPath(href);
+    }
+
+    return href;
+  }
   const results = [...navLinks, ...sustainabilityLinks, ...footerLinks].filter(
     (link, index, links) => {
       return (
@@ -76,7 +79,7 @@ export function Navbar() {
         )}
       >
         <a
-          href={uiCopy.home}
+          href={resolveLink(uiCopy.home)}
           aria-label={uiCopy.philsagaMiningCorporationHome}
           className="flex shrink-0 items-center gap-3 lg:min-w-0"
         >
@@ -106,9 +109,22 @@ export function Navbar() {
         <NavigationMenu.Root className="relative hidden lg:block lg:justify-self-center">
           <NavigationMenu.List className="flex items-center gap-8 text-sm font-medium">
             {navLinks.map((link) => (
-              <NavigationMenu.Item key={link.label}>
+              <NavigationMenu.Item
+                key={link.label}
+                className={
+                  link.label === "News & Articles"
+                    ? "hidden xl:block"
+                    : undefined
+                }
+              >
                 <NavigationMenu.Link
-                  href={link.href}
+                  href={resolveLink(link.href)}
+                  aria-current={
+                    (page === "about" && link.label === "About Us") ||
+                    (page === "articles" && link.label === "News & Articles")
+                      ? "page"
+                      : undefined
+                  }
                   className="py-4 hover:text-primary"
                 >
                   {link.label}
@@ -124,7 +140,7 @@ export function Navbar() {
                 {sustainabilityLinks.map((link) => (
                   <NavigationMenu.Link
                     key={link.label}
-                    href={link.href}
+                    href={resolveLink(link.href)}
                     className="block whitespace-nowrap rounded-lg px-4 py-3 hover:bg-black/5"
                   >
                     {link.label}
@@ -135,6 +151,7 @@ export function Navbar() {
             <NavigationMenu.Item>
               <NavigationMenu.Link
                 href={uiCopy.httpsWwwPhilsagaComCareers}
+                aria-current={page === "careers" ? "page" : undefined}
                 className="hover:text-primary"
               >
                 {uiCopy.careers}
@@ -177,7 +194,7 @@ export function Navbar() {
                   <li key={link.label}>
                     <DialogClose asChild>
                       <a
-                        href={link.href}
+                        href={resolveLink(link.href)}
                         className="flex justify-between rounded-lg px-3 py-3 hover:bg-black/5"
                       >
                         {link.label}
@@ -194,6 +211,28 @@ export function Navbar() {
               </ul>
             </DialogContent>
           </Dialog>
+          <img
+            src={assetPath("assets/ISO-LOGO.png")}
+            alt={uiCopy.certificationInternationalIso140012015}
+            width={391}
+            height={390}
+            className="size-10 shrink-0 object-contain sm:size-12"
+          />
+          <a
+            href={site.facebook}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={uiCopy.followUsOnFacebook}
+            className="group relative flex size-11 shrink-0 items-center justify-center rounded-full border border-[#102b2b]/15 text-[#102b2b] transition-colors duration-200 hover:border-[#102b2b] hover:bg-[#102b2b] hover:text-[#ffb20b] focus-visible:bg-[#102b2b] focus-visible:text-[#ffb20b]"
+          >
+            <FaFacebookF className="size-4" aria-hidden="true" />
+            <span
+              aria-hidden="true"
+              className="pointer-events-none invisible absolute right-0 top-full mt-3 translate-y-1 whitespace-nowrap rounded-lg border border-white/10 bg-[#102b2b] px-4 py-2.5 text-xs font-medium text-white opacity-0 shadow-lg transition-[opacity,transform,visibility] duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:visible group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none"
+            >
+              {uiCopy.followUsOnFacebook}
+            </span>
+          </a>
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -207,7 +246,7 @@ export function Navbar() {
             <SheetContent>
               <SheetClose asChild>
                 <a
-                  href={uiCopy.home}
+                  href={resolveLink(uiCopy.home)}
                   aria-label={uiCopy.philsagaMiningCorporationHome}
                   className="flex w-fit rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary md:mt-10"
                 >
@@ -233,7 +272,7 @@ export function Navbar() {
                 {mobileNavLinks.map((link) => (
                   <SheetClose asChild key={link.label}>
                     <a
-                      href={link.href}
+                      href={resolveLink(link.href)}
                       className="border-b border-black/10 py-4 text-lg hover:text-primary"
                     >
                       {link.label}
@@ -283,4 +322,3 @@ export function Navbar() {
     </header>
   );
 }
-

@@ -1,142 +1,341 @@
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { site } from "../data/site";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
+import { site, stories } from "../data/site";
+import { assetPath } from "../lib/assets";
 import { useReducedMotion } from "../hooks/useReducedMotion";
-import { assetPath } from "./Shared";
+import "./Hero.css";
 
-gsap.registerPlugin(ScrollTrigger);
+// Editorial cover images are separate from the original article thumbnails.
+const featuredArticles = [
+  {
+    ...stories[0],
+    headline: "Helping Bislig rebuild",
+    description:
+      "Supporting 48 fire-affected families with essential supplies and materials to help rebuild their homes and lives.",
+    cover: assetPath("assets/loading-truck.png"),
+    position: "center 60%",
+  },
+  {
+    ...stories[1],
+    headline: "Protecting what matters",
+    description:
+      "A closer look at the ecosystems around our operations, through PMC and MMPRC’s biodiversity assessment.",
+    cover: assetPath("assets/approach-lake.png"),
+    position: "center",
+  },
+  {
+    ...stories[2],
+    headline: "Growing a greener tomorrow",
+    description:
+      "Communities come together for the Mining Forest Program, restoring forest areas and planting for the future.",
+    cover: assetPath("assets/approach-seedling.png"),
+    position: "center",
+  },
+];
+
+const slideDuration = 7000;
 
 export function Hero() {
-  const track = useRef<HTMLDivElement>(null);
-  const video = useRef<HTMLVideoElement>(null);
-  const hint = useRef<HTMLSpanElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const section = useRef<HTMLElement>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const suppressClickUntil = useRef(0);
   const reducedMotion = useReducedMotion();
+  const playing = !paused && !hovered && visible && !reducedMotion;
+  const article = featuredArticles[activeIndex];
 
-  useLayoutEffect(() => {
-    const media = video.current;
-    const trackElement = track.current;
-    const hintElement = hint.current;
+  useEffect(() => {
+    const element = section.current;
 
-    if (!media || !trackElement || !hintElement || reducedMotion) {
+    if (!element) {
       return;
     }
 
-    let trigger: ScrollTrigger | undefined;
-    let timeline: gsap.core.Timeline | undefined;
-    let frameRequest = 0;
-    const startTime = Math.min(2, media.duration || 2);
-    let desiredTime = startTime;
-    let lastSeekAt = 0;
+    let accumulatedDistance = 0;
+    let lastWheelAt = 0;
+    let lastSlideAt = -Infinity;
 
-    const seekToDesiredTime = () => {
-      if (media.seeking) {
+    const onWheel = (event: WheelEvent) => {
+      if (event.ctrlKey) {
         return;
       }
 
+      const horizontalDistance = event.shiftKey ? event.deltaY : event.deltaX;
+
+      if (
+        horizontalDistance === 0 ||
+        (!event.shiftKey && Math.abs(event.deltaX) <= Math.abs(event.deltaY))
+      ) {
+        return;
+      }
+
+      // Consume horizontal gestures only, leaving normal page scrolling available.
+      event.preventDefault();
       const now = performance.now();
+      const unit =
+        event.deltaMode === 1
+          ? 16
+          : event.deltaMode === 2
+            ? element.clientWidth
+            : 1;
 
-      if (now - lastSeekAt < 40) {
-        cancelAnimationFrame(frameRequest);
-        frameRequest = requestAnimationFrame(seekToDesiredTime);
+      if (
+        now - lastWheelAt > 180 ||
+        Math.sign(accumulatedDistance) !== Math.sign(horizontalDistance)
+      ) {
+        accumulatedDistance = 0;
+      }
+
+      lastWheelAt = now;
+      accumulatedDistance += horizontalDistance * unit;
+
+      // Trackpad momentum must not run through several articles in one gesture.
+      if (Math.abs(accumulatedDistance) < 45 || now - lastSlideAt < 650) {
         return;
       }
 
-      if (Math.abs(media.currentTime - desiredTime) < 0.035) {
-        return;
-      }
-
-      lastSeekAt = now;
-      media.currentTime = desiredTime;
+      const direction = accumulatedDistance > 0 ? 1 : -1;
+      setActiveIndex((index) => {
+        return (
+          (index + direction + featuredArticles.length) %
+          featuredArticles.length
+        );
+      });
+      setPaused(true);
+      accumulatedDistance = 0;
+      lastSlideAt = now;
     };
 
-    const onSeeked = () => {
-      if (Math.abs(media.currentTime - desiredTime) >= 0.035) {
-        cancelAnimationFrame(frameRequest);
-        frameRequest = requestAnimationFrame(seekToDesiredTime);
-      }
-    };
-
-    const createScrollTrigger = () => {
-      if (trigger || !Number.isFinite(media.duration) || media.duration <= 0) {
-        return;
-      }
-
-      const playhead = { time: startTime };
-      desiredTime = startTime;
-      timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: trackElement,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.5,
-          onUpdate: seekToDesiredTime,
-        },
-      });
-
-      timeline.to(playhead, {
-        time: media.duration,
-        duration: 1,
-        ease: "none",
-        onUpdate: () => {
-          desiredTime = playhead.time;
-        },
-      });
-      timeline.to(hintElement, { opacity: 0, duration: 0.05 }, 0);
-      trigger = timeline.scrollTrigger;
-      media.addEventListener("seeked", onSeeked);
-      ScrollTrigger.refresh();
-      window.scrollTo({ top: window.innerHeight, behavior: "instant" });
-    };
-
-    if (media.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      createScrollTrigger();
-    } else {
-      media.addEventListener("loadedmetadata", createScrollTrigger, {
-        once: true,
-      });
-    }
+    element.addEventListener("wheel", onWheel, { passive: false });
 
     return () => {
-      media.removeEventListener("loadedmetadata", createScrollTrigger);
-      media.removeEventListener("seeked", onSeeked);
-      cancelAnimationFrame(frameRequest);
-      trigger?.kill();
-      timeline?.kill();
+      element.removeEventListener("wheel", onWheel);
     };
-  }, [reducedMotion]);
+  }, []);
+
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      setVisible(!document.hidden);
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    const observer = new IntersectionObserver(([entry]) => {
+      setVisible(entry.isIntersecting && !document.hidden);
+    });
+    if (section.current) {
+      observer.observe(section.current);
+    }
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!playing) {
+      return;
+    }
+    const timeout = window.setTimeout(() => {
+      setActiveIndex((index) => (index + 1) % featuredArticles.length);
+    }, slideDuration);
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [activeIndex, playing]);
+
+  function selectSlide(index: number) {
+    setActiveIndex((index + featuredArticles.length) % featuredArticles.length);
+    setPaused(true);
+  }
 
   return (
-    <div ref={track} className="relative h-[300vh]" aria-label={site.name}>
-      <section
-        id="hero"
-        className="sticky top-0 h-svh min-h-[480px] w-full overflow-hidden bg-stone-950"
-      >
-        <h1 className="sr-only">{site.name}</h1>
-        <video
-          ref={video}
-          muted
-          playsInline
-          preload={reducedMotion ? "none" : "auto"}
-          poster={assetPath("assets/hero-poster.jpg")}
-          aria-hidden="true"
-          className="absolute inset-0 size-full origin-top scale-[1.12] object-cover object-top"
+    <section
+      ref={section}
+      id="hero"
+      className="article-hero"
+      aria-label="Featured articles"
+      aria-roledescription="carousel"
+      onTouchStart={(event) => {
+        if (event.touches.length !== 1) {
+          touchStart.current = null;
+          return;
+        }
+
+        touchStart.current = {
+          x: event.touches[0].clientX,
+          y: event.touches[0].clientY,
+        };
+      }}
+      onTouchEnd={(event) => {
+        const start = touchStart.current;
+        touchStart.current = null;
+
+        if (!start || event.touches.length > 0) {
+          return;
+        }
+
+        const distanceX = start.x - event.changedTouches[0].clientX;
+        const distanceY = start.y - event.changedTouches[0].clientY;
+
+        if (
+          Math.abs(distanceX) > 50 &&
+          Math.abs(distanceX) > Math.abs(distanceY)
+        ) {
+          selectSlide(activeIndex + (distanceX > 0 ? 1 : -1));
+          suppressClickUntil.current = performance.now() + 400;
+        }
+      }}
+      onTouchCancel={() => {
+        touchStart.current = null;
+      }}
+      onClickCapture={(event) => {
+        if (performance.now() < suppressClickUntil.current) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }}
+      onMouseEnter={() => {
+        setHovered(true);
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
+      }}
+      onFocusCapture={() => {
+        setPaused(true);
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          selectSlide(activeIndex + (event.key === "ArrowRight" ? 1 : -1));
+        }
+      }}
+    >
+      <h1 className="sr-only">{site.name}</h1>
+      <div className="article-hero__images" aria-hidden="true">
+        {featuredArticles.map((item, index) => (
+          <img
+            key={item.href}
+            src={item.cover}
+            alt=""
+            fetchPriority={index === 0 ? "high" : "auto"}
+            className={index === activeIndex ? "is-active" : ""}
+            style={{ objectPosition: item.position }}
+          />
+        ))}
+      </div>
+      <div className="article-hero__shade" aria-hidden="true" />
+      <div className="article-hero__ribbon" aria-hidden="true" />
+      <div className="article-hero__stage">
+        <div
+          className="article-hero__copy"
+          aria-live={playing ? "off" : "polite"}
+          aria-atomic="true"
         >
-          {!reducedMotion && (
-            <>
-              <source src={assetPath("assets/intro3.mp4")} type="video/mp4" />
-            </>
-          )}
-        </video>
-        {!reducedMotion && (
-          <span
-            ref={hint}
-            className="pointer-events-none absolute inset-x-0 bottom-7 text-center font-sans text-[10px] tracking-[0.2em] text-white/80"
+          <div
+            key={article.href}
+            className="article-hero__story"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${activeIndex + 1} of ${featuredArticles.length}`}
           >
-            Scroll
-          </span>
-        )}
-      </section>
-    </div>
+            <p className="article-hero__category">{article.category}</p>
+            <h2>{article.headline}</h2>
+            <p className="article-hero__description">{article.description}</p>
+            <a
+              className="article-hero__cta"
+              href={article.href}
+              aria-label={`Read the article: ${article.title}`}
+            >
+              Read the Article
+              <ArrowRight size={20} aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+        <div
+          className="article-hero__pagination"
+          aria-label="Choose featured article"
+        >
+          {featuredArticles.map((item, index) => (
+            <button
+              key={item.href}
+              type="button"
+              aria-label={`Show article ${index + 1}: ${item.headline}`}
+              aria-pressed={index === activeIndex}
+              onClick={() => {
+                selectSlide(index);
+              }}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </button>
+          ))}
+        </div>
+        <div className="article-hero__controls">
+          {!reducedMotion && (
+            <button
+              type="button"
+              className="article-hero__play"
+              aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+              onClick={() => {
+                setPaused(!paused);
+              }}
+            >
+              {paused ? (
+                <Play size={17} aria-hidden="true" />
+              ) : (
+                <Pause size={17} aria-hidden="true" />
+              )}
+            </button>
+          )}
+          <button
+            type="button"
+            aria-label="Previous article"
+            onClick={() => {
+              selectSlide(activeIndex - 1);
+            }}
+          >
+            <ArrowLeft aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next article"
+            onClick={() => {
+              selectSlide(activeIndex + 1);
+            }}
+          >
+            <ArrowRight aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+      <div className="article-hero__rail" aria-label="Featured stories">
+        {featuredArticles.map((item, index) => (
+          <button
+            key={item.href}
+            type="button"
+            className={`article-hero__card ${index === activeIndex ? "is-active" : ""}`}
+            aria-label={`Show ${item.headline}`}
+            aria-pressed={index === activeIndex}
+            onClick={() => {
+              selectSlide(index);
+            }}
+          >
+            <span className="article-hero__number">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <img src={item.cover} alt="" width={168} height={108} />
+            <span className="article-hero__card-copy">
+              <span className="article-hero__card-category">
+                {item.category}
+              </span>
+              <span className="article-hero__card-title">{item.headline}</span>
+              <span className="article-hero__card-action">
+                Explore story <ArrowRight size={15} aria-hidden="true" />
+              </span>
+            </span>
+          </button>
+        ))}
+      </div>
+    </section>
   );
 }

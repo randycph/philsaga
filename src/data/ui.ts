@@ -1,3 +1,5 @@
+import { assetPath } from "../lib/assets";
+
 export const uiCopy = {
   photographUnavailable: "photograph unavailable",
   videoPlayPrefix: "Play",
@@ -5,7 +7,7 @@ export const uiCopy = {
   skipToContent: "Skip to content",
   ourFeaturedCommunityPrograms: "Our featured community programs",
   learnMore: "Learn more",
-  httpsWwwPhilsagaComNews: "https://www.philsaga.com/news",
+  httpsWwwPhilsagaComNews: assetPath("articles.html"),
   goToArchivePage: "Go to Archive Page",
   philsagaMineHeadframeInRosarioAgusanDelSur:
     "Philsaga mine headframe in Rosario, Agusan del Sur",
@@ -33,7 +35,7 @@ export const uiCopy = {
   home2: "Home",
   about: "#about",
   aboutUs: "About Us",
-  httpsWwwPhilsagaComCareers: "https://www.philsaga.com/careers",
+  httpsWwwPhilsagaComCareers: assetPath("careers.html"),
   careers: "Careers",
   httpsWwwPhilsagaComContact: "https://www.philsaga.com/contact",
   faqs: "FAQs",
@@ -65,7 +67,7 @@ export const uiCopy = {
   readTheStory: "Read the story",
   accountabilityInAction: "Accountability in action",
   sdmpAnnualAccomplishmentReport: "SDMP Annual Accomplishment Report",
-  httpsWwwPhilsagaComAnnualReports: "https://www.philsaga.com/annual-reports",
+  httpsWwwPhilsagaComAnnualReports: assetPath("annual-reports.html"),
   viewReport: "View Report",
   fiveValuesOneSharedCommitmentToThePeople:
     "Five values. One shared commitment to the people and places we call home.",

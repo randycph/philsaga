@@ -13,13 +13,23 @@ const footerLinkGroups = [
   ],
   [
     ...footerLinks.slice(5),
-    { label: "News", href: "https://www.philsaga.com/news" },
+    { label: "News", href: assetPath("articles.html") },
+    { label: "Annual Reports", href: assetPath("annual-reports.html") },
+    { label: "Hospital", href: assetPath("hospital.html") },
     { label: "Contact", href: "#contact" },
   ],
 ];
 
-export function Footer() {
+export function Footer({ interiorPage = false }: { interiorPage?: boolean }) {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
+
+  function resolveLink(href: string) {
+    if (interiorPage && href.startsWith("#") && href !== "#contact") {
+      return assetPath(href);
+    }
+
+    return href;
+  }
 
   useEffect(() => {
     const updateVisibility = () => {
@@ -48,7 +58,10 @@ export function Footer() {
   return (
     <footer className="site-footer" id="contact">
       <div className="site-footer__main">
-        <a href={uiCopy.home} aria-label={uiCopy.philsagaMiningCorporationHome}>
+        <a
+          href={resolveLink(uiCopy.home)}
+          aria-label={uiCopy.philsagaMiningCorporationHome}
+        >
           <img src={assetPath("assets/pmc-logo.png")} alt="PMC" />
           <span>
             A Socially Responsible &
@@ -93,7 +106,7 @@ export function Footer() {
           <ul key={links[0].label}>
             {links.map((link) => (
               <li key={link.label}>
-                <a href={link.href}>
+                <a href={resolveLink(link.href)}>
                   <ChevronRight aria-hidden="true" />
                   {link.label}
                 </a>
@@ -123,7 +136,7 @@ export function Footer() {
       </div>
       {showScrollToTop && (
         <a
-          href={uiCopy.home}
+          href={interiorPage ? "#main" : uiCopy.home}
           data-scroll-to-top
           className="site-footer__back-to-top"
           aria-label="Scroll to top"

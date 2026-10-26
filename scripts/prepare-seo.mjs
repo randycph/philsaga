@@ -2,11 +2,18 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { createServer, loadEnv, resolveConfig } from "vite";
 
-const environment = { ...loadEnv("production", process.cwd(), ""), ...process.env };
-const canonical = new URL(environment.SEO_SITE_URL || "https://www.philsaga.com/");
+const environment = {
+  ...loadEnv("production", process.cwd(), ""),
+  ...process.env,
+};
+const canonical = new URL(
+  environment.SEO_SITE_URL || "https://www.philsaga.com/",
+);
 
 if (canonical.protocol !== "https:" || canonical.search || canonical.hash) {
-  throw new Error("SEO_SITE_URL must be an HTTPS URL without a query or fragment.");
+  throw new Error(
+    "SEO_SITE_URL must be an HTTPS URL without a query or fragment.",
+  );
 }
 
 canonical.pathname = `${canonical.pathname.replace(/\/+$/, "")}/`;
@@ -50,7 +57,9 @@ const server = await createServer({
 });
 
 try {
-  const { render, site, stories } = await server.ssrLoadModule("/src/entry-server.tsx");
+  const { render, site, stories } = await server.ssrLoadModule(
+    "/src/entry-server.tsx",
+  );
   const body = render();
   const logo = await pngImage("assets/pmc-logo.png", "#logo", site.name);
   const image = await pngImage(
@@ -63,7 +72,9 @@ try {
   const description = html.match(/name="description"\s+content="([^"]+)"/)?.[1];
 
   if (!title || !description || !html.includes("<!-- seo-head -->")) {
-    throw new Error("The HTML title, description, or SEO insertion marker is missing.");
+    throw new Error(
+      "The HTML title, description, or SEO insertion marker is missing.",
+    );
   }
 
   const organizationId = absoluteUrl("#organization");
@@ -169,9 +180,157 @@ try {
       .replace("<!-- seo-head -->", tags.join("\n    "))
       .replace('<div id="root"></div>', `<div id="root">${body}</div>`),
   );
+
+  const secondaryPages = [
+    {
+      page: "hospital",
+      file: "hospital.html",
+      title: `Philsaga Mining Hospital | ${site.name}`,
+      description:
+        "Explore Philsaga Mining Hospital services, published X-ray and clinical laboratory rates, and community healthcare in Bunawan, Agusan del Sur.",
+      type: "WebPage",
+      image: await pngImage(
+        "assets/hospital-slide-7.png",
+        "hospital.html#primary-image",
+        "Philsaga Mining Hospital healthcare team caring for a young patient",
+      ),
+    },
+    {
+      page: "reports",
+      file: "annual-reports.html",
+      title: `Annual Reports | ${site.name}`,
+      description:
+        "Browse Philsaga’s SDMP Annual Accomplishment Report archive, check PDF availability, and view or download available reports from 2009 to 2021.",
+      type: "CollectionPage",
+      image: await pngImage(
+        "assets/loading-truck.png",
+        "annual-reports.html#primary-image",
+        "Philsaga mining operations surrounded by forested hills",
+      ),
+    },
+    {
+      page: "articles",
+      file: "articles.html",
+      title: `News & Articles | ${site.name}`,
+      description:
+        "Explore Philsaga’s news and stories on sustainable mining, community development, environmental stewardship, and the people behind our progress.",
+      type: "CollectionPage",
+      image: await pngImage(
+        "assets/purpose-mine.png",
+        "articles.html#primary-image",
+        "Haul truck on a winding mine road at sunrise",
+      ),
+    },
+    {
+      page: "about",
+      file: "about.html",
+      title: `About Us | ${site.name}`,
+      description:
+        "Discover Philsaga Mining Corporation’s story, mission, vision, and commitment to responsible mining, our people, and our communities.",
+      type: "AboutPage",
+      image,
+    },
+    {
+      page: "careers",
+      file: "careers.html",
+      title: `Careers | ${site.name}`,
+      description:
+        "Explore career opportunities at Philsaga Mining Corporation. Search positions, review role summaries, and continue to the official application page.",
+      type: "CollectionPage",
+      image: await pngImage(
+        "assets/careers-team.png",
+        "careers.html#primary-image",
+        "Philsaga team members overlooking the processing plant",
+      ),
+    },
+  ];
+
+  for (const page of secondaryPages) {
+    const pageUrl = absoluteUrl(page.file);
+    const pageGraph = {
+      "@context": "https://schema.org",
+      "@type": page.type,
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: page.title,
+      description: page.description,
+      inLanguage: "en-PH",
+      about: {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: site.name,
+        url: siteUrl,
+        foundingDate: "2000",
+      },
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": websiteId,
+        url: siteUrl,
+        name: site.name,
+      },
+    };
+    const pageTags = tags
+      .filter((tag) => !tag.startsWith('<script type="application/ld+json">'))
+      .map((tag) => {
+        return tag
+          .replaceAll(escapeAttribute(title), escapeAttribute(page.title))
+          .replaceAll(
+            escapeAttribute(description),
+            escapeAttribute(page.description),
+          )
+          .replaceAll(
+            escapeAttribute(image.url),
+            escapeAttribute(page.image.url),
+          )
+          .replaceAll(
+            escapeAttribute(image.caption),
+            escapeAttribute(page.image.caption),
+          )
+          .replace(
+            `property="og:image:width" content="${image.width}"`,
+            `property="og:image:width" content="${page.image.width}"`,
+          )
+          .replace(
+            `property="og:image:height" content="${image.height}"`,
+            `property="og:image:height" content="${page.image.height}"`,
+          )
+          .replace(
+            `href="${escapeAttribute(siteUrl)}"`,
+            `href="${escapeAttribute(pageUrl)}"`,
+          )
+          .replace(
+            `content="${escapeAttribute(siteUrl)}"`,
+            `content="${escapeAttribute(pageUrl)}"`,
+          );
+      });
+    pageTags.push(
+      `<script type="application/ld+json">${JSON.stringify(pageGraph).replaceAll("<", "\\u003c")}</script>`,
+    );
+    await writeFile(
+      path.join(output, page.file),
+      html
+        .replace(
+          /<title>[^<]+<\/title>/,
+          `<title>${escapeAttribute(page.title)}</title>`,
+        )
+        .replace(
+          /name="description"\s+content="[^"]+"/,
+          `name="description" content="${escapeAttribute(page.description)}"`,
+        )
+        .replace("<!-- seo-head -->", pageTags.join("\n    "))
+        .replace(
+          '<div id="root"></div>',
+          `<div id="root">${render(page.page)}</div>`,
+        ),
+    );
+  }
+  const sitemapUrls = [
+    siteUrl,
+    ...secondaryPages.map((page) => absoluteUrl(page.file)),
+  ];
   await writeFile(
     path.join(output, "sitemap.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${escapeAttribute(siteUrl)}</loc></url>\n</urlset>\n`,
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.map((url) => `  <url><loc>${escapeAttribute(url)}</loc></url>`).join("\n")}\n</urlset>\n`,
   );
   await writeFile(
     path.join(output, "robots.txt"),
@@ -213,7 +372,9 @@ try {
     "",
     "## Website sections",
     "",
-    ...sections.map((section) => `- [${section.name}](${absoluteUrl(`#${section.id}`)})`),
+    ...sections.map(
+      (section) => `- [${section.name}](${absoluteUrl(`#${section.id}`)})`,
+    ),
     "",
   ].join("\n");
   await writeFile(path.join(output, "index.md"), summary);
@@ -221,7 +382,9 @@ try {
     path.join(output, "llms.txt"),
     `# ${site.name}\n\n> ${site.tagline}. Located in ${site.location}, Philippines.\n\n## Website\n\n- [Homepage](${siteUrl}): Company overview, values, community programs, and contact information.\n- [Company information in Markdown](${absoluteUrl("index.md")}): Text version for readers and AI tools.\n- [Sitemap](${absoluteUrl("sitemap.xml")}): Canonical page URL.\n\n## Contact\n\n${site.location}, Philippines. Telephone: ${site.phone}. Email: ${site.email}.\n`,
   );
-  console.log(`Prerendered homepage, metadata, JSON-LD, sitemap, robots.txt, and AI-readable text for ${siteUrl}`);
+  console.log(
+    `Prerendered homepage, metadata, JSON-LD, sitemap, robots.txt, and AI-readable text for ${siteUrl}`,
+  );
 } finally {
   await server.close();
 }

@@ -1,0 +1,322 @@
+[
+  {
+    "id": "xray1",
+    "type": "xray",
+    "category": "Head",
+    "procedures": [
+      {
+        "name": "SKULL APL",
+        "price": 500
+      },
+      {
+        "name": "MANDIBLE",
+        "price": 300
+      },
+      {
+        "name": "WATERS VIEW",
+        "price": 300
+      },
+      {
+        "name": "PARANASAL SINUSES",
+        "price": 560
+      },
+      {
+        "name": "MASTOID SERIES",
+        "price": 560
+      }
+    ]
+  },
+  {
+    "id": "xray2",
+    "type": "xray",
+    "category": "Chest / Thorax / Abdomen",
+    "procedures": [
+      {
+        "name": "CHEST PA (ADULT)",
+        "price": 300
+      },
+      {
+        "name": "CHEST PA (CHILD)",
+        "price": 500
+      },
+      {
+        "name": "APICOLORDOTIC VIEW",
+        "price": 300
+      },
+      {
+        "name": "CHEST LATERAL",
+        "price": 300
+      },
+      {
+        "name": "T-CAGE",
+        "price": 400
+      },
+      {
+        "name": "PLAIN ABDOMEN",
+        "price": 350
+      },
+      {
+        "name": "ABDOMEN SUP/UPR",
+        "price": 600
+      },
+      {
+        "name": "PLAIN KUB",
+        "price": 350
+      }
+    ]
+  },
+  {
+    "id": "xray3",
+    "type": "xray",
+    "category": "Vertebral Column & Pelvic Area",
+    "procedures": [
+      {
+        "name": "CERVICAL APL",
+        "price": 300
+      },
+      {
+        "name": "THORACIC SPINE APL",
+        "price": 400
+      },
+      {
+        "name": "THORACOLUMBAR APL",
+        "price": 600
+      },
+      {
+        "name": "LUMBAR APL",
+        "price": 400
+      },
+      {
+        "name": "LUMBOSACRAL APL",
+        "price": 600
+      },
+      {
+        "name": "PELVIS AP",
+        "price": 400
+      },
+      {
+        "name": "HIP JOINT AP",
+        "price": 250
+      }
+    ]
+  },
+  {
+    "id": "xray4",
+    "type": "xray",
+    "category": "Upper Extremities",
+    "procedures": [
+      {
+        "name": "CLAVICLE",
+        "price": 250
+      },
+      {
+        "name": "SHOULDER AP",
+        "price": 300
+      },
+      {
+        "name": "ARM APL",
+        "price": 400
+      },
+      {
+        "name": "ELBOW APL",
+        "price": 300
+      },
+      {
+        "name": "FOREARM APL",
+        "price": 400
+      },
+      {
+        "name": "WRIST APL",
+        "price": 250
+      },
+      {
+        "name": "HAND APL/APO",
+        "price": 250
+      },
+      {
+        "name": "DIGITS APL/APO",
+        "price": 200
+      }
+    ]
+  },
+  {
+    "id": "xray5",
+    "type": "xray",
+    "category": "Lower Extremities",
+    "procedures": [
+      {
+        "name": "FEMUR (THIGH) APL",
+        "price": 420
+      },
+      {
+        "name": "KNEE APL",
+        "price": 350
+      },
+      {
+        "name": "LEG APL",
+        "price": 420
+      },
+      {
+        "name": "ANKLE APL",
+        "price": 350
+      },
+      {
+        "name": "FOOT APL/APO",
+        "price": 280
+      },
+      {
+        "name": "MORTISE VIEW",
+        "price": 200
+      }
+    ]
+  },
+  {
+    "id": "clinical1",
+    "type": "laboratory",
+    "category": "Hematology / Microscopy / Microbiology Section",
+    "procedures": [
+      {
+        "name": "CBC (with Platelet Count)",
+        "price": 250
+      },
+      {
+        "name": "CBC",
+        "price": 200
+      },
+      {
+        "name": "URINALYSIS",
+        "price": 60
+      },
+      {
+        "name": "FECALYSIS",
+        "price": 60
+      },
+      {
+        "name": "GRAM STAIN",
+        "price": 150
+      },
+      {
+        "name": "AFB STAIN",
+        "price": 200
+      }
+    ]
+  },
+  {
+    "id": "clinical2",
+    "type": "laboratory",
+    "category": "Chemistry Section",
+    "procedures": [
+      {
+        "name": "RANDOM BLOOD SUGAR",
+        "price": 100
+      },
+      {
+        "name": "FASTING BLOOD SUGAR",
+        "price": 150
+      },
+      {
+        "name": "LIPID PROFILE",
+        "price": 800
+      },
+      {
+        "name": "TOTAL CHOLESTEROL",
+        "price": 250
+      },
+      {
+        "name": "TRIGLYCERIDE",
+        "price": 250
+      },
+      {
+        "name": "HDL-CHOLESTEROL",
+        "price": 250
+      },
+      {
+        "name": "BLOOD UREA NITROGEN",
+        "price": 250
+      },
+      {
+        "name": "SERUM URIC ACID",
+        "price": 250
+      },
+      {
+        "name": "CREATININE",
+        "price": 250
+      },
+      {
+        "name": "SGPT/ALT",
+        "price": 250
+      },
+      {
+        "name": "SGOT/AST",
+        "price": 250
+      },
+      {
+        "name": "SERUM ELECTROLYTES",
+        "price": 700
+      },
+      {
+        "name": "THYROID PANEL (TSH, T3, T4)",
+        "price": 3200
+      },
+      {
+        "name": "GLYCOSYLATED HEMOGLOBIN (HBA1C)",
+        "price": 900
+      },
+      {
+        "name": "TROPONON-I TEST (TROP-I)",
+        "price": 1000
+      },
+      {
+        "name": "PROSTATE SPECIFIC ANTIGEN (PSA) TEST",
+        "price": 1000
+      }
+    ]
+  },
+  {
+    "id": "clinical3",
+    "type": "laboratory",
+    "category": "Immunology Section",
+    "procedures": [
+      {
+        "name": "BLOOD TYPING w/o Rh",
+        "price": 40
+      },
+      {
+        "name": "BLOOD TYPING w/ Rh",
+        "price": 60
+      },
+      {
+        "name": "PREGNANCY TEST",
+        "price": 250
+      },
+      {
+        "name": "SALMONELLA TYPHI IgM/IgG",
+        "price": 700
+      },
+      {
+        "name": "HBsAg",
+        "price": 250
+      },
+      {
+        "name": "DENGUE IgM/IgG",
+        "price": 700
+      },
+      {
+        "name": "DENGUE NS1 ANTIGEN TEST",
+        "price": 700
+      },
+      {
+        "name": "ANTI-STREPTOLYSIN O (ASO)",
+        "price": 300
+      },
+      {
+        "name": "ESR",
+        "price": 150
+      },
+      {
+        "name": "SARS COV-2 RAPID ANTIGEN TEST",
+        "price": 1000
+      }
+    ]
+  }
+]

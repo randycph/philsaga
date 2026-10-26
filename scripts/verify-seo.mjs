@@ -4,9 +4,81 @@ import test from "node:test";
 
 const html = await readFile("dist/index.html", "utf8");
 const graph = JSON.parse(
-  html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] || "null",
+  html.match(
+    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
+  )?.[1] || "null",
 );
 const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
+
+test("About Us is prerendered with its own metadata and working navigation", async () => {
+  const about = await readFile("dist/about.html", "utf8");
+  const aboutUrl = new URL("about.html", canonical).href;
+  assert.equal((about.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(about, /Building<br\s*\/?\s*>Better Futures/);
+  assert.match(about, /A Stronger/);
+  assert.match(about, /Our Mission/);
+  assert.match(about, /Our Vision/);
+  assert.match(about, /Tenement Background History/);
+  assert.match(about, /Our Story, Standards/);
+  assert.ok(about.includes(`rel="canonical" href="${aboutUrl}"`));
+  assert.ok(about.includes(`property="og:url" content="${aboutUrl}"`));
+  assert.match(about, /"@type":"AboutPage"/);
+  assert.match(about, /aria-current="page"/);
+  const ids = [...about.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(new Set(ids).size, ids.length);
+  for (const link of about.matchAll(/href="#([^"]+)"/g)) {
+    assert.ok(ids.includes(link[1]), `Missing About Us anchor ${link[1]}`);
+  }
+});
+
+test("Careers is prerendered with search controls, supplied assets, and its own canonical", async () => {
+  const careers = await readFile("dist/careers.html", "utf8");
+  const careersUrl = new URL("careers.html", canonical).href;
+  assert.equal((careers.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(careers, /Build a Meaningful/);
+  assert.match(careers, /id="open-positions"/);
+  assert.match(careers, /Cadet Mechanical Engineer/);
+  assert.match(careers, /View Details/);
+  assert.match(careers, /careers-team\.png/);
+  assert.match(careers, /careers-future\.png/);
+  assert.match(careers, /logo-long\.png/);
+  assert.ok(careers.includes(`rel="canonical" href="${careersUrl}"`));
+  assert.ok(careers.includes(`property="og:url" content="${careersUrl}"`));
+  assert.match(careers, /"@type":"CollectionPage"/);
+  assert.ok(!careers.includes('"@type":"JobPosting"'));
+  const ids = [...careers.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(new Set(ids).size, ids.length);
+  for (const link of careers.matchAll(/href="#([^"]+)"/g)) {
+    assert.ok(ids.includes(link[1]), `Missing Careers anchor ${link[1]}`);
+  }
+});
+
+test("Articles is prerendered with dated stories, category controls, and its own canonical", async () => {
+  const articles = await readFile("dist/articles.html", "utf8");
+  const articlesUrl = new URL("articles.html", canonical).href;
+  assert.equal((articles.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(articles, /Stories that/);
+  assert.match(articles, /Search articles/);
+  assert.match(articles, /Filter articles by category/);
+  assert.match(articles, /Manobo Heritage Preservation/);
+  assert.match(articles, /article-manobo\.jpg/);
+  assert.match(articles, /logo-long\.png/);
+  assert.equal((articles.match(/<article class="news-card/g) || []).length, 7);
+  assert.equal(
+    (articles.match(/<time dateTime="\d{4}-\d{2}-\d{2}"/g) || []).length,
+    8,
+  );
+  assert.ok(articles.includes(`rel="canonical" href="${articlesUrl}"`));
+  assert.ok(articles.includes(`property="og:url" content="${articlesUrl}"`));
+  assert.match(articles, /"@type":"CollectionPage"/);
+  const ids = [...articles.matchAll(/\sid="([^"]+)"/g)].map(
+    (match) => match[1],
+  );
+  assert.equal(new Set(ids).size, ids.length);
+  for (const link of articles.matchAll(/href="#([^"]+)"/g)) {
+    assert.ok(ids.includes(link[1]), `Missing Articles anchor ${link[1]}`);
+  }
+});
 
 test("initial HTML contains the actual homepage, headings, contact details, and links", () => {
   assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
@@ -25,11 +97,72 @@ test("initial HTML contains the actual homepage, headings, contact details, and 
   }
 
   for (const anchor of html.matchAll(/<a(?:\s[^>]*)?>/g)) {
-    assert.match(anchor[0], /\shref="[^"]+"/, "Every link needs a real destination");
+    assert.match(
+      anchor[0],
+      /\shref="[^"]+"/,
+      "Every link needs a real destination",
+    );
   }
 
   for (const image of html.matchAll(/<img(?:\s[^>]*)?>/g)) {
-    assert.match(image[0], /\salt="[^"]*"/, "Every image needs an alt attribute");
+    assert.match(
+      image[0],
+      /\salt="[^"]*"/,
+      "Every image needs an alt attribute",
+    );
+  }
+});
+
+test("Hospital contains the published rate browser and its own metadata", async () => {
+  const hospital = await readFile("dist/hospital.html", "utf8");
+  const groups = JSON.parse(
+    await readFile("src/data/hospital-rates.json", "utf8"),
+  );
+  const procedures = groups.flatMap((group) => group.procedures);
+
+  assert.equal(procedures.length, 66);
+  assert.equal(
+    groups
+      .filter((group) => group.type === "xray")
+      .flatMap((group) => group.procedures).length,
+    34,
+  );
+  assert.equal(
+    procedures.find((procedure) => procedure.name === "SKULL APL").price,
+    500,
+  );
+  assert.equal(
+    procedures.find((procedure) => procedure.name === "URINALYSIS").price,
+    60,
+  );
+  assert.equal((hospital.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(hospital, /Care That/);
+  assert.match(hospital, /Search procedures/);
+  assert.match(hospital, /SKULL APL/);
+  assert.match(hospital, /Bunawan/);
+  assert.match(hospital, /logo-long\.png/);
+  assert.ok(
+    hospital.includes(
+      `rel="canonical" href="${new URL("hospital.html", canonical).href}"`,
+    ),
+  );
+});
+
+test("Annual Reports shows unavailable recent PDFs and serves genuine archive files", async () => {
+  const reports = await readFile("dist/annual-reports.html", "utf8");
+  assert.equal((reports.match(/<h1[\s>]/g) || []).length, 1);
+  assert.match(reports, /2025/);
+  assert.match(reports, /PDF is currently unavailable/);
+  assert.match(reports, /Search reports by year/);
+
+  for (let year = 2009; year <= 2021; year += 1) {
+    const pdf = await readFile(`dist/reports/sdmp-${year}.pdf`);
+    assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
+    assert.ok(reports.includes(`reports/sdmp-${year}.pdf`));
+  }
+
+  for (let year = 2022; year <= 2025; year += 1) {
+    assert.ok(!reports.includes(`reports/sdmp-${year}.pdf`));
   }
 });
 
@@ -51,12 +184,30 @@ test("canonical, share metadata, and crawl files describe the same homepage", as
     'name="twitter:card"',
     'type="application/ld+json"',
   ]) {
-    assert.equal(html.split(uniqueTag).length - 1, 1, `Duplicate or missing ${uniqueTag}`);
+    assert.equal(
+      html.split(uniqueTag).length - 1,
+      1,
+      `Duplicate or missing ${uniqueTag}`,
+    );
   }
 
   const sitemap = await readFile("dist/sitemap.xml", "utf8");
   assert.ok(sitemap.includes(`<loc>${canonical}</loc>`));
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 1);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 6);
+  assert.ok(
+    sitemap.includes(`<loc>${new URL("about.html", canonical).href}</loc>`),
+  );
+  assert.ok(
+    sitemap.includes(`<loc>${new URL("careers.html", canonical).href}</loc>`),
+  );
+  assert.ok(
+    sitemap.includes(`<loc>${new URL("articles.html", canonical).href}</loc>`),
+  );
+  assert.ok(
+    sitemap.includes(
+      `<loc>${new URL("annual-reports.html", canonical).href}</loc>`,
+    ),
+  );
   const robots = await readFile("dist/robots.txt", "utf8");
   assert.ok(robots.includes(`Sitemap: ${canonical}sitemap.xml`));
 });
@@ -72,7 +223,10 @@ test("JSON-LD graph has unique entity IDs and no broken internal references", ()
     }
 
     if (value["@id"] && value["@type"]) {
-      assert.ok(!definitions.has(value["@id"]), `Duplicate entity ${value["@id"]}`);
+      assert.ok(
+        !definitions.has(value["@id"]),
+        `Duplicate entity ${value["@id"]}`,
+      );
       definitions.set(value["@id"], value);
     } else if (value["@id"]) {
       references.push(value["@id"]);
@@ -98,7 +252,10 @@ test("JSON-LD graph has unique entity IDs and no broken internal references", ()
 test("schema images and section IDs exist in the built page", async () => {
   for (const entity of graph["@graph"]) {
     if (entity["@type"] === "ImageObject") {
-      const file = new URL(entity.url).pathname.replace(new URL(canonical).pathname, "");
+      const file = new URL(entity.url).pathname.replace(
+        new URL(canonical).pathname,
+        "",
+      );
       const bytes = await readFile(`dist/${file}`);
       assert.equal(entity.width, bytes.readUInt32BE(16));
       assert.equal(entity.height, bytes.readUInt32BE(20));

@@ -164,7 +164,7 @@
 }
 
 .editorial-values {
-  padding: 5.5vw var(--page-gutter) 2.5vw;
+  padding: 10vw var(--page-gutter) 2.5vw;
   background: #f6f4ef url("/assets/values-tiger.png") center 40% / cover;
 }
 

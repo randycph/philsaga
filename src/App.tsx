@@ -12,8 +12,16 @@ import { Footer } from "./components/Footer";
 import { useLenis } from "./hooks/useLenis";
 import { useImageParallax } from "./hooks/useImageParallax";
 import { useEntranceAnimations } from "./hooks/useEntranceAnimations";
+import { AboutPage } from "./pages/AboutPage";
+import { CareersPage } from "./pages/CareersPage";
+import { ArticlesPage } from "./pages/ArticlesPage";
+import { AnnualReportsPage } from "./pages/AnnualReportsPage";
+import { HospitalPage } from "./pages/HospitalPage";
 
-export default function App() {
+export type SitePage =
+  "home" | "about" | "careers" | "articles" | "reports" | "hospital";
+
+export default function App({ page = "home" }: { page?: SitePage }) {
   useLenis();
   useImageParallax();
   useEntranceAnimations();
@@ -26,20 +34,34 @@ export default function App() {
       >
         {uiCopy.skipToContent}
       </a>
-      <Navbar />
+      <Navbar page={page} />
       <main id="main">
-        <div id="home">
-          <Hero />
-        </div>
-        <TrustStrip />
-        <CompanyIntro />
-        <VisionMission />
-        <TigerValues />
-        <Sdmp />
-        <CommunityPrograms />
-        <VideoSection />
+        {page === "about" ? (
+          <AboutPage />
+        ) : page === "careers" ? (
+          <CareersPage />
+        ) : page === "articles" ? (
+          <ArticlesPage />
+        ) : page === "reports" ? (
+          <AnnualReportsPage />
+        ) : page === "hospital" ? (
+          <HospitalPage />
+        ) : (
+          <>
+            <div id="home">
+              <Hero />
+            </div>
+            {/* <TrustStrip /> */}
+            <CompanyIntro />
+            <VisionMission />
+            <TigerValues />
+            <Sdmp />
+            <CommunityPrograms />
+            <VideoSection />
+          </>
+        )}
       </main>
-      <Footer />
+      <Footer interiorPage={page !== "home"} />
     </div>
   );
 }
