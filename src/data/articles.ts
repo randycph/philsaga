@@ -1,5 +1,6 @@
 import { assetPath } from "../lib/assets";
 import { stories } from "./site";
+import { reliefArticle } from "./article-detail";
 
 export const articleCategories = [
   "All Articles",
@@ -26,6 +27,10 @@ export interface NewsArticle {
 
 // Curated published stories; covers may use the site's editorial landscape imagery.
 export const newsArticles: NewsArticle[] = [
+  {
+    ...reliefArticle,
+    category: "Community",
+  },
   {
     id: "mining-forest-program",
     title: "Communities for Conservation: Growing a Greener Future",

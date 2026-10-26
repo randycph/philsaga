@@ -37,7 +37,7 @@ export const uiCopy = {
   aboutUs: "About Us",
   httpsWwwPhilsagaComCareers: assetPath("careers.html"),
   careers: "Careers",
-  httpsWwwPhilsagaComContact: "https://www.philsaga.com/contact",
+  httpsWwwPhilsagaComContact: assetPath("contact.html"),
   faqs: "FAQs",
   contact: "Contact",
   philsagaMiningOperationsInMindanao: "Philsaga mining operations in Mindanao",
@@ -58,7 +58,7 @@ export const uiCopy = {
   whatAreYouLookingFor: "What are you looking for?",
   noMatchingPagesTryCommunityOrReport:
     "No matching pages. Try “community” or “report”.",
-  contact2: "#contact",
+  contact2: assetPath("contact.html"),
   openNavigation: "Open navigation",
   philsaga: "Philsaga",
   mobileNavigation: "Mobile navigation",

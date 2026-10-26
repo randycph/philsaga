@@ -1,4 +1,4 @@
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -190,6 +190,15 @@ export function CompanyInformation() {
   const selected = companyLinks[activeIndex];
   const previous = companyLinks[activeIndex - 1];
   const next = companyLinks[activeIndex + 1];
+
+  useEffect(() => {
+    const section = new URLSearchParams(window.location.search).get("section");
+    const index = companyLinks.findIndex((link) => link.id === section);
+
+    if (index >= 0) {
+      setActiveIndex(index);
+    }
+  }, []);
 
   function navigateTabs(
     event: KeyboardEvent<HTMLButtonElement>,

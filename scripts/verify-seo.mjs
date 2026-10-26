@@ -63,10 +63,10 @@ test("Articles is prerendered with dated stories, category controls, and its own
   assert.match(articles, /Manobo Heritage Preservation/);
   assert.match(articles, /article-manobo\.jpg/);
   assert.match(articles, /logo-long\.png/);
-  assert.equal((articles.match(/<article class="news-card/g) || []).length, 7);
+  assert.equal((articles.match(/<article class="news-card/g) || []).length, 8);
   assert.equal(
     (articles.match(/<time dateTime="\d{4}-\d{2}-\d{2}"/g) || []).length,
-    8,
+    9,
   );
   assert.ok(articles.includes(`rel="canonical" href="${articlesUrl}"`));
   assert.ok(articles.includes(`property="og:url" content="${articlesUrl}"`));
@@ -113,6 +113,36 @@ test("initial HTML contains the actual homepage, headings, contact details, and 
   }
 });
 
+test("Article detail has crawlable story content, section links, and NewsArticle metadata", async () => {
+  const article = await readFile("dist/article-bislig-relief.html", "utf8");
+  const listing = await readFile("dist/articles.html", "utf8");
+  const articleUrl = new URL("article-bislig-relief.html", canonical).href;
+  const schema = JSON.parse(
+    article.match(
+      /<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
+    )[1],
+  );
+  const ids = [...article.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+
+  assert.equal((article.match(/<h1[\s>]/g) || []).length, 1);
+  assert.equal(new Set(ids).size, ids.length);
+  assert.match(article, /Supporting Families After the Fire/);
+  assert.match(article, /480/);
+  assert.match(article, /Editorial illustration/);
+  assert.match(article, /article-bislig-relief\.png/);
+  assert.match(article, /Copy article link/);
+  assert.match(listing, /href="[^"]*article-bislig-relief\.html"/);
+  assert.ok(article.includes(`rel="canonical" href="${articleUrl}"`));
+  assert.match(article, /property="og:type" content="article"/);
+  assert.equal(schema["@type"], "NewsArticle");
+  assert.equal(schema.datePublished, "2026-08-18");
+  assert.equal(schema.author.name, "PMC-MMPRC Foundation, Inc.");
+
+  for (const link of article.matchAll(/href="#([^"]+)"/g)) {
+    assert.ok(ids.includes(link[1]), `Missing article anchor ${link[1]}`);
+  }
+});
+
 test("Hospital contains the published rate browser and its own metadata", async () => {
   const hospital = await readFile("dist/hospital.html", "utf8");
   const groups = JSON.parse(
@@ -146,6 +176,79 @@ test("Hospital contains the published rate browser and its own metadata", async 
       `rel="canonical" href="${new URL("hospital.html", canonical).href}"`,
     ),
   );
+});
+
+test("Contact page is prerendered with validated email preparation and office destinations", async () => {
+  const contact = await readFile("dist/contact.html", "utf8");
+  const contactUrl = new URL("contact.html", canonical).href;
+  const ids = [...contact.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+
+  assert.equal((contact.match(/<h1[\s>]/g) || []).length, 1);
+  assert.equal(new Set(ids).size, ids.length);
+  assert.match(contact, /Let’s start/);
+  assert.match(contact, /aria-label="Contact inquiry"/);
+  const emailInput = contact.match(/<input[^>]*id="contact-email"[^>]*>/)?.[0];
+  const consentInput = contact.match(
+    /<input[^>]*id="contact-consent"[^>]*>/,
+  )?.[0];
+  assert.match(emailInput, /type="email"/);
+  assert.match(emailInput, /required/);
+  assert.match(consentInput, /type="checkbox"/);
+  assert.match(consentInput, /required/);
+  assert.match(contact, /Continue to Email/);
+  assert.match(contact, /send it from your email app/);
+  assert.match(contact, /C.P. Garcia Highway, Sasa/);
+  assert.match(contact, /Bayugan 3, Rosario/);
+  assert.match(contact, /tel:\+63822350045/);
+  assert.equal((contact.match(/Get directions to /g) || []).length, 2);
+  assert.ok(contact.includes(`rel="canonical" href="${contactUrl}"`));
+  assert.match(contact, /"@type":"ContactPage"/);
+
+  for (const link of contact.matchAll(/href="#([^"]+)"/g)) {
+    assert.ok(ids.includes(link[1]), `Missing contact anchor ${link[1]}`);
+  }
+});
+
+test("Visual sitemap has six directories and valid local page destinations", async () => {
+  const directory = await readFile("dist/sitemap.html", "utf8");
+  const basePath = new URL(canonical).pathname;
+  const runtimeBase =
+    directory.match(/<script[^>]+src="([^"]+)assets\//)?.[1] || basePath;
+  const ids = [...directory.matchAll(/\sid="([^"]+)"/g)].map(
+    (match) => match[1],
+  );
+  assert.equal((directory.match(/class="sitemap-group"/g) || []).length, 6);
+  assert.equal(new Set(ids).size, ids.length);
+  assert.match(directory, /Website Sitemap/);
+  assert.match(directory, /Search the sitemap/);
+  assert.match(directory, /department-11/);
+  assert.ok(
+    directory.includes(
+      `rel="canonical" href="${new URL("sitemap.html", canonical).href}"`,
+    ),
+  );
+
+  for (const match of directory.matchAll(/href="([^"]+)"/g)) {
+    const href = match[1].replaceAll("&amp;", "&");
+
+    if (href.startsWith("#")) {
+      assert.ok(ids.includes(href.slice(1)), `Missing sitemap anchor ${href}`);
+    } else if (href.startsWith(runtimeBase) && !href.startsWith("//")) {
+      const url = new URL(href, "http://localhost");
+      const file = url.pathname.slice(runtimeBase.length) || "index.html";
+
+      if (file.endsWith(".html")) {
+        const target = await readFile(`dist/${file}`, "utf8");
+
+        if (url.hash) {
+          assert.ok(
+            target.includes(`id="${url.hash.slice(1)}"`),
+            `Missing target ${href}`,
+          );
+        }
+      }
+    }
+  }
 });
 
 test("Annual Reports shows unavailable recent PDFs and serves genuine archive files", async () => {
@@ -193,7 +296,7 @@ test("canonical, share metadata, and crawl files describe the same homepage", as
 
   const sitemap = await readFile("dist/sitemap.xml", "utf8");
   assert.ok(sitemap.includes(`<loc>${canonical}</loc>`));
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 6);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 9);
   assert.ok(
     sitemap.includes(`<loc>${new URL("about.html", canonical).href}</loc>`),
   );

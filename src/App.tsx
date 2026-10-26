@@ -17,9 +17,20 @@ import { CareersPage } from "./pages/CareersPage";
 import { ArticlesPage } from "./pages/ArticlesPage";
 import { AnnualReportsPage } from "./pages/AnnualReportsPage";
 import { HospitalPage } from "./pages/HospitalPage";
+import { ArticleDetailPage } from "./pages/ArticleDetailPage";
+import { SitemapPage } from "./pages/SitemapPage";
+import { ContactPage } from "./pages/ContactPage";
 
 export type SitePage =
-  "home" | "about" | "careers" | "articles" | "reports" | "hospital";
+  | "home"
+  | "about"
+  | "careers"
+  | "articles"
+  | "reports"
+  | "hospital"
+  | "article"
+  | "sitemap"
+  | "contact";
 
 export default function App({ page = "home" }: { page?: SitePage }) {
   useLenis();
@@ -46,6 +57,12 @@ export default function App({ page = "home" }: { page?: SitePage }) {
           <AnnualReportsPage />
         ) : page === "hospital" ? (
           <HospitalPage />
+        ) : page === "article" ? (
+          <ArticleDetailPage />
+        ) : page === "sitemap" ? (
+          <SitemapPage />
+        ) : page === "contact" ? (
+          <ContactPage />
         ) : (
           <>
             <div id="home">

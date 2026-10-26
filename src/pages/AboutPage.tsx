@@ -123,7 +123,7 @@ export function AboutPage() {
             Together with our people, partners, and communities, we continue to
             create sustainable opportunities for generations to come.
           </p>
-          <a href="#contact" className="about-page__button">
+          <a href={assetPath("contact.html")} className="about-page__button">
             Get in Touch <ArrowRight size={17} aria-hidden="true" />
           </a>
         </div>

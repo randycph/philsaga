@@ -16,7 +16,7 @@ const footerLinkGroups = [
     { label: "News", href: assetPath("articles.html") },
     { label: "Annual Reports", href: assetPath("annual-reports.html") },
     { label: "Hospital", href: assetPath("hospital.html") },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: assetPath("contact.html") },
   ],
 ];
 
@@ -124,7 +124,7 @@ export function Footer({ interiorPage = false }: { interiorPage?: boolean }) {
                 {link.label}
               </a>
             ))}
-            <a href="https://www.philsaga.com/sitemap">Sitemap</a>
+            <a href={assetPath("sitemap.html")}>Sitemap</a>
           </nav>
         </div>
         <p className="site-footer__credit">

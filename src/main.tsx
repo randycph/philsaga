@@ -16,6 +16,9 @@ const pageRoutes: Record<string, SitePage> = {
   "articles.html": "articles",
   "annual-reports.html": "reports",
   "hospital.html": "hospital",
+  "article-bislig-relief.html": "article",
+  "sitemap.html": "sitemap",
+  "contact.html": "contact",
 };
 const pageFile = window.location.pathname.split("/").at(-1) || "";
 const app = (

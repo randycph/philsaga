@@ -57,7 +57,7 @@ const server = await createServer({
 });
 
 try {
-  const { render, site, stories } = await server.ssrLoadModule(
+  const { render, site, stories, reliefArticle } = await server.ssrLoadModule(
     "/src/entry-server.tsx",
   );
   const body = render();
@@ -183,6 +183,44 @@ try {
 
   const secondaryPages = [
     {
+      page: "contact",
+      file: "contact.html",
+      title: `Contact Us | ${site.name}`,
+      description:
+        "Contact Philsaga Mining Corporation for inquiries, partnerships, and community information. Find our Davao and Agusan offices, email, and telephone details.",
+      type: "ContactPage",
+      image: await pngImage(
+        "assets/careers-team.png",
+        "contact.html#primary-image",
+        "Philsaga operations surrounded by forested hills",
+      ),
+    },
+    {
+      page: "sitemap",
+      file: "sitemap.html",
+      title: `Website Sitemap | ${site.name}`,
+      description:
+        "Find Philsaga company information, sustainability and community programs, news, departments, reports, hospital services, and contact information.",
+      type: "CollectionPage",
+      image: await pngImage(
+        "assets/careers-team.png",
+        "sitemap.html#primary-image",
+        "Philsaga team members overlooking the processing plant",
+      ),
+    },
+    {
+      page: "article",
+      file: reliefArticle.file,
+      title: `${reliefArticle.title} | ${site.name}`,
+      description: reliefArticle.excerpt,
+      type: "NewsArticle",
+      image: await pngImage(
+        "assets/article-relief-illustration.png",
+        `${reliefArticle.file}#primary-image`,
+        reliefArticle.imageAlt,
+      ),
+    },
+    {
       page: "hospital",
       file: "hospital.html",
       title: `Philsaga Mining Hospital | ${site.name}`,
@@ -303,6 +341,25 @@ try {
             `content="${escapeAttribute(pageUrl)}"`,
           );
       });
+    if (page.page === "article") {
+      Object.assign(pageGraph, {
+        headline: reliefArticle.title,
+        datePublished: reliefArticle.date,
+        articleSection: reliefArticle.category,
+        image: page.image.url,
+        author: { "@type": "Organization", name: reliefArticle.author },
+        publisher: { "@type": "Organization", name: site.name, url: siteUrl },
+        mainEntityOfPage: pageUrl,
+        isBasedOn: reliefArticle.source,
+      });
+      const typeIndex = pageTags.findIndex((tag) =>
+        tag.includes('property="og:type"'),
+      );
+      pageTags[typeIndex] = '<meta property="og:type" content="article" />';
+      pageTags.push(
+        `<meta property="article:published_time" content="${reliefArticle.date}" />`,
+      );
+    }
     pageTags.push(
       `<script type="application/ld+json">${JSON.stringify(pageGraph).replaceAll("<", "\\u003c")}</script>`,
     );

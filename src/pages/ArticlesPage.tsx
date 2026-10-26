@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Mail, Search, X } from "lucide-react";
 import {
   articleCategories,
@@ -58,6 +58,17 @@ export function ArticlesPage() {
   const results = filterNewsArticles(category, query);
   const featured = newsArticles[0];
 
+  useEffect(() => {
+    const selectedCategory = new URLSearchParams(window.location.search).get(
+      "category",
+    );
+    const match = articleCategories.find((item) => item === selectedCategory);
+
+    if (match) {
+      setCategory(match);
+    }
+  }, []);
+
   function clearFilters() {
     setCategory("All Articles");
     setQuery("");
@@ -115,12 +126,14 @@ export function ArticlesPage() {
             {query.trim() ? ` for ${query.trim()}` : ""}.
           </p>
           {results.length > 0 ? (
-            <div className="news-grid">
+            <div
+              className={`news-grid ${results.length === 8 ? "news-grid--balanced" : ""}`}
+            >
               {results.map((article, index) => (
                 <ArticleCard
                   key={article.id}
                   article={article}
-                  compact={index > 2}
+                  compact={index > (results.length === 8 ? 1 : 2)}
                 />
               ))}
             </div>

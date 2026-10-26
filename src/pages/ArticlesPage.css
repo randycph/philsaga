@@ -275,6 +275,16 @@
   grid-column: span 3;
 }
 
+@media (min-width: 1101px) {
+  .news-grid--balanced > .news-card:not(.news-card--compact) {
+    grid-column: span 6;
+  }
+
+  .news-grid--balanced > .news-card--compact {
+    grid-column: span 4;
+  }
+}
+
 .news-card--compact .news-card__content {
   padding: 10px 14px 14px;
 }

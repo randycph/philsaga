@@ -45,11 +45,11 @@ export const mobileNavLinks: LinkItem[] = [
   ...navLinks,
   ...sustainabilityLinks,
   { label: "Careers", href: assetPath("careers.html") },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: assetPath("contact.html") },
 ];
 
 export const legalLinks: LinkItem[] = [
-  { label: "Site Map", href: "https://www.philsaga.com/sitemap" },
+  { label: "Site Map", href: assetPath("sitemap.html") },
   {
     label: "Terms & Conditions",
     href: "https://www.philsaga.com/terms-and-conditions",

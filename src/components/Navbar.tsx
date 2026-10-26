@@ -121,7 +121,8 @@ export function Navbar({ page = "home" }: { page?: SitePage }) {
                   href={resolveLink(link.href)}
                   aria-current={
                     (page === "about" && link.label === "About Us") ||
-                    (page === "articles" && link.label === "News & Articles")
+                    ((page === "articles" || page === "article") &&
+                      link.label === "News & Articles")
                       ? "page"
                       : undefined
                   }
@@ -155,6 +156,15 @@ export function Navbar({ page = "home" }: { page?: SitePage }) {
                 className="hover:text-primary"
               >
                 {uiCopy.careers}
+              </NavigationMenu.Link>
+            </NavigationMenu.Item>
+            <NavigationMenu.Item className="hidden xl:block">
+              <NavigationMenu.Link
+                href={assetPath("contact.html")}
+                aria-current={page === "contact" ? "page" : undefined}
+                className="hover:text-primary"
+              >
+                Contact
               </NavigationMenu.Link>
             </NavigationMenu.Item>
           </NavigationMenu.List>
