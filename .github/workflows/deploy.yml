@@ -53,7 +53,7 @@ jobs:
         if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master'
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          server: ftp.webfocusprod.wsiph2.com
+          server: webfocusprod.wsiph2.com
           port: 21
           username: philsaga@cms4.webfocusprod.wsiph2.com
           password: ${{ secrets.CPANEL_FTP_PASSWORD }}
