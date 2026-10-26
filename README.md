@@ -26,6 +26,16 @@ When the repository is cloned directly into the folder serving `/philsaga/`, kee
 
 Run `npm install` and `npm run build` in the server checkout, or deploy the complete locally generated `dist/` directory with the repository. Pulling source changes alone does not rebuild the site. Apache must allow `.htaccess` rewrite rules and have `mod_rewrite` enabled.
 
+### GitHub Actions deployment
+
+`.github/workflows/deploy.yml` builds and checks the site on pull requests and pushes to `master`. A push to `master` deploys `.htaccess` and the generated `dist/` folder to cPanel over explicit FTPS on port 21. The FTP account is scoped in cPanel to `/home/webfocusprod/cms4.webfocusprod.wsiph2.com/philsaga`, so the workflow deploys to `/`, the account's FTP-visible root.
+
+Add this repository or environment secret in GitHub before enabling deployment:
+
+- `CPANEL_FTP_PASSWORD`: the FTP account password.
+
+The account needs write access to its configured directory. That directory must contain `.htaccess`; `dist/` will be deployed beneath it. A manually dispatched run also deploys only when the selected branch is `master`.
+
 The production base in `vite.config.ts` is already `/philsaga/`. After deploying the root `.htaccess` and the build output, refresh the page with Ctrl + F5. The page should request `/philsaga/assets/` JavaScript rather than `/src/main.tsx`.
 
 ## SEO and AI-readable content

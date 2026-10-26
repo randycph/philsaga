@@ -1,0 +1,62 @@
+name: CI / CD
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: philsaga-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy to cPanel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production site
+        run: npm run build
+        env:
+          VITE_BASE_PATH: /philsaga/
+
+      - name: Verify generated SEO output
+        run: npm run check:seo
+
+      - name: Prepare cPanel upload
+        if: github.event_name != 'pull_request'
+        run: |
+          mkdir -p deploy
+          cp -R dist deploy/dist
+          cp .htaccess deploy/.htaccess
+
+      - name: Deploy to cPanel over FTPS
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master'
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ftp.webfocusprod.wsiph2.com
+          port: 21
+          username: philsaga@cms4.webfocusprod.wsiph2.com
+          password: ${{ secrets.CPANEL_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: deploy/
+          server-dir: /
