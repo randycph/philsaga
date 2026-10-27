@@ -317,7 +317,7 @@
 }
 
 .site-footer {
-  padding: 0 var(--page-gutter);
+  padding: 0 max(7%, calc((100% - 1268px) / 2));
   background: #f6f4ef;
   color: #102b2b;
 }
@@ -508,6 +508,12 @@
     flex-wrap: wrap;
   }
 
+}
+
+@media (max-width: 767px) {
+  .site-footer {
+    padding-inline: 20px;
+  }
 }
 
 @media (max-width: 600px) {
