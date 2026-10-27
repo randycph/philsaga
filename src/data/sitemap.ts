@@ -51,7 +51,6 @@ export const sitemapGroups: SitemapGroup[] = [
         label: "Social Development & Management Program (SDMP)",
         href: assetPath("#sustainability"),
       },
-      { label: "Community Programs", href: assetPath("#community") },
       {
         label: "Health and Wellness",
         href: "https://www.philsaga.com/the-vein/HEALTH",
@@ -149,11 +148,11 @@ export const sitemapGroups: SitemapGroup[] = [
       { label: "Environmental Policy", href: companySection("policy") },
       {
         label: "Data Privacy Policy",
-        href: "https://www.philsaga.com/data-privacy-policy",
+        href: assetPath("data-privacy-policy.html"),
       },
       {
         label: "Terms & Conditions",
-        href: "https://www.philsaga.com/terms-and-conditions",
+        href: assetPath("terms-and-conditions.html"),
       },
       { label: "Sitemap", href: assetPath("sitemap.html") },
     ],

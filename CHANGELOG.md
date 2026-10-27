@@ -1,5 +1,10 @@
 # Change record
 
+## Privacy and terms pages
+
+- Added styled Data Privacy Policy and Terms and Conditions overview pages, with numbered sections, a contents sidebar, contact details, and links to the complete published documents.
+- Connected the footer and visual sitemap to the local pages and included both in prerendering, canonical metadata, and the XML sitemap.
+
 ## Homepage footer width
 
 - Aligned the homepage footer with the full-width homepage sections using the shared page gutter.

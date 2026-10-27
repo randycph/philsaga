@@ -22,6 +22,8 @@ const pageRoutes: Record<string, SitePage> = {
   "article-solidarity-movement.html": "video-article",
   "sitemap.html": "sitemap",
   "contact.html": "contact",
+  "data-privacy-policy.html": "privacy",
+  "terms-and-conditions.html": "terms",
 };
 const pageFile = window.location.pathname.split("/").at(-1) || "";
 const app = (

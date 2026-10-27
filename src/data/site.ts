@@ -52,18 +52,17 @@ export const legalLinks: LinkItem[] = [
   { label: "Site Map", href: assetPath("sitemap.html") },
   {
     label: "Terms & Conditions",
-    href: "https://www.philsaga.com/terms-and-conditions",
+    href: assetPath("terms-and-conditions.html"),
   },
   {
     label: "Data Privacy Policy",
-    href: "https://www.philsaga.com/data-privacy-policy",
+    href: assetPath("data-privacy-policy.html"),
   },
 ];
 
 export const footerLinks: LinkItem[] = [
   { label: "Home", href: "#home" },
   { label: "About", href: assetPath("about.html") },
-  { label: "Community Programs", href: "#community" },
   { label: "Supplier Portal", href: "https://vendor.philsaga.com" },
   { label: "The Vein", href: "https://www.philsaga.com/the-vein" },
   { label: "Career", href: assetPath("careers.html") },

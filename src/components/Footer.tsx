@@ -9,12 +9,11 @@ const footerLinkGroups = [
   footerLinks.slice(0, 3),
   [
     ...footerLinks.slice(3, 5),
-    { label: "Sustainability", href: "#sustainability" },
+    { label: "Annual Reports", href: assetPath("annual-reports.html") },
   ],
   [
     ...footerLinks.slice(5),
     { label: "News", href: assetPath("articles.html") },
-    { label: "Annual Reports", href: assetPath("annual-reports.html") },
     { label: "Hospital", href: assetPath("hospital.html") },
     { label: "Contact", href: assetPath("contact.html") },
   ],

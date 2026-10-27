@@ -10,6 +10,39 @@ const graph = JSON.parse(
 );
 const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
 
+test("Legal pages have crawlable overviews, source links, and valid section navigation", async () => {
+  const sitemap = await readFile("dist/sitemap.xml", "utf8");
+
+  for (const [file, title, sectionCount] of [
+    ["data-privacy-policy.html", "Data Privacy Policy", 6],
+    ["terms-and-conditions.html", "Terms and Conditions", 4],
+  ]) {
+    const page = await readFile(`dist/${file}`, "utf8");
+    const url = new URL(file, canonical).href;
+    const sections = [...page.matchAll(/<section[^>]* id="([^"]+)"/g)];
+
+    assert.equal((page.match(/<h1[\s>]/g) || []).length, 1);
+    assert.ok(page.includes(title));
+    assert.ok(page.includes(`rel="canonical" href="${url}"`));
+    assert.match(page, /"@type":"WebPage"/);
+    assert.match(page, /This is a concise overview/);
+    assert.ok(
+      page.includes(
+        `href="https://www.philsaga.com/${file.replace(".html", "")}"`,
+      ),
+    );
+    assert.match(page, /href="mailto:info@philsaga.com"/);
+    assert.equal(sections.length, sectionCount);
+
+    for (const section of sections) {
+      assert.ok(page.includes(`href="#${section[1]}"`));
+    }
+
+    assert.ok(sitemap.includes(`<loc>${url}</loc>`));
+    assert.ok(html.includes(file));
+  }
+});
+
 test("About Us is prerendered with its own metadata and working navigation", async () => {
   const about = await readFile("dist/about.html", "utf8");
   const aboutUrl = new URL("about.html", canonical).href;
@@ -351,7 +384,7 @@ test("canonical, share metadata, and crawl files describe the same homepage", as
 
   const sitemap = await readFile("dist/sitemap.xml", "utf8");
   assert.ok(sitemap.includes(`<loc>${canonical}</loc>`));
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 12);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 14);
   assert.ok(
     sitemap.includes(`<loc>${new URL("about.html", canonical).href}</loc>`),
   );

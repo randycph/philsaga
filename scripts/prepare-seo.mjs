@@ -57,7 +57,7 @@ const server = await createServer({
 });
 
 try {
-  const { render, site, stories, reliefArticle, newsArticles } =
+  const { render, site, stories, reliefArticle, newsArticles, legalDocuments } =
     await server.ssrLoadModule("/src/entry-server.tsx");
   const body = render();
   const logo = await pngImage("assets/pmc-logo.png", "#logo", site.name);
@@ -308,6 +308,17 @@ try {
       type: "NewsArticle",
       image: coverImage,
       story,
+    });
+  }
+
+  for (const [page, document] of Object.entries(legalDocuments)) {
+    secondaryPages.push({
+      page,
+      file: document.file,
+      title: `${document.title} | ${site.name}`,
+      description: document.description,
+      type: "WebPage",
+      image: logo,
     });
   }
 

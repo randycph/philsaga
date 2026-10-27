@@ -22,6 +22,7 @@ import { SitemapPage } from "./pages/SitemapPage";
 import { ContactPage } from "./pages/ContactPage";
 import { MediaArticlePage } from "./pages/MediaArticlePage";
 import { HomepageAnnouncement } from "./components/HomepageAnnouncement";
+import { LegalPage } from "./pages/LegalPage";
 
 export type SitePage =
   | "home"
@@ -35,7 +36,9 @@ export type SitePage =
   | "image-gallery-article"
   | "video-article"
   | "sitemap"
-  | "contact";
+  | "contact"
+  | "privacy"
+  | "terms";
 
 export default function App({ page = "home" }: { page?: SitePage }) {
   useLenis();
@@ -74,6 +77,8 @@ export default function App({ page = "home" }: { page?: SitePage }) {
           <SitemapPage />
         ) : page === "contact" ? (
           <ContactPage />
+        ) : page === "privacy" || page === "terms" ? (
+          <LegalPage documentId={page} />
         ) : (
           <>
             <div id="home">
