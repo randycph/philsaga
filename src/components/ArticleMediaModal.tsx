@@ -181,10 +181,6 @@ export function ArticleMediaModal({
                   <p className="article-gallery__caption">
                     {activeImage.description}
                   </p>
-                  <a href={activeImage.source} target="_blank" rel="noreferrer">
-                    Read the original story{" "}
-                    <ExternalLink size={13} aria-hidden="true" />
-                  </a>
                 </div>
                 <div className="article-gallery__controls">
                   <div className="article-gallery__navigation">
