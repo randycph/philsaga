@@ -297,7 +297,11 @@ try {
 
     secondaryPages.push({
       page:
-        story.media.type === "gallery" ? "gallery-article" : "video-article",
+        story.media.type === "gallery"
+          ? story.galleryPresentation === "images-only"
+            ? "image-gallery-article"
+            : "gallery-article"
+          : "video-article",
       file: story.file,
       title: `${story.title} | ${site.name}`,
       description: story.excerpt,

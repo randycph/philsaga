@@ -3,6 +3,7 @@ import { stories } from "./site";
 import { reliefArticle } from "./article-detail";
 import {
   communityGallery,
+  communityPhotoJournal,
   solidarityFilm,
   type ArticleMedia,
 } from "./article-media";
@@ -30,6 +31,7 @@ export interface NewsArticle {
   imagePosition?: string;
   imageSize?: { width: number; height: number };
   media?: ArticleMedia;
+  galleryPresentation?: "images-only";
   file?: string;
   content?: Array<{
     heading: string;
@@ -79,6 +81,22 @@ export const newsArticles: NewsArticle[] = [
     image: assetPath("assets/article-solidarity-video.png"),
     imageAlt: "Philsaga’s Solidarity Movement video cover",
     media: solidarityFilm,
+  },
+  {
+    id: "community-photo-journal",
+    title: "People & Communities: In Pictures",
+    excerpt:
+      "A photographic collection of heritage, health, cooperation, and emergency preparedness from Philsaga’s published stories.",
+    category: "Community",
+    date: "2026-10-27",
+    href: assetPath("article-community-photo-journal.html"),
+    file: "article-community-photo-journal.html",
+    image: assetPath("assets/article-manobo.jpg"),
+    imageSize: { width: 2048, height: 1318 },
+    imageAlt:
+      "Community representatives at the Manobo Heritage Learning Center groundbreaking",
+    media: communityPhotoJournal,
+    galleryPresentation: "images-only",
   },
   {
     id: "mining-forest-program",

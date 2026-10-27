@@ -32,6 +32,7 @@ export type SitePage =
   | "hospital"
   | "article"
   | "gallery-article"
+  | "image-gallery-article"
   | "video-article"
   | "sitemap"
   | "contact";
@@ -65,6 +66,8 @@ export default function App({ page = "home" }: { page?: SitePage }) {
           <ArticleDetailPage />
         ) : page === "gallery-article" ? (
           <MediaArticlePage articleId="community-in-focus" />
+        ) : page === "image-gallery-article" ? (
+          <MediaArticlePage articleId="community-photo-journal" />
         ) : page === "video-article" ? (
           <MediaArticlePage articleId="solidarity-movement-film" />
         ) : page === "sitemap" ? (

@@ -72,6 +72,10 @@ export const sitemapGroups: SitemapGroup[] = [
     links: [
       { label: "News & Articles", href: assetPath("articles.html") },
       {
+        label: "Photo Gallery: People & Communities",
+        href: assetPath("article-community-photo-journal.html"),
+      },
+      {
         label: "Photo Story: Community in Focus",
         href: assetPath("article-community-in-focus.html"),
       },

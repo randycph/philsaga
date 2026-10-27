@@ -242,6 +242,29 @@
   background: #f4f0e6;
 }
 
+.media-story--images-only .media-story__header {
+  padding-bottom: 28px;
+}
+
+.media-story--images-only .media-story__gallery-heading {
+  justify-content: flex-end;
+}
+
+.media-story__photo-grid--images-only {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.media-story__photo-grid--images-only figure:first-child {
+  grid-column: auto;
+}
+
+.media-story__photo-grid--images-only figure:first-child img {
+  height: auto;
+  aspect-ratio: 1.55;
+  object-fit: cover;
+}
+
 .media-story__video video {
   max-height: 70dvh;
 }

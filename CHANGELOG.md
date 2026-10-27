@@ -1,5 +1,11 @@
 # Change record
 
+## Image-only gallery article
+
+- Added People & Communities: In Pictures as a dedicated article containing a photo grid without article paragraphs or visible photo captions.
+- Kept the gallery badge on its listing card. Selecting a photograph opens the existing gallery modal with captions, navigation, thumbnails, and slideshow controls.
+- Added the new page to prerendering, article metadata, and both sitemaps. Existing text-and-gallery and video articles retain their layouts.
+
 ## Announcement opening focus
 
 - Focus the notice heading when the announcement opens, removing the colored reading-area outline on page reload while retaining focus indicators for keyboard navigation.

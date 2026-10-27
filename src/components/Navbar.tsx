@@ -124,6 +124,7 @@ export function Navbar({ page = "home" }: { page?: SitePage }) {
                     ((page === "articles" ||
                       page === "article" ||
                       page === "gallery-article" ||
+                      page === "image-gallery-article" ||
                       page === "video-article") &&
                       link.label === "News & Articles")
                       ? "page"

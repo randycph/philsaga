@@ -18,6 +18,7 @@ const pageRoutes: Record<string, SitePage> = {
   "hospital.html": "hospital",
   "article-bislig-relief.html": "article",
   "article-community-in-focus.html": "gallery-article",
+  "article-community-photo-journal.html": "image-gallery-article",
   "article-solidarity-movement.html": "video-article",
   "sitemap.html": "sitemap",
   "contact.html": "contact",

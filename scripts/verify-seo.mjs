@@ -63,14 +63,15 @@ test("Articles is prerendered with dated stories, category controls, and its own
   assert.match(articles, /Manobo Heritage Preservation/);
   assert.match(articles, /article-manobo\.jpg/);
   assert.match(articles, /logo-long\.png/);
-  assert.equal((articles.match(/<article class="news-card/g) || []).length, 10);
+  assert.equal((articles.match(/<article class="news-card/g) || []).length, 11);
   assert.match(articles, /article-community-in-focus\.html/);
   assert.match(articles, /article-solidarity-movement\.html/);
+  assert.match(articles, /article-community-photo-journal\.html/);
   assert.match(articles, /Read story/);
   assert.match(articles, /Watch film/);
   assert.equal(
     (articles.match(/<time dateTime="\d{4}-\d{2}-\d{2}"/g) || []).length,
-    11,
+    12,
   );
   assert.ok(articles.includes(`rel="canonical" href="${articlesUrl}"`));
   assert.ok(articles.includes(`property="og:url" content="${articlesUrl}"`));
@@ -153,6 +154,10 @@ test("Gallery and video articles have dedicated crawlable pages and inline media
     "utf8",
   );
   const video = await readFile("dist/article-solidarity-movement.html", "utf8");
+  const imageGallery = await readFile(
+    "dist/article-community-photo-journal.html",
+    "utf8",
+  );
   const sitemap = await readFile("dist/sitemap.xml", "utf8");
 
   assert.match(gallery, /People, partnerships and progress/);
@@ -165,10 +170,19 @@ test("Gallery and video articles have dedicated crawlable pages and inline media
   assert.match(video, /SOLIDARITY_MOVEMENT\.mp4/);
   assert.doesNotMatch(gallery, /role="dialog"/);
   assert.doesNotMatch(video, /role="dialog"/);
+  assert.match(imageGallery, /media-story__photo-grid--images-only/);
+  assert.equal(
+    (imageGallery.match(/aria-label="Open photograph /g) || []).length,
+    4,
+  );
+  assert.doesNotMatch(imageGallery, /<figcaption/);
+  assert.doesNotMatch(imageGallery, /class="media-story__body"/);
+  assert.doesNotMatch(imageGallery, /class="media-story__deck"/);
 
   for (const [html, file] of [
     [gallery, "article-community-in-focus.html"],
     [video, "article-solidarity-movement.html"],
+    [imageGallery, "article-community-photo-journal.html"],
   ]) {
     const url = new URL(file, canonical).href;
     const schema = JSON.parse(
@@ -337,7 +351,7 @@ test("canonical, share metadata, and crawl files describe the same homepage", as
 
   const sitemap = await readFile("dist/sitemap.xml", "utf8");
   assert.ok(sitemap.includes(`<loc>${canonical}</loc>`));
-  assert.equal((sitemap.match(/<loc>/g) || []).length, 11);
+  assert.equal((sitemap.match(/<loc>/g) || []).length, 12);
   assert.ok(
     sitemap.includes(`<loc>${new URL("about.html", canonical).href}</loc>`),
   );

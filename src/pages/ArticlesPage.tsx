@@ -20,12 +20,16 @@ function ArticleCard({
   article: NewsArticle;
   compact?: boolean;
 }) {
-  const actionLabel =
-    article.media?.type === "gallery"
-      ? "Read story"
-      : article.media?.type === "video"
-        ? "Watch film"
-        : "Read More";
+  let actionLabel = "Read More";
+
+  if (article.media?.type === "gallery") {
+    actionLabel =
+      article.galleryPresentation === "images-only"
+        ? "View gallery"
+        : "Read story";
+  } else if (article.media?.type === "video") {
+    actionLabel = "Watch film";
+  }
 
   return (
     <article className={`news-card ${compact ? "news-card--compact" : ""}`}>
