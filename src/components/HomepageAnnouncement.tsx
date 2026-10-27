@@ -29,6 +29,7 @@ export function HomepageAnnouncement() {
       suppressScrollX: true,
       wheelPropagation: false,
       minScrollbarLength: 40,
+      scrollingThreshold: 900,
     });
     const thumb = scrollElement.querySelector<HTMLElement>(".ps__thumb-y");
 

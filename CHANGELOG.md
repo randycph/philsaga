@@ -1,5 +1,10 @@
 # Change record
 
+## Announcement scrollbar appearance
+
+- Changed the announcement scrollbar to a neutral gray thumb and track.
+- The track fades away after scrolling stops, including while the pointer remains over the notice. It stays visible during dragging or keyboard focus.
+
 ## Announcement scrollbar
 
 - Replaced the public notice's native scrollbar with Perfect Scrollbar, using a slim gold thumb and an ivory track.

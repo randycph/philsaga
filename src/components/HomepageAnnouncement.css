@@ -76,10 +76,18 @@
   display: none;
 }
 
-.homepage-announcement__notice > .ps__rail-y {
+.homepage-announcement__notice.ps > .ps__rail-y {
   width: 10px;
   border-radius: 10px;
-  background: #e9e2d2;
+  background: #ededed;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.homepage-announcement__notice.ps.ps--scrolling-y > .ps__rail-y,
+.homepage-announcement__notice.ps > .ps__rail-y.ps--clicking,
+.homepage-announcement__notice.ps
+  > .ps__rail-y:has(> .ps__thumb-y:focus-visible) {
   opacity: 1;
 }
 
@@ -87,26 +95,19 @@
   right: 2px;
   width: 6px;
   border-radius: 10px;
-  background: #a48a55;
+  background: #a6a6a6;
 }
 
 .homepage-announcement__notice > .ps__rail-y > .ps__thumb-y:focus-visible {
-  outline: 2px solid #b98b2b;
+  outline: 2px solid #707070;
   outline-offset: 2px;
-}
-
-.homepage-announcement__notice > .ps__rail-y:hover,
-.homepage-announcement__notice > .ps__rail-y:focus-within,
-.homepage-announcement__notice > .ps__rail-y.ps--clicking {
-  background: #e4dac4;
-  opacity: 1;
 }
 
 .homepage-announcement__notice > .ps__rail-y:hover > .ps__thumb-y,
 .homepage-announcement__notice > .ps__rail-y:focus-within > .ps__thumb-y,
 .homepage-announcement__notice > .ps__rail-y.ps--clicking > .ps__thumb-y {
   width: 6px;
-  background: #806426;
+  background: #858585;
 }
 
 .homepage-announcement__notice:focus-visible {
