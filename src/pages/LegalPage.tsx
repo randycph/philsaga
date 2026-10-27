@@ -98,23 +98,6 @@ export function LegalPage({ documentId }: { documentId: "privacy" | "terms" }) {
         </aside>
 
         <div className="legal-reading">
-          <div className="legal-source">
-            <div>
-              <p className="legal-eyebrow">
-                {documentId === "privacy"
-                  ? "Policy overview"
-                  : "Terms overview"}
-              </p>
-              <p>
-                This is a concise overview. Read the published document for the
-                complete wording.
-              </p>
-            </div>
-            <a href={document.source} target="_blank" rel="noreferrer">
-              Read full {documentId === "privacy" ? "policy" : "terms"}
-              <ExternalLink size={14} aria-hidden="true" />
-            </a>
-          </div>
           <div className="legal-document">
             {document.sections.map((section, index) => (
               <section key={section.id} id={section.id}>
