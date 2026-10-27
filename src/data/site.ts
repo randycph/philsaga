@@ -36,7 +36,7 @@ export const navLinks: LinkItem[] = [
 ];
 
 export const sustainabilityLinks: LinkItem[] = [
-  { label: "The Vien", href: "https://www.philsaga.com/the-vein" },
+  { label: "The Vein", href: "https://www.philsaga.com/the-vein" },
   { label: "Annual Reports", href: assetPath("annual-reports.html") },
   { label: "Hospital Services", href: assetPath("hospital.html") },
 ];
