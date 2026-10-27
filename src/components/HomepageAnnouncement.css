@@ -7,9 +7,13 @@
 }
 
 .homepage-announcement {
+  display: flex;
+  flex-direction: column;
   z-index: 211;
   width: calc(100% - 40px);
   max-width: 960px;
+  max-height: 90dvh;
+  overflow: hidden;
   padding: 44px 48px 34px;
   border: 1px solid #e4ddca;
   border-radius: 18px;
@@ -32,6 +36,7 @@
   line-height: 1.4;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 
 .homepage-announcement__eyebrow svg {
@@ -41,7 +46,7 @@
 }
 
 .homepage-announcement__title {
-  /* max-width: 470px; */
+  flex-shrink: 0;
   margin-top: 20px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(32px, 3.5vw, 40px);
@@ -51,11 +56,76 @@
   text-wrap: balance;
 }
 
-.homepage-announcement__description {
-  margin-top: 22px;
+.homepage-announcement__notice {
+  min-height: 0;
+  margin-top: 24px;
+  padding-right: 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
   color: #536165;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.homepage-announcement__notice:focus-visible {
+  outline: 2px solid #d88b00;
+  outline-offset: 4px;
+}
+
+.homepage-announcement__effective-date {
+  margin-top: 22px;
+  padding: 14px 18px;
+  border-left: 3px solid #dca139;
+  background: #f5eddb;
+  color: #183b32;
+}
+
+.homepage-announcement__cases {
+  display: grid;
+  gap: 26px;
+  margin-top: 26px;
+  padding-left: 22px;
+  list-style: decimal;
+}
+
+.homepage-announcement__cases > li::marker {
+  color: #9c7426;
+  font-weight: 600;
+}
+
+.homepage-announcement__cases h3 {
+  padding-left: 4px;
+  color: #153a32;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.homepage-announcement__cases blockquote {
+  margin-top: 16px;
+  padding: 18px 22px;
+  border-left: 2px solid #ceba8f;
+  background: #ffffff80;
+}
+
+.homepage-announcement__cases blockquote > p + p {
+  margin-top: 16px;
+}
+
+.homepage-announcement__cases blockquote ol {
+  display: grid;
+  gap: 14px;
+  margin-block: 18px;
+  padding-left: 22px;
+  list-style: decimal;
+}
+
+.homepage-announcement__ordered {
+  color: #183b32;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .homepage-announcement__actions {
@@ -63,6 +133,10 @@
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 14px;
+  flex-shrink: 0;
+}
+
+.homepage-announcement__actions:has(> button) {
   margin-top: 26px;
 }
 
@@ -121,7 +195,12 @@
     font-size: clamp(30px, 7.5vw, 40px);
   }
 
-  .homepage-announcement__description {
-    font-size: 14px;
+  .homepage-announcement__notice {
+    padding-right: 10px;
+    font-size: 13px;
+  }
+
+  .homepage-announcement__cases blockquote {
+    padding: 14px;
   }
 }

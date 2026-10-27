@@ -1,5 +1,10 @@
 # Change record
 
+## Public court decisions notice
+
+- Replaced the scholarship copy in the homepage announcement with the supplied court decisions notice, preserving its wording, case names, dates, quotations, and numbered rulings.
+- Added a scrollable reading area with case headings, quotation blocks, an emphasized effective date, and a persistent close control. Kept both announcement actions commented out.
+
 ## Article year filter
 
 - Added a sidebar year filter using the years present in article dates, newest first, plus All Years and matching counts.
