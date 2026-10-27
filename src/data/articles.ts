@@ -1,6 +1,11 @@
 import { assetPath } from "../lib/assets";
 import { stories } from "./site";
 import { reliefArticle } from "./article-detail";
+import {
+  communityGallery,
+  solidarityFilm,
+  type ArticleMedia,
+} from "./article-media";
 
 export const articleCategories = [
   "All Articles",
@@ -23,6 +28,7 @@ export interface NewsArticle {
   image: string;
   imageAlt: string;
   imagePosition?: string;
+  media?: ArticleMedia;
 }
 
 // Curated published stories; covers may use the site's editorial landscape imagery.
@@ -30,6 +36,31 @@ export const newsArticles: NewsArticle[] = [
   {
     ...reliefArticle,
     category: "Community",
+  },
+  {
+    id: "community-in-focus",
+    title: "Community in Focus: Stories in Pictures",
+    excerpt:
+      "A selection from The Vein, exploring community development, learning, safety, and the people behind Philsaga’s progress.",
+    category: "Community",
+    date: "2026-10-27",
+    href: assetPath("articles.html?media=community-in-focus"),
+    image: assetPath("assets/gallery-sdmp-poblacion.jpg"),
+    imageAlt:
+      "Community members gather outside a new facility in Barangay Poblacion",
+    media: communityGallery,
+  },
+  {
+    id: "solidarity-movement-film",
+    title: "Solidarity Movement: A Shared Purpose",
+    excerpt:
+      "Watch highlights from the April 3, 2023 gathering of employees, community figures, and officials at Philsaga Mining Corporation.",
+    category: "People",
+    date: "2023-04-03",
+    href: assetPath("articles.html?media=solidarity-movement-film"),
+    image: assetPath("assets/article-solidarity-video.png"),
+    imageAlt: "Philsaga’s Solidarity Movement video cover",
+    media: solidarityFilm,
   },
   {
     id: "mining-forest-program",

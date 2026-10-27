@@ -63,10 +63,14 @@ test("Articles is prerendered with dated stories, category controls, and its own
   assert.match(articles, /Manobo Heritage Preservation/);
   assert.match(articles, /article-manobo\.jpg/);
   assert.match(articles, /logo-long\.png/);
-  assert.equal((articles.match(/<article class="news-card/g) || []).length, 8);
+  assert.equal((articles.match(/<article class="news-card/g) || []).length, 10);
+  assert.match(articles, /articles\.html\?media=community-in-focus/);
+  assert.match(articles, /articles\.html\?media=solidarity-movement-film/);
+  assert.match(articles, /View gallery/);
+  assert.match(articles, /Watch film/);
   assert.equal(
     (articles.match(/<time dateTime="\d{4}-\d{2}-\d{2}"/g) || []).length,
-    9,
+    11,
   );
   assert.ok(articles.includes(`rel="canonical" href="${articlesUrl}"`));
   assert.ok(articles.includes(`property="og:url" content="${articlesUrl}"`));

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { ArrowRight, Mail, Search, X } from "lucide-react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { ArrowRight, Images, Mail, Play, Search, X } from "lucide-react";
+import { ArticleMediaModal } from "../components/ArticleMediaModal";
 import {
   articleCategories,
   filterNewsArticles,
@@ -15,16 +16,39 @@ import "./ArticlesPage.css";
 function ArticleCard({
   article,
   compact = false,
+  onOpenMedia,
 }: {
   article: NewsArticle;
   compact?: boolean;
+  onOpenMedia: (article: NewsArticle, trigger: HTMLAnchorElement) => void;
 }) {
+  const actionLabel =
+    article.media?.type === "gallery"
+      ? "View gallery"
+      : article.media?.type === "video"
+        ? "Watch film"
+        : "Read More";
+
+  function handleArticleClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (
+      article.media &&
+      !event.metaKey &&
+      !event.ctrlKey &&
+      !event.shiftKey &&
+      !event.altKey
+    ) {
+      event.preventDefault();
+      onOpenMedia(article, event.currentTarget);
+    }
+  }
+
   return (
     <article className={`news-card ${compact ? "news-card--compact" : ""}`}>
       <a
         href={article.href}
         className="news-card__image"
-        aria-label={`Read ${article.title}`}
+        aria-label={`${actionLabel}: ${article.title}`}
+        onClick={handleArticleClick}
       >
         <img
           src={article.image}
@@ -33,19 +57,41 @@ function ArticleCard({
           loading="lazy"
         />
         <span className="news-card__badge">{article.category}</span>
+        {article.media && (
+          <span className="news-card__format">
+            {article.media.type === "gallery" ? (
+              <>
+                <Images size={14} aria-hidden="true" />{" "}
+                {article.media.images.length} photographs
+              </>
+            ) : (
+              <>
+                <Play size={13} fill="currentColor" aria-hidden="true" /> Film
+              </>
+            )}
+          </span>
+        )}
+        {article.media?.type === "video" && (
+          <span className="news-card__play" aria-hidden="true">
+            <Play size={22} fill="currentColor" />
+          </span>
+        )}
       </a>
       <div className="news-card__content">
         <time dateTime={article.date}>{formatArticleDate(article.date)}</time>
         <h2>
-          <a href={article.href}>{article.title}</a>
+          <a href={article.href} onClick={handleArticleClick}>
+            {article.title}
+          </a>
         </h2>
         {!compact && <p>{article.excerpt}</p>}
         <a
           className="news-card__read"
           href={article.href}
-          aria-label={`Read more: ${article.title}`}
+          aria-label={`${actionLabel}: ${article.title}`}
+          onClick={handleArticleClick}
         >
-          Read More <ArrowRight size={15} aria-hidden="true" />
+          {actionLabel} <ArrowRight size={15} aria-hidden="true" />
         </a>
       </div>
     </article>
@@ -55,6 +101,8 @@ function ArticleCard({
 export function ArticlesPage() {
   const [category, setCategory] = useState<ArticleCategory>("All Articles");
   const [query, setQuery] = useState("");
+  const [selectedMedia, setSelectedMedia] = useState<NewsArticle | null>(null);
+  const mediaTrigger = useRef<HTMLAnchorElement | null>(null);
   const results = filterNewsArticles(category, query);
   const featured = newsArticles[0];
 
@@ -67,7 +115,31 @@ export function ArticlesPage() {
     if (match) {
       setCategory(match);
     }
+
+    const mediaId = new URLSearchParams(window.location.search).get("media");
+    const mediaArticle = newsArticles.find(
+      (article) => article.id === mediaId && article.media,
+    );
+
+    if (mediaArticle) {
+      setSelectedMedia(mediaArticle);
+    }
   }, []);
+
+  function openMedia(article: NewsArticle, trigger: HTMLAnchorElement) {
+    mediaTrigger.current = trigger;
+    setSelectedMedia(article);
+    const url = new URL(window.location.href);
+    url.searchParams.set("media", article.id);
+    window.history.replaceState(null, "", url);
+  }
+
+  function closeMedia() {
+    setSelectedMedia(null);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("media");
+    window.history.replaceState(null, "", url);
+  }
 
   function clearFilters() {
     setCategory("All Articles");
@@ -134,6 +206,7 @@ export function ArticlesPage() {
                   key={article.id}
                   article={article}
                   compact={index > (results.length === 8 ? 1 : 2)}
+                  onOpenMedia={openMedia}
                 />
               ))}
             </div>
@@ -238,6 +311,16 @@ export function ArticlesPage() {
           </div>
         </aside>
       </div>
+      {selectedMedia && (
+        <ArticleMediaModal
+          key={selectedMedia.id}
+          article={selectedMedia}
+          onClose={closeMedia}
+          onRestoreFocus={() => {
+            mediaTrigger.current?.focus();
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,5 +1,12 @@
 # Change record
 
+## Gallery and video articles
+
+- Added a Community in Focus photo story using four photographs from The Vein, with individual captions and links to the original coverage.
+- Added a Solidarity Movement film article using Philsaga's existing MP4, with native playback controls and a source link.
+- Added accessible media dialogs in the site's ivory, forest green, and gold palette. Galleries include thumbnails, previous/next controls, arrow-key navigation, and an optional five-second slideshow that pauses for interaction.
+- Added shareable article links through the `media` query parameter and updated the SEO checks for the expanded article collection.
+
 ## About reference layout
 
 - Rebuilt only the About section with reference proportions, section marker, compact typography, diagonal right-side supplied artwork, and the reference statistics row.

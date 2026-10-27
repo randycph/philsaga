@@ -1,0 +1,336 @@
+.article-media-modal {
+  width: calc(100% - 48px);
+  max-width: 1160px;
+  max-height: 92dvh;
+  padding: 0;
+  overflow-x: hidden;
+  border: 1px solid #d8c7a5;
+  border-radius: 14px;
+  background: #faf8f3;
+  color: #102b2b;
+  box-shadow: 0 32px 120px #001c1a66;
+}
+
+.article-media-modal__header {
+  padding: 28px 76px 24px 32px;
+  border-bottom: 1px solid #102b2b12;
+}
+
+.article-media-modal__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #946817;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.article-media-modal__eyebrow > span {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #c6ad7d;
+}
+
+.article-media-modal__title {
+  margin-top: 10px;
+  font-family: var(--font-heading);
+  font-size: clamp(21px, 2.2vw, 30px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.045em;
+}
+
+.article-media-modal__description {
+  max-width: 780px;
+  margin-top: 10px;
+  color: #6a7970;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.article-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+}
+
+.article-gallery__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(320px, 49dvh, 540px);
+  background: radial-gradient(ellipse at center, #183d33, #071e19);
+}
+
+.article-gallery__stage > img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.article-gallery__counter {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  display: flex;
+  gap: 7px;
+  padding: 5px 11px;
+  border: 1px solid #ffffff29;
+  border-radius: 4px;
+  background: #061e1cbb;
+  color: #fff8e8;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  backdrop-filter: blur(8px);
+}
+
+.article-gallery__counter > span {
+  color: #c2cfc5;
+}
+
+.article-gallery__error {
+  max-width: 320px;
+  padding: 28px;
+  color: #fff8e8;
+  text-align: center;
+}
+
+.article-gallery__detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 30px 26px 24px;
+}
+
+.article-gallery__position {
+  color: #9a752c;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.article-gallery__detail h3 {
+  margin-top: 14px;
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.04em;
+}
+
+.article-gallery__caption {
+  margin-top: 14px;
+  color: #6a7970;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.article-gallery__detail a,
+.article-film__footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  color: #81601c;
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.article-gallery__navigation {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.article-gallery__navigation button,
+.article-gallery__playback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  border: 1px solid #cbb98e;
+  border-radius: 6px;
+  color: #153e31;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 180ms;
+}
+
+.article-gallery__navigation button:last-child {
+  border-color: #123d30;
+  background: #123d30;
+  color: #fff9ec;
+}
+
+.article-gallery__navigation button:hover {
+  background: #f0e7d3;
+}
+
+.article-gallery__navigation button:last-child:hover {
+  background: #235441;
+}
+
+.article-gallery__playback {
+  width: 100%;
+  margin-top: 10px;
+  border-color: transparent;
+  background: #eee9dc;
+}
+
+.article-gallery__playback:hover {
+  background: #e7dfcc;
+}
+
+.article-gallery__playback > span {
+  margin-left: auto;
+  padding-right: 14px;
+  color: #7c826e;
+  font-size: 10px;
+}
+
+.article-gallery__playback > svg {
+  margin-left: 14px;
+}
+
+.article-media-modal button:focus-visible,
+.article-media-modal a:focus-visible {
+  outline: 2px solid #cb921c;
+  outline-offset: 3px;
+}
+
+.article-media-modal button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.article-gallery__thumbnails {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 26px;
+  overflow-x: auto;
+  border-top: 1px solid #102b2b12;
+  background: #f4f0e6;
+}
+
+.article-gallery__thumbnails button {
+  position: relative;
+  flex-shrink: 0;
+  width: 86px;
+  height: 58px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  opacity: 0.65;
+  cursor: pointer;
+}
+
+.article-gallery__thumbnails button[aria-current="true"] {
+  border-color: #c88d23;
+  opacity: 1;
+}
+
+.article-gallery__thumbnails img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.article-gallery__thumbnails button > span {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  padding: 0 4px;
+  border-radius: 2px;
+  background: #052a25cc;
+  color: #fff;
+  font-size: 9px;
+}
+
+.article-gallery__thumbnails > p {
+  margin-left: auto;
+  padding-left: 16px;
+  color: #7d877a;
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.article-film > video {
+  display: block;
+  width: 100%;
+  max-height: 58dvh;
+  aspect-ratio: 16 / 9;
+  background: #071e19;
+}
+
+.article-film__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 20px;
+  padding: 20px 32px;
+  color: #6a7970;
+  font-size: 12px;
+}
+
+.article-film__footer a {
+  margin-top: 0;
+}
+
+@media (max-width: 767px) {
+  .article-media-modal {
+    width: calc(100% - 24px);
+    max-height: 94dvh;
+    border-radius: 10px;
+  }
+
+  .article-media-modal__header {
+    padding: 23px 60px 20px 22px;
+  }
+
+  .article-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .article-gallery__stage {
+    height: auto;
+    aspect-ratio: 1.55;
+  }
+
+  .article-gallery__detail {
+    gap: 20px;
+    padding: 22px;
+  }
+
+  .article-gallery__detail h3 {
+    margin-top: 8px;
+    font-size: 20px;
+  }
+
+  .article-gallery__thumbnails {
+    gap: 8px;
+    padding: 14px 20px;
+  }
+
+  .article-gallery__thumbnails button {
+    width: 62px;
+    height: 46px;
+  }
+
+  .article-gallery__thumbnails > p {
+    display: none;
+  }
+
+  .article-film__footer {
+    padding: 20px 22px;
+  }
+}
