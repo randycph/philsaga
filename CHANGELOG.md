@@ -1,5 +1,10 @@
 # Change record
 
+## Homepage footer width
+
+- Aligned the homepage footer with the full-width homepage sections using the shared page gutter.
+- Applied the existing capped container width and mobile spacing through an interior-page modifier.
+
 ## Image-only gallery article
 
 - Added People & Communities: In Pictures as a dedicated article containing a photo grid without article paragraphs or visible photo captions.

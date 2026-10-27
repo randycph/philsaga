@@ -56,7 +56,10 @@ export function Footer({ interiorPage = false }: { interiorPage?: boolean }) {
   }, []);
 
   return (
-    <footer className="site-footer" id="contact">
+    <footer
+      className={`site-footer${interiorPage ? " site-footer--interior" : ""}`}
+      id="contact"
+    >
       <div className="site-footer__main">
         <a
           href={resolveLink(uiCopy.home)}

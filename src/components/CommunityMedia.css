@@ -317,9 +317,13 @@
 }
 
 .site-footer {
-  padding: 0 max(7%, calc((100% - 1268px) / 2));
+  padding: 0 var(--page-gutter);
   background: #f6f4ef;
   color: #102b2b;
+}
+
+.site-footer--interior {
+  padding-inline: max(7%, calc((100% - 1268px) / 2));
 }
 
 .site-footer__main,
@@ -511,7 +515,7 @@
 }
 
 @media (max-width: 767px) {
-  .site-footer {
+  .site-footer--interior {
     padding-inline: 20px;
   }
 }
