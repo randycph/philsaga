@@ -1,7 +1,20 @@
 # Change record
 
+## Article year filter
+
+- Added a sidebar year filter using the years present in article dates, newest first, plus All Years and matching counts.
+- Year, category, and keyword filters work together; Clear filters resets all three. Valid `year` query parameters select the matching year on page load.
+
+## Homepage announcement
+
+- Added the supplied scholarship announcement in a 620px ivory dialog with a dark, blurred backdrop, close control, and Dismiss button.
+- The dialog opens on each homepage reload without storing dismissal state. Interior pages do not mount it.
+- Kept the Read Announcement action commented out until a destination is supplied.
+
 ## Gallery and video articles
 
+- Gallery and video cards now open dedicated article pages. Optional body sections support either text with media or media alone; gallery photographs open the lightbox at the selected image.
+- Fixed gallery dialog height and constrained the caption panel so slide changes keep the modal, photo area, and navigation in place.
 - Added a Community in Focus photo story using four photographs from The Vein, with individual captions and links to the original coverage.
 - Added a Solidarity Movement film article using Philsaga's existing MP4, with native playback controls and a source link.
 - Added accessible media dialogs in the site's ivory, forest green, and gold palette. Galleries include thumbnails, previous/next controls, arrow-key navigation, and an optional five-second slideshow that pauses for interaction.

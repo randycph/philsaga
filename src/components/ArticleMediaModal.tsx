@@ -8,6 +8,7 @@ import {
   Play,
 } from "lucide-react";
 import type { NewsArticle } from "../data/articles";
+import { ArticleVideo } from "./ArticleVideo";
 import {
   Dialog,
   DialogContent,
@@ -20,16 +21,18 @@ export function ArticleMediaModal({
   article,
   onClose,
   onRestoreFocus,
+  initialIndex = 0,
 }: {
   article: NewsArticle;
   onClose: () => void;
   onRestoreFocus: () => void;
+  initialIndex?: number;
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [playing, setPlaying] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
-  const [videoFailed, setVideoFailed] = useState(false);
+
   const media = article.media;
   const images = media?.type === "gallery" ? media.images : [];
   const activeImage = images[activeIndex];
@@ -91,7 +94,7 @@ export function ArticleMediaModal({
       }}
     >
       <DialogContent
-        className="article-media-modal"
+        className={`article-media-modal article-media-modal--${media.type}`}
         onCloseAutoFocus={(event) => {
           event.preventDefault();
           onRestoreFocus();
@@ -251,37 +254,7 @@ export function ArticleMediaModal({
             </div>
           </>
         ) : media.type === "video" ? (
-          <div className="article-film">
-            <video
-              controls
-              playsInline
-              preload="metadata"
-              poster={article.image}
-              aria-label={article.title}
-              onError={() => {
-                setVideoFailed(true);
-              }}
-            >
-              <source
-                src={media.video}
-                type="video/mp4"
-                onError={() => {
-                  setVideoFailed(true);
-                }}
-              />
-              Your browser cannot play this video. Open the original film below.
-            </video>
-            <div className="article-film__footer">
-              <p role={videoFailed ? "alert" : undefined}>
-                {videoFailed
-                  ? "The film couldn’t be loaded. You can watch it on Philsaga’s website."
-                  : "A Philsaga Mining Corporation film · April 3, 2023"}
-              </p>
-              <a href={media.source} target="_blank" rel="noreferrer">
-                Original film <ExternalLink size={14} aria-hidden="true" />
-              </a>
-            </div>
-          </div>
+          <ArticleVideo article={article} />
         ) : null}
       </DialogContent>
     </Dialog>

@@ -20,6 +20,8 @@ import { HospitalPage } from "./pages/HospitalPage";
 import { ArticleDetailPage } from "./pages/ArticleDetailPage";
 import { SitemapPage } from "./pages/SitemapPage";
 import { ContactPage } from "./pages/ContactPage";
+import { MediaArticlePage } from "./pages/MediaArticlePage";
+import { HomepageAnnouncement } from "./components/HomepageAnnouncement";
 
 export type SitePage =
   | "home"
@@ -29,6 +31,8 @@ export type SitePage =
   | "reports"
   | "hospital"
   | "article"
+  | "gallery-article"
+  | "video-article"
   | "sitemap"
   | "contact";
 
@@ -59,6 +63,10 @@ export default function App({ page = "home" }: { page?: SitePage }) {
           <HospitalPage />
         ) : page === "article" ? (
           <ArticleDetailPage />
+        ) : page === "gallery-article" ? (
+          <MediaArticlePage articleId="community-in-focus" />
+        ) : page === "video-article" ? (
+          <MediaArticlePage articleId="solidarity-movement-film" />
         ) : page === "sitemap" ? (
           <SitemapPage />
         ) : page === "contact" ? (
@@ -79,6 +87,7 @@ export default function App({ page = "home" }: { page?: SitePage }) {
         )}
       </main>
       <Footer interiorPage={page !== "home"} />
+      {page === "home" && <HomepageAnnouncement />}
     </div>
   );
 }

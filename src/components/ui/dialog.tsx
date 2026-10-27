@@ -13,11 +13,21 @@ export const DialogClose = Primitive.Close;
 export function DialogContent({
   className,
   children,
+  overlayClassName,
+  closeClassName,
   ...props
-}: ComponentProps<typeof Primitive.Content>) {
+}: ComponentProps<typeof Primitive.Content> & {
+  overlayClassName?: string;
+  closeClassName?: string;
+}) {
   return (
     <Primitive.Portal>
-      <Primitive.Overlay className="dialog-overlay fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm" />
+      <Primitive.Overlay
+        className={cn(
+          "dialog-overlay fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm",
+          overlayClassName,
+        )}
+      />
       <Primitive.Content
         data-lenis-prevent
         className={cn(
@@ -27,7 +37,12 @@ export function DialogContent({
         {...props}
       >
         {children}
-        <Primitive.Close className="absolute right-4 top-4 rounded-lg bg-background p-2 focus-visible:outline-2 focus-visible:outline-primary">
+        <Primitive.Close
+          className={cn(
+            "absolute right-4 top-4 rounded-lg bg-background p-2 focus-visible:outline-2 focus-visible:outline-primary",
+            closeClassName,
+          )}
+        >
           <X className="size-5" />
           <span className="sr-only">{uiCopy.close}</span>
         </Primitive.Close>

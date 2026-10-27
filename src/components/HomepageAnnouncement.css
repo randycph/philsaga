@@ -1,0 +1,127 @@
+.homepage-announcement__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  background: #041b15a6;
+  backdrop-filter: blur(3px);
+}
+
+.homepage-announcement {
+  z-index: 211;
+  width: calc(100% - 40px);
+  max-width: 960px;
+  padding: 44px 48px 34px;
+  border: 1px solid #e4ddca;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fffefb, #faf7f0);
+  color: #0d2c2c;
+  font-family: var(--font-sans);
+  box-shadow:
+    0 28px 100px #00171155,
+    0 5px 20px #0017111a;
+}
+
+.homepage-announcement__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-right: 25px;
+  color: #eb9400;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.homepage-announcement__eyebrow svg {
+  flex-shrink: 0;
+  fill: #ffb11b;
+  stroke-width: 1.6;
+}
+
+.homepage-announcement__title {
+  /* max-width: 470px; */
+  margin-top: 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 3.5vw, 40px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.homepage-announcement__description {
+  margin-top: 22px;
+  color: #536165;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.homepage-announcement__actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.homepage-announcement__dismiss,
+.homepage-announcement__read {
+  min-width: 132px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 1px solid #506565;
+  border-radius: 6px;
+  color: #102c2d;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background 180ms;
+}
+
+.homepage-announcement__dismiss:hover {
+  background: #ece8dc;
+}
+
+.homepage-announcement__read {
+  flex: 1;
+  border-color: #ffad0b;
+  background: linear-gradient(110deg, #ffb51b, #ffa40a);
+}
+
+.homepage-announcement__close {
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 8px;
+  border: 1px solid #102b2b0a;
+  border-radius: 50%;
+  background: #fffefb;
+  box-shadow: 0 3px 12px #102b2b12;
+  cursor: pointer;
+}
+
+.homepage-announcement button:focus-visible {
+  outline: 2px solid #d88b00;
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .homepage-announcement {
+    padding: 34px 28px 28px;
+    border-radius: 14px;
+  }
+
+  .homepage-announcement__title {
+    font-size: clamp(30px, 7.5vw, 40px);
+  }
+
+  .homepage-announcement__description {
+    font-size: 14px;
+  }
+}

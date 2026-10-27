@@ -28,7 +28,13 @@ export interface NewsArticle {
   image: string;
   imageAlt: string;
   imagePosition?: string;
+  imageSize?: { width: number; height: number };
   media?: ArticleMedia;
+  file?: string;
+  content?: Array<{
+    heading: string;
+    paragraphs: string[];
+  }>;
 }
 
 // Curated published stories; covers may use the site's editorial landscape imagery.
@@ -44,11 +50,22 @@ export const newsArticles: NewsArticle[] = [
       "A selection from The Vein, exploring community development, learning, safety, and the people behind Philsaga’s progress.",
     category: "Community",
     date: "2026-10-27",
-    href: assetPath("articles.html?media=community-in-focus"),
+    href: assetPath("article-community-in-focus.html"),
+    file: "article-community-in-focus.html",
     image: assetPath("assets/gallery-sdmp-poblacion.jpg"),
+    imageSize: { width: 2048, height: 1318 },
     imageAlt:
       "Community members gather outside a new facility in Barangay Poblacion",
     media: communityGallery,
+    content: [
+      {
+        heading: "People, partnerships and progress",
+        paragraphs: [
+          "From community facilities in Barangay Poblacion to skills recognition, safety learning, and physical fitness, this selection brings together four stories published by The Vein.",
+          "Explore the photographs below for a closer look at the people and activities behind these stories. Select any photograph to open the full gallery, read its caption, or play the slideshow.",
+        ],
+      },
+    ],
   },
   {
     id: "solidarity-movement-film",
@@ -57,7 +74,8 @@ export const newsArticles: NewsArticle[] = [
       "Watch highlights from the April 3, 2023 gathering of employees, community figures, and officials at Philsaga Mining Corporation.",
     category: "People",
     date: "2023-04-03",
-    href: assetPath("articles.html?media=solidarity-movement-film"),
+    href: assetPath("article-solidarity-movement.html"),
+    file: "article-solidarity-movement.html",
     image: assetPath("assets/article-solidarity-video.png"),
     imageAlt: "Philsaga’s Solidarity Movement video cover",
     media: solidarityFilm,
@@ -147,7 +165,21 @@ export const newsArticles: NewsArticle[] = [
   },
 ];
 
-export function filterNewsArticles(category: ArticleCategory, search: string) {
+export const articleYears = Array.from(
+  new Set(
+    newsArticles.map((article) => {
+      return article.date.slice(0, 4);
+    }),
+  ),
+).sort((first, second) => {
+  return Number(second) - Number(first);
+});
+
+export function filterNewsArticles(
+  category: ArticleCategory,
+  search: string,
+  year = "",
+) {
   const query = search.trim().toLocaleLowerCase();
 
   return newsArticles.filter((article) => {
@@ -156,6 +188,7 @@ export function filterNewsArticles(category: ArticleCategory, search: string) {
 
     return (
       (category === "All Articles" || article.category === category) &&
+      (!year || article.date.startsWith(`${year}-`)) &&
       (!query || text.includes(query))
     );
   });

@@ -71,6 +71,14 @@ export const sitemapGroups: SitemapGroup[] = [
     title: "News & Media",
     links: [
       { label: "News & Articles", href: assetPath("articles.html") },
+      {
+        label: "Photo Story: Community in Focus",
+        href: assetPath("article-community-in-focus.html"),
+      },
+      {
+        label: "Film: Solidarity Movement",
+        href: assetPath("article-solidarity-movement.html"),
+      },
       { label: "The Vein", href: "https://www.philsaga.com/the-vein" },
       { label: "Company News", href: articleCategory("Company News") },
       { label: "Community News", href: articleCategory("Community") },

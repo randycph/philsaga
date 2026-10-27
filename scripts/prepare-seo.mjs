@@ -57,9 +57,8 @@ const server = await createServer({
 });
 
 try {
-  const { render, site, stories, reliefArticle } = await server.ssrLoadModule(
-    "/src/entry-server.tsx",
-  );
+  const { render, site, stories, reliefArticle, newsArticles } =
+    await server.ssrLoadModule("/src/entry-server.tsx");
   const body = render();
   const logo = await pngImage("assets/pmc-logo.png", "#logo", site.name);
   const image = await pngImage(
@@ -283,6 +282,31 @@ try {
     },
   ];
 
+  for (const story of newsArticles.filter(
+    (article) => article.media && article.file,
+  )) {
+    const coverFile = `assets/${story.image.split("/assets/").at(-1)}`;
+    const coverImage = coverFile.endsWith(".png")
+      ? await pngImage(coverFile, `${story.file}#primary-image`, story.imageAlt)
+      : {
+          url: absoluteUrl(coverFile),
+          caption: story.imageAlt,
+          width: story.imageSize?.width,
+          height: story.imageSize?.height,
+        };
+
+    secondaryPages.push({
+      page:
+        story.media.type === "gallery" ? "gallery-article" : "video-article",
+      file: story.file,
+      title: `${story.title} | ${site.name}`,
+      description: story.excerpt,
+      type: "NewsArticle",
+      image: coverImage,
+      story,
+    });
+  }
+
   for (const page of secondaryPages) {
     const pageUrl = absoluteUrl(page.file);
     const pageGraph = {
@@ -309,6 +333,15 @@ try {
     };
     const pageTags = tags
       .filter((tag) => !tag.startsWith('<script type="application/ld+json">'))
+      .filter((tag) => {
+        if (tag.includes('property="og:image:width"')) {
+          return Boolean(page.image.width);
+        }
+        if (tag.includes('property="og:image:height"')) {
+          return Boolean(page.image.height);
+        }
+        return true;
+      })
       .map((tag) => {
         return tag
           .replaceAll(escapeAttribute(title), escapeAttribute(page.title))
@@ -341,23 +374,32 @@ try {
             `content="${escapeAttribute(pageUrl)}"`,
           );
       });
-    if (page.page === "article") {
+    const pageArticle =
+      page.story || (page.page === "article" ? reliefArticle : null);
+    if (pageArticle) {
       Object.assign(pageGraph, {
-        headline: reliefArticle.title,
-        datePublished: reliefArticle.date,
-        articleSection: reliefArticle.category,
+        headline: pageArticle.title,
+        datePublished: pageArticle.date,
+        articleSection: pageArticle.category,
         image: page.image.url,
-        author: { "@type": "Organization", name: reliefArticle.author },
+        author: {
+          "@type": "Organization",
+          name: pageArticle.author || site.name,
+        },
         publisher: { "@type": "Organization", name: site.name, url: siteUrl },
         mainEntityOfPage: pageUrl,
-        isBasedOn: reliefArticle.source,
+        isBasedOn:
+          pageArticle.source ||
+          (pageArticle.media?.type === "gallery"
+            ? pageArticle.media.images.map((image) => image.source)
+            : pageArticle.media?.source),
       });
       const typeIndex = pageTags.findIndex((tag) =>
         tag.includes('property="og:type"'),
       );
       pageTags[typeIndex] = '<meta property="og:type" content="article" />';
       pageTags.push(
-        `<meta property="article:published_time" content="${reliefArticle.date}" />`,
+        `<meta property="article:published_time" content="${pageArticle.date}" />`,
       );
     }
     pageTags.push(

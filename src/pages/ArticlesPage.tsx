@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Images, Mail, Play, Search, X } from "lucide-react";
-import { ArticleMediaModal } from "../components/ArticleMediaModal";
 import {
   articleCategories,
+  articleYears,
   filterNewsArticles,
   formatArticleDate,
   newsArticles,
@@ -16,31 +16,16 @@ import "./ArticlesPage.css";
 function ArticleCard({
   article,
   compact = false,
-  onOpenMedia,
 }: {
   article: NewsArticle;
   compact?: boolean;
-  onOpenMedia: (article: NewsArticle, trigger: HTMLAnchorElement) => void;
 }) {
   const actionLabel =
     article.media?.type === "gallery"
-      ? "View gallery"
+      ? "Read story"
       : article.media?.type === "video"
         ? "Watch film"
         : "Read More";
-
-  function handleArticleClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (
-      article.media &&
-      !event.metaKey &&
-      !event.ctrlKey &&
-      !event.shiftKey &&
-      !event.altKey
-    ) {
-      event.preventDefault();
-      onOpenMedia(article, event.currentTarget);
-    }
-  }
 
   return (
     <article className={`news-card ${compact ? "news-card--compact" : ""}`}>
@@ -48,7 +33,6 @@ function ArticleCard({
         href={article.href}
         className="news-card__image"
         aria-label={`${actionLabel}: ${article.title}`}
-        onClick={handleArticleClick}
       >
         <img
           src={article.image}
@@ -80,16 +64,13 @@ function ArticleCard({
       <div className="news-card__content">
         <time dateTime={article.date}>{formatArticleDate(article.date)}</time>
         <h2>
-          <a href={article.href} onClick={handleArticleClick}>
-            {article.title}
-          </a>
+          <a href={article.href}>{article.title}</a>
         </h2>
         {!compact && <p>{article.excerpt}</p>}
         <a
           className="news-card__read"
           href={article.href}
           aria-label={`${actionLabel}: ${article.title}`}
-          onClick={handleArticleClick}
         >
           {actionLabel} <ArrowRight size={15} aria-hidden="true" />
         </a>
@@ -101,9 +82,8 @@ function ArticleCard({
 export function ArticlesPage() {
   const [category, setCategory] = useState<ArticleCategory>("All Articles");
   const [query, setQuery] = useState("");
-  const [selectedMedia, setSelectedMedia] = useState<NewsArticle | null>(null);
-  const mediaTrigger = useRef<HTMLAnchorElement | null>(null);
-  const results = filterNewsArticles(category, query);
+  const [year, setYear] = useState("");
+  const results = filterNewsArticles(category, query, year);
   const featured = newsArticles[0];
 
   useEffect(() => {
@@ -116,34 +96,28 @@ export function ArticlesPage() {
       setCategory(match);
     }
 
+    const selectedYear = new URLSearchParams(window.location.search).get(
+      "year",
+    );
+
+    if (selectedYear && articleYears.includes(selectedYear)) {
+      setYear(selectedYear);
+    }
+
     const mediaId = new URLSearchParams(window.location.search).get("media");
     const mediaArticle = newsArticles.find(
       (article) => article.id === mediaId && article.media,
     );
 
-    if (mediaArticle) {
-      setSelectedMedia(mediaArticle);
+    if (mediaArticle?.file) {
+      window.location.replace(mediaArticle.href);
     }
   }, []);
-
-  function openMedia(article: NewsArticle, trigger: HTMLAnchorElement) {
-    mediaTrigger.current = trigger;
-    setSelectedMedia(article);
-    const url = new URL(window.location.href);
-    url.searchParams.set("media", article.id);
-    window.history.replaceState(null, "", url);
-  }
-
-  function closeMedia() {
-    setSelectedMedia(null);
-    const url = new URL(window.location.href);
-    url.searchParams.delete("media");
-    window.history.replaceState(null, "", url);
-  }
 
   function clearFilters() {
     setCategory("All Articles");
     setQuery("");
+    setYear("");
   }
 
   return (
@@ -195,6 +169,7 @@ export function ArticlesPage() {
           <p className="sr-only" role="status" aria-live="polite">
             {results.length} {results.length === 1 ? "article" : "articles"}{" "}
             found{category !== "All Articles" ? ` in ${category}` : ""}
+            {year ? ` from ${year}` : ""}
             {query.trim() ? ` for ${query.trim()}` : ""}.
           </p>
           {results.length > 0 ? (
@@ -206,7 +181,6 @@ export function ArticlesPage() {
                   key={article.id}
                   article={article}
                   compact={index > (results.length === 8 ? 1 : 2)}
-                  onOpenMedia={openMedia}
                 />
               ))}
             </div>
@@ -214,7 +188,7 @@ export function ArticlesPage() {
             <div className="news-empty">
               <Search size={32} aria-hidden="true" />
               <h2>No articles match your search.</h2>
-              <p>Try another keyword or browse a different category.</p>
+              <p>Try another keyword, category, or year.</p>
               <button type="button" onClick={clearFilters}>
                 Show all articles <ArrowRight size={17} aria-hidden="true" />
               </button>
@@ -222,10 +196,7 @@ export function ArticlesPage() {
           )}
         </section>
 
-        <aside
-          className="news-sidebar"
-          aria-label="Article search and categories"
-        >
+        <aside className="news-sidebar" aria-label="Article search and filters">
           <label className="news-search">
             <Search size={18} aria-hidden="true" />
             <span className="sr-only">Search articles</span>
@@ -238,7 +209,7 @@ export function ArticlesPage() {
               }}
             />
           </label>
-          {(query !== "" || category !== "All Articles") && (
+          {(query !== "" || category !== "All Articles" || year !== "") && (
             <button type="button" className="news-clear" onClick={clearFilters}>
               Clear filters <X size={14} aria-hidden="true" />
             </button>
@@ -247,12 +218,7 @@ export function ArticlesPage() {
             <h2>Categories</h2>
             <div role="group" aria-label="Article categories">
               {articleCategories.map((item) => {
-                const count =
-                  item === "All Articles"
-                    ? newsArticles.length
-                    : newsArticles.filter(
-                        (article) => article.category === item,
-                      ).length;
+                const count = filterNewsArticles(item, query, year).length;
                 return (
                   <button
                     type="button"
@@ -269,6 +235,39 @@ export function ArticlesPage() {
               })}
             </div>
           </div>
+          <section
+            className="news-categories"
+            aria-labelledby="news-year-heading"
+          >
+            <h2 id="news-year-heading">Filter by Year</h2>
+            <div role="group" aria-label="Filter articles by year">
+              <button
+                type="button"
+                aria-pressed={year === ""}
+                onClick={() => {
+                  setYear("");
+                }}
+              >
+                <span>All Years</span>
+                <span>{filterNewsArticles(category, query).length}</span>
+              </button>
+              {articleYears.map((item) => (
+                <button
+                  type="button"
+                  key={item}
+                  aria-pressed={year === item}
+                  onClick={() => {
+                    setYear(item);
+                  }}
+                >
+                  <span>{item}</span>
+                  <span>
+                    {filterNewsArticles(category, query, item).length}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </section>
           <a
             href={featured.href}
             className="news-featured"
@@ -311,16 +310,6 @@ export function ArticlesPage() {
           </div>
         </aside>
       </div>
-      {selectedMedia && (
-        <ArticleMediaModal
-          key={selectedMedia.id}
-          article={selectedMedia}
-          onClose={closeMedia}
-          onRestoreFocus={() => {
-            mediaTrigger.current?.focus();
-          }}
-        />
-      )}
     </div>
   );
 }

@@ -121,7 +121,10 @@ export function Navbar({ page = "home" }: { page?: SitePage }) {
                   href={resolveLink(link.href)}
                   aria-current={
                     (page === "about" && link.label === "About Us") ||
-                    ((page === "articles" || page === "article") &&
+                    ((page === "articles" ||
+                      page === "article" ||
+                      page === "gallery-article" ||
+                      page === "video-article") &&
                       link.label === "News & Articles")
                       ? "page"
                       : undefined
