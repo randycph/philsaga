@@ -1,5 +1,9 @@
 # Change record
 
+## Announcement opening focus
+
+- Focus the notice heading when the announcement opens, removing the colored reading-area outline on page reload while retaining focus indicators for keyboard navigation.
+
 ## Announcement scrollbar appearance
 
 - Changed the announcement scrollbar to a neutral gray thumb and track.

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Megaphone } from "lucide-react";
 import PerfectScrollbar from "perfect-scrollbar";
 import {
@@ -12,6 +12,7 @@ import "./HomepageAnnouncement.css";
 
 export function HomepageAnnouncement() {
   const [open, setOpen] = useState(false);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const [scrollElement, setScrollElement] = useState<HTMLDivElement | null>(
     null,
   );
@@ -82,12 +83,20 @@ export function HomepageAnnouncement() {
         className="homepage-announcement"
         overlayClassName="homepage-announcement__overlay"
         closeClassName="homepage-announcement__close"
+        onOpenAutoFocus={(event) => {
+          event.preventDefault();
+          titleRef.current?.focus();
+        }}
       >
         <p className="homepage-announcement__eyebrow">
           <Megaphone size={28} aria-hidden="true" />
           Public Announcement
         </p>
-        <DialogTitle className="homepage-announcement__title">
+        <DialogTitle
+          ref={titleRef}
+          tabIndex={-1}
+          className="homepage-announcement__title"
+        >
           Notice to the Public
         </DialogTitle>
         <DialogDescription className="sr-only">
