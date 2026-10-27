@@ -5,7 +5,6 @@ import {
   ExternalLink,
   Leaf,
   ShieldCheck,
-  Users,
 } from "lucide-react";
 import {
   companyBoards,
@@ -167,19 +166,14 @@ function CompanyContent({ id }: { id: CompanySectionId }) {
         Leadership as published on Philsaga Mining Corporation’s official
         company pages.
       </p>
-      <div className="company-leadership">
+      <ol className="company-leadership">
         {board.map((person) => (
-          <article key={person.name}>
-            <span className="company-leadership__icon">
-              <Users aria-hidden="true" size={23} />
-            </span>
-            <div>
-              <h4>{person.name}</h4>
-              <p>{person.role}</p>
-            </div>
-          </article>
+          <li key={person.name}>
+            <h4>{person.name}</h4>
+            <p>{person.role}</p>
+          </li>
         ))}
-      </div>
+      </ol>
     </>
   );
 }

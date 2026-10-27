@@ -659,39 +659,54 @@
 
 .company-leadership {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 25px;
+  gap: 18px;
+  width: min(100%, 500px);
+  margin: 28px auto 0;
+  padding: 0;
+  list-style: none;
 }
 
-.company-leadership article {
+.company-leadership > li {
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  padding: 22px 18px;
-  border: 1px solid #102b2b14;
-  border-radius: 7px;
-  background: #ffffff73;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 112px;
+  padding: 28px 24px;
+  border: 1px solid #d6c9ac80;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fffdf8, #f7f3e9);
+  box-shadow:
+    0 4px 16px #102b2b05,
+    inset 0 1px 0 #ffffff;
+  text-align: center;
 }
 
-.company-leadership__icon {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #fbefdc;
-  color: #eda019;
+.company-leadership > li::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 32px;
+  height: 2px;
+  background: #d6a343;
+  transform: translateX(-50%);
+  content: "";
 }
 
 .company-leadership h4 {
-  font-size: 15px;
+  color: var(--about-ink);
+  font-family: var(--font-heading);
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
 }
 
 .company-leadership p {
-  margin-top: 5px;
-  font-size: 12px;
+  margin-top: 7px;
+  color: #6f7c72;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .company-tomorrow {
@@ -766,9 +781,6 @@
     grid-template-columns: 52px minmax(0, 1fr);
     gap: 14px;
     padding-left: 33px;
-  }
-  .company-leadership {
-    grid-template-columns: 1fr;
   }
 }
 
