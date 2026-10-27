@@ -1,5 +1,10 @@
 # Change record
 
+## Complete privacy policy and terms
+
+- Replaced both legal summaries with the complete user-supplied wording, including all privacy purposes, rights, disclaimer, copyright, and hyperlink conditions.
+- Removed overview wording and formatted the full documents with paragraphs, lists, subsection headings, and a scrollable contents sidebar.
+
 ## Privacy and terms pages
 
 - Added styled Data Privacy Policy and Terms and Conditions overview pages, with numbered sections, a contents sidebar, contact details, and links to the complete published documents.

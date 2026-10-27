@@ -10,12 +10,12 @@ const graph = JSON.parse(
 );
 const canonical = html.match(/rel="canonical" href="([^"]+)"/)?.[1];
 
-test("Legal pages have crawlable overviews, source links, and valid section navigation", async () => {
+test("Legal pages preserve the supplied full text and section navigation", async () => {
   const sitemap = await readFile("dist/sitemap.xml", "utf8");
 
   for (const [file, title, sectionCount] of [
-    ["data-privacy-policy.html", "Data Privacy Policy", 6],
-    ["terms-and-conditions.html", "Terms and Conditions", 4],
+    ["data-privacy-policy.html", "Data Privacy Policy", 11],
+    ["terms-and-conditions.html", "Terms and Conditions", 3],
   ]) {
     const page = await readFile(`dist/${file}`, "utf8");
     const url = new URL(file, canonical).href;
@@ -25,12 +25,33 @@ test("Legal pages have crawlable overviews, source links, and valid section navi
     assert.ok(page.includes(title));
     assert.ok(page.includes(`rel="canonical" href="${url}"`));
     assert.match(page, /"@type":"WebPage"/);
-    assert.match(page, /This is a concise overview/);
-    assert.ok(
-      page.includes(
-        `href="https://www.philsaga.com/${file.replace(".html", "")}"`,
-      ),
+    assert.doesNotMatch(
+      page,
+      /concise overview|Read full policy|Read full terms/,
     );
+    const source = await readFile(
+      `src/data/legal/${file.startsWith("data-") ? "privacy" : "terms"}.txt`,
+      "utf8",
+    );
+    const escapeText = (text) => {
+      return text
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#x27;");
+    };
+
+    for (const line of source.split(/\r?\n/)) {
+      const text = line.replace(/^(#{2,3}|-) /, "").trim();
+
+      if (text) {
+        assert.ok(
+          page.includes(escapeText(text)),
+          `Missing supplied text: ${text}`,
+        );
+      }
+    }
     assert.match(page, /href="mailto:info@philsaga.com"/);
     assert.equal(sections.length, sectionCount);
 

@@ -2,14 +2,33 @@ import { useEffect, useState } from "react";
 import {
   ArrowRight,
   ChevronRight,
-  ExternalLink,
   Mail,
   Scale,
   ShieldCheck,
 } from "lucide-react";
-import { legalDocuments } from "../data/legal";
+import { legalDocuments, type LegalBlock } from "../data/legal";
 import { assetPath } from "../lib/assets";
 import "./LegalPage.css";
+
+function LegalContent({ blocks }: { blocks: LegalBlock[] }) {
+  return blocks.map((block, index) => {
+    if (block.type === "list") {
+      return (
+        <ul key={index}>
+          {block.items.map((item, itemIndex) => (
+            <li key={itemIndex}>{item}</li>
+          ))}
+        </ul>
+      );
+    }
+
+    if (block.type === "heading") {
+      return <h3 key={index}>{block.text}</h3>;
+    }
+
+    return <p key={index}>{block.text}</p>;
+  });
+}
 
 export function LegalPage({ documentId }: { documentId: "privacy" | "terms" }) {
   const document = legalDocuments[documentId];
@@ -54,7 +73,6 @@ export function LegalPage({ documentId }: { documentId: "privacy" | "terms" }) {
           <div>
             <p className="legal-eyebrow">Policies & Information</p>
             <h1 id="legal-title">{document.title}</h1>
-            <p className="legal-header__intro">{document.introduction}</p>
             <div className="legal-header__meta">
               <span>Philsaga Mining Corporation</span>
               {document.published && (
@@ -99,6 +117,11 @@ export function LegalPage({ documentId }: { documentId: "privacy" | "terms" }) {
 
         <div className="legal-reading">
           <div className="legal-document">
+            {document.introduction.length > 0 && (
+              <div className="legal-document__introduction">
+                <LegalContent blocks={document.introduction} />
+              </div>
+            )}
             {document.sections.map((section, index) => (
               <section key={section.id} id={section.id}>
                 <span className="legal-document__number" aria-hidden="true">
@@ -106,7 +129,7 @@ export function LegalPage({ documentId }: { documentId: "privacy" | "terms" }) {
                 </span>
                 <div>
                   <h2>{section.title}</h2>
-                  <p>{section.text}</p>
+                  <LegalContent blocks={section.blocks} />
                 </div>
               </section>
             ))}
