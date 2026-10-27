@@ -1,5 +1,10 @@
 # Change record
 
+## Announcement scrollbar
+
+- Replaced the public notice's native scrollbar with Perfect Scrollbar, using a slim gold thumb and an ivory track.
+- Added resize updates, keyboard-accessible scrollbar values, and cleanup when the modal closes.
+
 ## Public court decisions notice
 
 - Replaced the scholarship copy in the homepage announcement with the supplied court decisions notice, preserving its wording, case names, dates, quotations, and numbered rulings.

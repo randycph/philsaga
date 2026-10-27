@@ -57,15 +57,56 @@
 }
 
 .homepage-announcement__notice {
+  position: relative;
   min-height: 0;
   margin-top: 24px;
-  padding-right: 18px;
+  padding-right: 26px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-gutter: stable;
   color: #536165;
   font-size: 14px;
   line-height: 1.8;
+}
+
+.homepage-announcement__notice.ps {
+  scrollbar-width: none;
+}
+
+.homepage-announcement__notice.ps::-webkit-scrollbar {
+  display: none;
+}
+
+.homepage-announcement__notice > .ps__rail-y {
+  width: 10px;
+  border-radius: 10px;
+  background: #e9e2d2;
+  opacity: 1;
+}
+
+.homepage-announcement__notice > .ps__rail-y > .ps__thumb-y {
+  right: 2px;
+  width: 6px;
+  border-radius: 10px;
+  background: #a48a55;
+}
+
+.homepage-announcement__notice > .ps__rail-y > .ps__thumb-y:focus-visible {
+  outline: 2px solid #b98b2b;
+  outline-offset: 2px;
+}
+
+.homepage-announcement__notice > .ps__rail-y:hover,
+.homepage-announcement__notice > .ps__rail-y:focus-within,
+.homepage-announcement__notice > .ps__rail-y.ps--clicking {
+  background: #e4dac4;
+  opacity: 1;
+}
+
+.homepage-announcement__notice > .ps__rail-y:hover > .ps__thumb-y,
+.homepage-announcement__notice > .ps__rail-y:focus-within > .ps__thumb-y,
+.homepage-announcement__notice > .ps__rail-y.ps--clicking > .ps__thumb-y {
+  width: 6px;
+  background: #806426;
 }
 
 .homepage-announcement__notice:focus-visible {
@@ -196,7 +237,7 @@
   }
 
   .homepage-announcement__notice {
-    padding-right: 10px;
+    padding-right: 20px;
     font-size: 13px;
   }
 
